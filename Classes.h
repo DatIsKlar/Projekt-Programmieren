@@ -1,5 +1,6 @@
 #include <vector>
 #include <string>
+#include <armadillo>
 
 class Alloy {
 private:
@@ -48,13 +49,14 @@ private:
 	std::vector<Alloy> alloy;
 public:
 	Storage();
-	Storage(Alloy);
+	Storage(std::vector<Alloy> aI);
 	std::vector<Alloy> getAlloys();
-	Alloy getAlloyByName(std::string alloyNameIn);
+	unsigned int getAlloyPosByName(std::string alloyNameIn);
 	void addAlloy(Alloy);
 	void removeAlloy(std::string alloyNameIn, float alloyAmountIn);
 	bool saveStorage(std::string nameIn, std::string spacerIn);
 	bool readStorage(std::string filename,std::string spacerIn);
+	void makeAlloyMix(std::vector<std::string> namesIn,Alloy& wantedIn);
 };
 
 class Order{

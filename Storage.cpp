@@ -6,23 +6,26 @@ Storage::Storage() {
 	alloy;
 }
 
-Storage::Storage(Alloy aI) {
-	alloy.push_back(aI);
+Storage::Storage(std::vector<Alloy> aI) {
+	alloy= aI;
 }
 
 std::vector<Alloy> Storage::getAlloys() {
 	return this->alloy;
 }
 
-Alloy Storage::getAlloyByName(std::string alloyNameIn) {
-	Alloy alloyReturn = this->alloy.front();
+unsigned int Storage::getAlloyPosByName(std::string alloyNameIn) {
+	unsigned int alloyReturn = 0;
+	unsigned int x=0;
 	for (auto i : this->alloy) {
 		if (i.getName() == alloyNameIn) {
-			i = alloyReturn;
+			alloyReturn = x;
 		}
+		x++;
 	}
 	return alloyReturn;
 }
+
 
 void Storage::addAlloy(Alloy alloy_i) {
 	this->alloy.push_back(alloy_i);
@@ -33,10 +36,9 @@ void Storage::removeAlloy(std::string alloyNameIn, float alloyAmountIn) {
 	for (auto i : this->alloy) {
 		x++;
 		if (i.getName() == alloyNameIn) {
-			if (alloyAmountIn == 0){
+			if (alloyAmountIn == 0) {
 				//this->alloy.erase(this->alloy.begin() + x - 1);
-			}
-			else
+			} else
 				i.setAmount(i.getAmount() - alloyAmountIn);
 		}
 	}
@@ -51,10 +53,10 @@ bool Storage::saveStorage(std::string filename, std::string spacer) {
 			<< "Type" + spacer + "Copper" + spacer + "Zinc" + spacer + "Tin"
 					+ spacer + "Name" + spacer + "Amount" + "\n";
 	for (Alloy i : this->alloy) {
-		char mode ='x';
-		if(i.getCopper()+i.getZinc()+i.getTin() == 1)
+		char mode = 'x';
+		if (i.getCopper() + i.getZinc() + i.getTin() == 1)
 			mode = 'p';
-		else if(i.getCopper()+i.getZinc()+i.getTin() == 100)
+		else if (i.getCopper() + i.getZinc() + i.getTin() == 100)
 			mode = 'a';
 
 		myfile
@@ -69,7 +71,7 @@ bool Storage::saveStorage(std::string filename, std::string spacer) {
 	return true;
 }
 
-bool Storage::readStorage(std::string filename,std::string spacer) {
+bool Storage::readStorage(std::string filename, std::string spacer) {
 	std::ifstream myfile;
 	myfile.open(filename + ".csv");
 	std::string line;
@@ -121,7 +123,7 @@ bool Storage::readStorage(std::string filename,std::string spacer) {
 						pos_amount = z;
 					} else if (i == "Name") {
 						pos_name = z;
-					}else if(i == "Firm"){
+					} else if (i == "Firm") {
 						pos_firm_name = z;
 					}
 					total_lenthg = z;
@@ -182,5 +184,38 @@ bool Storage::readStorage(std::string filename,std::string spacer) {
 		}
 	}
 	return true;
+}
+
+void Storage::makeAlloyMix(std::vector<std::string> namesIn, Alloy &wantedIn) {
+	std::vector<arma::vec> vec_;
+	arma::mat Gauss(0, 0);
+	std::vector<float> mengeAlt;
+	for (auto i : namesIn) {
+		unsigned int a_ = this->getAlloyPosByName(i);
+		arma::vec alloyNew = { this->alloy.at(a_).getCopper(),this->alloy.at(a_).getZinc(), this->alloy.at(a_).getTin() };
+		vec_.push_back(alloyNew);
+		mengeAlt.push_back(this->alloy.at(a_).getAmount());
+
+	}
+
+	arma::vec wanted = { wantedIn.getCopper(), wantedIn.getZinc(),
+			wantedIn.getTin() }; //var für Zielmischung
+	int x_ = 0;
+	for (auto i : vec_) {
+		Gauss.insert_cols(0, i); //Vector wird in der Spalte nach in Zeilen gepackt: Vec1 füllt in der ersten Spalte die ganze Zeile usw;
+		x_++; //Momentane pos;
+	}
+
+	arma::vec solution = solve(Gauss, wanted);
+	float finalAmount = 0;
+	int f = 0;
+	for (auto i : namesIn) {
+		unsigned int a_ = this->getAlloyPosByName(i);
+		finalAmount = solution[f]*wantedIn.getAmount();
+		f++;
+		this->alloy.at(a_).setAmount(this->alloy.at(a_).getAmount()-finalAmount);//setzten der neuen Menge im Lager;
+		std::cout<<"final	"<<finalAmount<<std::endl;
+	}
+
 }
 
