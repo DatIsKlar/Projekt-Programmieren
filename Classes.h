@@ -1,4 +1,3 @@
-
 #include <vector>
 #include <string>
 
@@ -25,18 +24,26 @@ public:
 class Firm {
 private:
 	std::string name;
-	std::string adress;
+	std::string street;
+	std::string zip;
+	std::string city;
+	std::string comment;
 public:
 	Firm();
-	Firm(std::string nameIn, std::string adressIn);
+	Firm(std::string nameIn, std::string streetIn, std::string zipIn, std::string cityIn, std::string commentIn);
 	std::string getName();
-	std::string getAdress();
+	std::string getStreet();
+	std::string getZip();
+	std::string getCity();
+	std::string getComment();
 	void setName(std::string nameIn);
-	void setAdress(std::string adressIn);
-	void setOrder(float orderIn);
+	void setStreet(std::string streetIn);
+	void setZip(std::string zipIn);
+	void setCity(std::string cityIn);
+	void setComment(std::string commentIn);
 };
 
-class Storage : public Firm {
+class Storage : public Firm{
 private:
 	std::vector<Alloy> alloy;
 public:
@@ -50,17 +57,33 @@ public:
 	bool readStorage(std::string filename,std::string spacerIn);
 };
 
+class Order{
+private:
+	float amount;
+	std::string firmName;
+public:
+	Order();
+	Order(float amountIn, std::string firmNameIn);
+	//~Order();
+	float getAmount();
+	std::string getFirmName();
+	void setAmount(float amountIn);
+	void setFirmName(std::string firmNameIn);
+};
 
-class Liefer : public Firm{
+class Supplier : public Firm{
 private:
 	Alloy alloy;
-	float order;
+	std::vector<Order> order;
 public:
-	Liefer();
-	Liefer(Alloy alloyIn,float orderIn);
-	void getOrder(float amount);
-	Alloy returnOrder();
-	Alloy getAlloyLiefer();
+	Supplier();
+	Supplier(Alloy alloyIn);
+	//~Supplier();
+	void setOrder(Order orderIn);
+	std::vector<Order> getOrder();
+	Alloy getAlloy();
+	bool saveSupplier(std::string nameIn, std::string spacerIn);
+	bool readSupplier(std::string filename, std::string spacerIn);
 };
 
 

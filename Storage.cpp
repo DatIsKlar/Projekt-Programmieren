@@ -1,8 +1,5 @@
 #include "Classes.h"
-#include <iostream>
 #include <fstream>
-#include <string>
-#include <vector>
 #include <sstream>
 
 Storage::Storage() {
@@ -36,8 +33,9 @@ void Storage::removeAlloy(std::string alloyNameIn, float alloyAmountIn) {
 	for (auto i : this->alloy) {
 		x++;
 		if (i.getName() == alloyNameIn) {
-			if (alloyAmountIn == 0)
-				this->alloy.erase(this->alloy.begin() + x - 1);
+			if (alloyAmountIn == 0){
+				//this->alloy.erase(this->alloy.begin() + x - 1);
+			}
 			else
 				i.setAmount(i.getAmount() - alloyAmountIn);
 		}
@@ -128,6 +126,7 @@ bool Storage::readStorage(std::string filename,std::string spacer) {
 					}
 					total_lenthg = z;
 				}
+
 			}
 			if (x >= 2) {
 				unsigned int j = 0;
@@ -173,7 +172,6 @@ bool Storage::readStorage(std::string filename,std::string spacer) {
 				amount = std::stof(i);
 			} else if (split == pos_firm_name) {
 				firm = i;
-				std::cout<<firm;
 			}
 
 			if (split == total_lenthg) {

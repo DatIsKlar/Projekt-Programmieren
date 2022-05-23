@@ -1,6 +1,5 @@
 #include "Classes.h"
-#include <string>
-#include <iostream>
+
 Alloy::Alloy() {
 	copper = 0;
 	zinc = 0;
