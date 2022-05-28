@@ -57,6 +57,7 @@ public:
 	bool saveStorage(std::string nameIn, std::string spacerIn);
 	bool readStorage(std::string filename,std::string spacerIn);
 	void makeAlloyMix(std::vector<std::string> namesIn,Alloy& wantedIn);
+	void editAlloyByName(std::string namesIn ,Alloy edit);
 };
 
 class Order{

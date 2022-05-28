@@ -1,6 +1,7 @@
 #include "Classes.h"
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 
 Storage::Storage() {
 	alloy;
@@ -25,7 +26,6 @@ unsigned int Storage::getAlloyPosByName(std::string alloyNameIn) {
 	}
 	return alloyReturn;
 }
-
 
 void Storage::addAlloy(Alloy alloy_i) {
 	this->alloy.push_back(alloy_i);
@@ -218,4 +218,11 @@ void Storage::makeAlloyMix(std::vector<std::string> namesIn, Alloy &wantedIn) {
 	}
 
 }
+
+void Storage::editAlloyByName(std::string namesIn ,Alloy edit){
+	this->alloy.at(this->getAlloyPosByName(namesIn)) = edit;
+}
+
+
+
 
