@@ -15,10 +15,15 @@ int main()
 	a.addAlloy(aA);
 	a.addAlloy(bA);
 	a.addAlloy(cA);
+	a.editAlloyByType(bA ,Alloy(0.8,0.1,0.1, "better2",5));
+	if(aA != cA)
+		std::cout<<"fals";
+	else
+		std::cout<<"true";
 
-	a.editAlloyByName("test",Alloy(.8,0.1,0.1, "better2",5));
-	unsigned int x1 = a.getAlloyPosByName("better2");
-	std::cout<<a.getAlloys().at(x1).getCopper();
+//	a.editAlloyByName("test",Alloy(.8,0.1,0.1, "better2",5));
+//	unsigned int x1 = a.getAlloyPosByName("better2");
+//	std::cout<<a.getAlloys().at(x1).getCopper();
 
 //	a.saveStorage("test",";"); //Lager read/save test;
 //	Storage b;

@@ -12,9 +12,9 @@ Alloy::Alloy(float copperIn, float zincIn, float tinIn, std::string nameIn,
 		float amountIn) {
 
 	float complet_value = copperIn + zincIn + tinIn;
-	if ((complet_value > 1 or complet_value < 1)) {
+	if ((complet_value > 1 || complet_value < 1)) {
 		if (complet_value > 1
-				and (complet_value < 100 or complet_value > 100)) {
+				&& (complet_value < 100 || complet_value > 100)) {
 			//do error
 		} else{
 			copperIn /= 100;
@@ -54,6 +54,32 @@ void Alloy::setAmount(float amountIn) {
 	this->amount = amountIn;
 }
 
+bool Alloy::operator==(const Alloy &b){
+	bool copper = this->copper == b.copper;
+	bool zinc = this->zinc == b.zinc;
+	bool tin = this->tin == b.tin;
+	bool name = this->name == b.name;
+	bool amount = this->amount == b.amount;
+
+	if(copper && zinc&&tin&&name&&amount)
+		return true;
+	else
+		return false;
+}
+
+bool Alloy::operator!=(const Alloy &b){
+	bool copper = this->copper == b.copper;
+	bool zinc = this->zinc == b.zinc;
+	bool tin = this->tin == b.tin;
+	bool name = this->name == b.name;
+	bool amount = this->amount == b.amount;
+
+	if(copper && zinc&&tin&&name&&amount)
+		return false;
+	else
+		return true;
+}
+
 //void Alloy::normalize() {
 //
 //	if (this->mode == 'a') {
@@ -68,7 +94,7 @@ void Alloy::setAmount(float amountIn) {
 //			this->zinc = this->zinc / 100;
 //			this->tin = this->tin / 100;
 //		} else if (this->copper + this->zinc + this->tin != 100
-//				and this->copper + this->zinc + this->tin != 1) {
+//				&& this->copper + this->zinc + this->tin != 1) {
 //			//error
 //		}
 //	}

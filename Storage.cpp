@@ -27,6 +27,18 @@ unsigned int Storage::getAlloyPosByName(std::string alloyNameIn) {
 	return alloyReturn;
 }
 
+unsigned int Storage::getAlloyPosByType(Alloy in){
+	unsigned int alloyReturn = 0;
+	unsigned int x=0;
+	for (auto i : this->alloy) {
+		if (i == in) {
+			alloyReturn = x;
+		}
+		x++;
+	}
+	return alloyReturn;
+}
+
 void Storage::addAlloy(Alloy alloy_i) {
 	this->alloy.push_back(alloy_i);
 }
@@ -112,14 +124,14 @@ bool Storage::readStorage(std::string filename, std::string spacer) {
 				unsigned int z = 0;
 				for (auto i : pos) {
 					z++;
-					if (i == "Copper" or i == "Kupfer") {
+					if (i == "Copper" || i == "Kupfer") {
 						pos_copper = z;
-					} else if (i == "Zinc" or i == "Zink") {
+					} else if (i == "Zinc" || i == "Zink") {
 						pos_zinc = z;
 
-					} else if (i == "Tin" or i == " Zinn") {
+					} else if (i == "Tin" || i == " Zinn") {
 						pos_tin = z;
-					} else if (i == "Amount" or i == " Menge") {
+					} else if (i == "Amount" || i == " Menge") {
 						pos_amount = z;
 					} else if (i == "Name") {
 						pos_name = z;
@@ -222,6 +234,11 @@ void Storage::makeAlloyMix(std::vector<std::string> namesIn, Alloy &wantedIn) {
 void Storage::editAlloyByName(std::string namesIn ,Alloy edit){
 	this->alloy.at(this->getAlloyPosByName(namesIn)) = edit;
 }
+
+void Storage::editAlloyByType(Alloy in ,Alloy edit){
+	this->alloy.at(this->getAlloyPosByType(in)) = edit;
+}
+
 
 
 

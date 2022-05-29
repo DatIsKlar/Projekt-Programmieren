@@ -19,6 +19,8 @@ public:
 	std::string getName();
 	float getAmount();
 	void setAmount(float ammountIn);
+	bool operator==(const Alloy &b);
+	bool operator!=(const Alloy &b);
 	//void normalize();
 };
 
@@ -52,12 +54,14 @@ public:
 	Storage(std::vector<Alloy> aI);
 	std::vector<Alloy> getAlloys();
 	unsigned int getAlloyPosByName(std::string alloyNameIn);
+	unsigned int getAlloyPosByType(Alloy in);
 	void addAlloy(Alloy);
 	void removeAlloy(std::string alloyNameIn, float alloyAmountIn);
 	bool saveStorage(std::string nameIn, std::string spacerIn);
 	bool readStorage(std::string filename,std::string spacerIn);
 	void makeAlloyMix(std::vector<std::string> namesIn,Alloy& wantedIn);
 	void editAlloyByName(std::string namesIn ,Alloy edit);
+	void editAlloyByType(Alloy in ,Alloy edit);
 };
 
 class Order{
@@ -88,5 +92,9 @@ public:
 	bool saveSupplier(std::string nameIn, std::string spacerIn);
 	bool readSupplier(std::string filename, std::string spacerIn);
 };
+
+
+
+
 
 
