@@ -10,7 +10,7 @@ Storage::Storage(std::vector<Alloy> aI) {
 	alloy= aI;
 }
 
-std::vector<Alloy> Storage::getAlloys() {
+std::vector<Alloy> *Storage::getAlloys() {
 	return this->alloy;
 }
 
@@ -225,11 +225,15 @@ void Storage::makeAlloyMix(std::vector<std::string> namesIn, Alloy &wantedIn) {
 }
 
 void Storage::editAlloyByName(std::string namesIn ,Alloy edit){
-	this->alloy.at(this->getAlloyPosByName(namesIn)) = edit;
+	unsigned int x = this->getAlloyPosByName(namesIn);
+	if(x>=0)
+		this->alloy.at(x) = edit;
 }
 
 void Storage::editAlloyByType(Alloy alloyIn ,Alloy edit){
-	this->alloy.at(this->getAlloyPosByType(alloyIn)) = edit;
+	unsigned int x = this->getAlloyPosByType(alloyIn);
+	if(x>=0)
+		this->alloy.at(x) = edit;
 }
 
 
