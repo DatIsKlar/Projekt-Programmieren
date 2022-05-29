@@ -16,11 +16,11 @@ int main()
 	a.addAlloy(bA);
 	a.addAlloy(cA);
 	a.editAlloyByType(bA ,Alloy(0.8,0.1,0.1, "better2",5));
-	if(aA != cA)
-		std::cout<<"fals";
-	else
-		std::cout<<"true";
+	a.removeAlloyByType(bA);
 
+	for(auto i:a.getAlloys()){
+		std::cout<<i.getName()<<std::endl;
+	}
 //	a.editAlloyByName("test",Alloy(.8,0.1,0.1, "better2",5));
 //	unsigned int x1 = a.getAlloyPosByName("better2");
 //	std::cout<<a.getAlloys().at(x1).getCopper();

@@ -1,7 +1,6 @@
 #include "Classes.h"
 #include <fstream>
 #include <sstream>
-#include <algorithm>
 
 Storage::Storage() {
 	alloy;
@@ -15,45 +14,42 @@ std::vector<Alloy> Storage::getAlloys() {
 	return this->alloy;
 }
 
-unsigned int Storage::getAlloyPosByName(std::string alloyNameIn) {
-	unsigned int alloyReturn = 0;
+int Storage::getAlloyPosByName(std::string alloyNameIn) {
 	unsigned int x=0;
 	for (auto i : this->alloy) {
 		if (i.getName() == alloyNameIn) {
-			alloyReturn = x;
+			return x;
 		}
 		x++;
 	}
-	return alloyReturn;
+	return -1;
 }
 
-unsigned int Storage::getAlloyPosByType(Alloy in){
-	unsigned int alloyReturn = 0;
+int Storage::getAlloyPosByType(Alloy in){
 	unsigned int x=0;
 	for (auto i : this->alloy) {
 		if (i == in) {
-			alloyReturn = x;
+			return x;
 		}
 		x++;
 	}
-	return alloyReturn;
+	return -1;
 }
 
 void Storage::addAlloy(Alloy alloy_i) {
 	this->alloy.push_back(alloy_i);
 }
 
-void Storage::removeAlloy(std::string alloyNameIn, float alloyAmountIn) {
-	int x = 0;
-	for (auto i : this->alloy) {
-		x++;
-		if (i.getName() == alloyNameIn) {
-			if (alloyAmountIn == 0) {
-				//this->alloy.erase(this->alloy.begin() + x - 1);
-			} else
-				i.setAmount(i.getAmount() - alloyAmountIn);
-		}
-	}
+void Storage::removeAlloyByName(std::string alloyNameIn) {
+	int x = this->getAlloyPosByName(alloyNameIn);
+	if(x>=0)
+		this->alloy.erase(this->alloy.begin()+x); // @suppress("Invalid arguments")
+}
+
+void Storage::removeAlloyByType(Alloy alloyIn) {
+	int x = this->getAlloyPosByType(alloyIn);
+	if(x>=0)
+		this->alloy.erase(this->alloy.begin()+x); // @suppress("Invalid arguments")
 }
 
 bool Storage::saveStorage(std::string filename, std::string spacer) {
@@ -235,8 +231,8 @@ void Storage::editAlloyByName(std::string namesIn ,Alloy edit){
 	this->alloy.at(this->getAlloyPosByName(namesIn)) = edit;
 }
 
-void Storage::editAlloyByType(Alloy in ,Alloy edit){
-	this->alloy.at(this->getAlloyPosByType(in)) = edit;
+void Storage::editAlloyByType(Alloy alloyIn ,Alloy edit){
+	this->alloy.at(this->getAlloyPosByType(alloyIn)) = edit;
 }
 
 
