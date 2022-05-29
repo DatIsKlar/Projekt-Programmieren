@@ -20,6 +20,23 @@ Alloy Supplier::getAlloy(){
 	return this->alloy;
 }
 
+int Supplier::getOrderPosById(unsigned int idIn){
+	unsigned int x=0;
+	for (auto i : this->order) {
+		if (i.getId() == idIn) {
+			return x;
+		}
+		x++;
+	}
+	return -1;
+}
+
+void Supplier::editOrderById(unsigned int idIn, Order edit){
+	this->order.at(this->getOrderPosById(idIn)) = edit;
+}
+
+
+
 //bool Supplier::saveStorage(std::string filename, std::string spacer) {
 //
 //	std::ofstream myfile;

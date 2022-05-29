@@ -69,14 +69,17 @@ class Order{
 private:
 	float amount;
 	std::string firmName;
+	unsigned int id;
 public:
 	Order();
-	Order(float amountIn, std::string firmNameIn);
+	Order(float amountIn, std::string firmNameIn,unsigned int idIn);
 	//~Order();
 	float getAmount();
 	std::string getFirmName();
+	unsigned int getId();
 	void setAmount(float amountIn);
 	void setFirmName(std::string firmNameIn);
+	void setId(unsigned int idIn);
 };
 
 class Supplier : public Firm{
@@ -92,6 +95,8 @@ public:
 	Alloy getAlloy();
 	bool saveSupplier(std::string nameIn, std::string spacerIn);
 	bool readSupplier(std::string filename, std::string spacerIn);
+	int getOrderPosById(unsigned int idIn);
+	void editOrderById(unsigned int idIn,Order edit);
 };
 
 

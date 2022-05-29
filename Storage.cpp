@@ -197,13 +197,10 @@ bool Storage::readStorage(std::string filename, std::string spacer) {
 void Storage::makeAlloyMix(std::vector<std::string> namesIn, Alloy &wantedIn) {
 	std::vector<arma::vec> vec_;
 	arma::mat Gauss(0, 0);
-	std::vector<float> mengeAlt;
 	for (auto i : namesIn) {
 		unsigned int a_ = this->getAlloyPosByName(i);
 		arma::vec alloyNew = { this->alloy.at(a_).getCopper(),this->alloy.at(a_).getZinc(), this->alloy.at(a_).getTin() };
 		vec_.push_back(alloyNew);
-		mengeAlt.push_back(this->alloy.at(a_).getAmount());
-
 	}
 
 	arma::vec wanted = { wantedIn.getCopper(), wantedIn.getZinc(),
@@ -215,16 +212,16 @@ void Storage::makeAlloyMix(std::vector<std::string> namesIn, Alloy &wantedIn) {
 	}
 
 	arma::vec solution = solve(Gauss, wanted);
-	float finalAmount = 0;
 	int f = 0;
 	for (auto i : namesIn) {
 		unsigned int a_ = this->getAlloyPosByName(i);
-		finalAmount = solution[f]*wantedIn.getAmount();
+		float finalAmount = this->alloy.at(a_).getAmount()-solution[f]*wantedIn.getAmount();
 		f++;
-		this->alloy.at(a_).setAmount(this->alloy.at(a_).getAmount()-finalAmount);//setzten der neuen Menge im Lager;
-		std::cout<<"final	"<<finalAmount<<std::endl;
+		if(finalAmount<0)
+			this->alloy.at(a_).setAmount(finalAmount);//setzten der neuen Menge im Lager
+		//else
+			//error
 	}
-
 }
 
 void Storage::editAlloyByName(std::string namesIn ,Alloy edit){
