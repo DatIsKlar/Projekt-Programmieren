@@ -10,7 +10,7 @@ Storage::Storage(std::vector<Alloy> aI) {
 	alloy= aI;
 }
 
-std::vector<Alloy> *Storage::getAlloys() {
+std::vector<Alloy> Storage::getAlloys() {
 	return this->alloy;
 }
 
