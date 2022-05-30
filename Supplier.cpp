@@ -2,10 +2,12 @@
 //test1
 Supplier::Supplier(){
 	alloy;
+	order;
 }
 
 Supplier::Supplier(Alloy alloyIn){
 	alloy = alloyIn;
+	order;
 }
 
 void Supplier::setOrder(Order orderIn){
@@ -35,8 +37,19 @@ void Supplier::editOrderById(unsigned int idIn, Order edit){
 	this->order.at(this->getOrderPosById(idIn)) = edit;
 }
 
+void Supplier::removerOrderById(unsigned int idIn){
+	this->order.erase(this->order.begin()+this->getOrderPosById(idIn));
+}
 
+void Supplier::printOrder(){
+	std::cout<<"Legierung	"<<"Namen	"<<"Menge	"<<"Id"<<std::endl;
 
+	for(auto i: this->order){
+		std::cout<<this->alloy.getCopper()<<"	"<<i.getFirmName()<<"	"<<i.getAmount()<<"	"<<i.getId()<<std::endl;
+		std::cout<<this->alloy.getZinc()<<std::endl;
+		std::cout<<this->alloy.getTin()<<std::endl;
+	}
+}
 //bool Supplier::saveStorage(std::string filename, std::string spacer) {
 //
 //	std::ofstream myfile;

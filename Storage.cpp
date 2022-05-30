@@ -25,7 +25,7 @@ int Storage::getAlloyPosByName(std::string alloyNameIn) {
 	return -1;
 }
 
-int Storage::getAlloyPosByType(Alloy in){
+int Storage::getAlloyPosByType(Alloy &in){
 	unsigned int x=0;
 	for (auto i : this->alloy) {
 		if (i == in) {
@@ -46,7 +46,7 @@ void Storage::removeAlloyByName(std::string alloyNameIn) {
 		this->alloy.erase(this->alloy.begin()+x); // @suppress("Invalid arguments")
 }
 
-void Storage::removeAlloyByType(Alloy alloyIn) {
+void Storage::removeAlloyByType(Alloy &alloyIn) {
 	int x = this->getAlloyPosByType(alloyIn);
 	if(x>=0)
 		this->alloy.erase(this->alloy.begin()+x); // @suppress("Invalid arguments")
@@ -194,8 +194,9 @@ bool Storage::readStorage(std::string filename, std::string spacer) {
 	return true;
 }
 
-void Storage::makeAlloyMix(std::vector<std::string> namesIn, Alloy &wantedIn) {
+std::vector<float> Storage::makeAlloyMix(std::vector<std::string> namesIn, Alloy &wantedIn) {
 	std::vector<arma::vec> vec_;
+	std::vector<float> returnAmount;
 	arma::mat Gauss(0, 0);
 	for (auto i : namesIn) {
 		unsigned int a_ = this->getAlloyPosByName(i);
@@ -204,7 +205,7 @@ void Storage::makeAlloyMix(std::vector<std::string> namesIn, Alloy &wantedIn) {
 	}
 
 	arma::vec wanted = { wantedIn.getCopper(), wantedIn.getZinc(),
-			wantedIn.getTin() }; //var für Zielmischung
+	wantedIn.getTin() }; //var für Zielmischung
 	int x_ = 0;
 	for (auto i : vec_) {
 		Gauss.insert_cols(0, i); //Vector wird in der Spalte nach in Zeilen gepackt: Vec1 füllt in der ersten Spalte die ganze Zeile usw;
@@ -221,7 +222,11 @@ void Storage::makeAlloyMix(std::vector<std::string> namesIn, Alloy &wantedIn) {
 			this->alloy.at(a_).setAmount(finalAmount);//setzten der neuen Menge im Lager
 		//else
 			//error
+
+		returnAmount.push_back(solution[f]);
 	}
+	return returnAmount;
+
 }
 
 void Storage::editAlloyByName(std::string namesIn ,Alloy edit){

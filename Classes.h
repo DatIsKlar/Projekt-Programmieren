@@ -24,6 +24,7 @@ public:
 	//void normalize();
 };
 
+
 class Firm {
 private:
 	std::string name;
@@ -34,7 +35,7 @@ private:
 public:
 	Firm();
 	Firm(std::string nameIn, std::string streetIn, std::string zipIn, std::string cityIn, std::string commentIn);
-	std::string getName();
+    std::string getName();
 	std::string getStreet();
 	std::string getZip();
 	std::string getCity();
@@ -54,13 +55,13 @@ public:
 	Storage(std::vector<Alloy> aI);
 	std::vector<Alloy> getAlloys();
 	int getAlloyPosByName(std::string alloyNameIn);
-	int getAlloyPosByType(Alloy alloyIn);
+	int getAlloyPosByType(Alloy& alloyIn);
 	void addAlloy(Alloy);
 	void removeAlloyByName(std::string alloyNameIn);
-	void removeAlloyByType(Alloy alloyIn);
+	void removeAlloyByType(Alloy& alloyIn);
 	bool saveStorage(std::string nameIn, std::string spacerIn);
 	bool readStorage(std::string filename,std::string spacerIn);
-	void makeAlloyMix(std::vector<std::string> namesIn,Alloy& wantedIn);
+	std::vector<float> makeAlloyMix(std::vector<std::string> namesIn,Alloy& wantedIn);
 	void editAlloyByName(std::string namesIn ,Alloy edit);
 	void editAlloyByType(Alloy in ,Alloy edit);
 };
@@ -97,6 +98,8 @@ public:
 	bool readSupplier(std::string filename, std::string spacerIn);
 	int getOrderPosById(unsigned int idIn);
 	void editOrderById(unsigned int idIn,Order edit);
+	void removerOrderById(unsigned int idIn);
+	void printOrder();
 };
 
 
