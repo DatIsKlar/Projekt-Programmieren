@@ -22,7 +22,7 @@ int Storage::getAlloyPosByName(std::string alloyNameIn) {
 		}
 		x++;
 	}
-	return -1;
+	return -1;//-1 ist ein fehler
 }
 
 int Storage::getAlloyPosByType(Alloy &in){
@@ -33,23 +33,32 @@ int Storage::getAlloyPosByType(Alloy &in){
 		}
 		x++;
 	}
-	return -1;
+	return -1;//-1 ist ein fehler
 }
 
 void Storage::addAlloy(Alloy alloy_i) {
 	this->alloy.push_back(alloy_i);
 }
 
-void Storage::removeAlloyByName(std::string alloyNameIn) {
+bool Storage::removeAlloyByName(std::string alloyNameIn) {
 	int x = this->getAlloyPosByName(alloyNameIn);
-	if(x>=0)
+	if(x>=0){
 		this->alloy.erase(this->alloy.begin()+x); // @suppress("Invalid arguments")
+		return true;
+	}
+	else
+		return false;
+
 }
 
-void Storage::removeAlloyByType(Alloy &alloyIn) {
+bool Storage::removeAlloyByType(Alloy &alloyIn) {
 	int x = this->getAlloyPosByType(alloyIn);
-	if(x>=0)
+	if(x>=0){
 		this->alloy.erase(this->alloy.begin()+x); // @suppress("Invalid arguments")
+		return true;
+	}
+	else
+		return false;
 }
 
 bool Storage::saveStorage(std::string filename, std::string spacer) {
@@ -229,16 +238,26 @@ std::vector<float> Storage::makeAlloyMix(std::vector<std::string> namesIn, Alloy
 
 }
 
-void Storage::editAlloyByName(std::string namesIn ,Alloy edit){
+bool Storage::editAlloyByName(std::string namesIn ,Alloy edit){
 	unsigned int x = this->getAlloyPosByName(namesIn);
-	if(x>=0)
+	if(x>=0){
 		this->alloy.at(x) = edit;
+		return true;
+	}
+	else
+		return false;
+
 }
 
-void Storage::editAlloyByType(Alloy alloyIn ,Alloy edit){
+bool Storage::editAlloyByType(Alloy alloyIn ,Alloy edit){
 	unsigned int x = this->getAlloyPosByType(alloyIn);
-	if(x>=0)
+	if(x>=0){
 		this->alloy.at(x) = edit;
+		return true;
+	}
+	else
+		return false;
+
 }
 
 

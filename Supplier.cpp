@@ -33,12 +33,25 @@ int Supplier::getOrderPosById(unsigned int idIn){
 	return -1;
 }
 
-void Supplier::editOrderById(unsigned int idIn, Order edit){
-	this->order.at(this->getOrderPosById(idIn)) = edit;
+bool Supplier::editOrderById(unsigned int idIn, Order edit){
+	int x = this->getOrderPosById(idIn);
+	if(x>=0){
+		this->order.at(x) = edit;
+		return true;
+	}
+	else
+		return false;
+
 }
 
-void Supplier::removerOrderById(unsigned int idIn){
-	this->order.erase(this->order.begin()+this->getOrderPosById(idIn));
+bool Supplier::removerOrderById(unsigned int idIn){
+	int x = this->getOrderPosById(idIn);
+	if(x>=0){
+		this->order.erase(this->order.begin()+x);
+		return true;
+	}
+	else
+		return false;
 }
 
 void Supplier::printOrder(){
