@@ -323,9 +323,30 @@ private:
 	std::string firmName;
 	unsigned int id;
 public:
+	/**
+	 * @fn Order()
+	 * Konstruktor mit leeren Werten des typen Order
+	 */
 	Order();
+
+	/**
+	 * @fn Order(float amountIn, std::string firmNameIn,unsigned int idIn)
+	 * Konstruktor mit Anfangswerten des typen Order
+	 * @param amountIn
+	 * menge der Bestellung
+	 * @param firmNameIn
+	 * name der Firma  welche die Bestellung aufgibt
+	 * @param idIn
+	 * Bestellnummer
+	 *
+	 */
 	Order(float amountIn, std::string firmNameIn,unsigned int idIn);
 	//~Order();
+
+	/**
+	 * @fn float getAmount()
+	 * gibt die Menge der Bestellung wieder
+	 */
 	float getAmount();
 	std::string getFirmName();
 	unsigned int getId();
