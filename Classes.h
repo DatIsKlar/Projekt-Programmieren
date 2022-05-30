@@ -221,7 +221,7 @@ public:
 	 * @fn int getAlloyPosByName(std::string alloyNameIn)
 	 * gibt einen integer mit der Position der gesuchten Legierung im Vector wieder.
 	 * wenn die Legierung nicht gefunden wurde wird eine -1 zurückgeben
-	 * @param std::string alloyNameIn
+	 * @param alloyNameIn
 	 * Name der gesuchten Legierung
 	 */
 	int getAlloyPosByName(std::string alloyNameIn);
@@ -230,7 +230,7 @@ public:
 	 * @fn int getAlloyPosByType(Alloy& alloyIn)
 	 * gibt einen integer mit der Position der gesuchten Legierung im Vector wieder.
 	 * wenn die Legierung nicht gefunden wurde wird eine -1 zurückgeben
-	 * @param Alloy& alloyIn
+	 * @param alloyIn
 	 * Referenz der gesuchten Legierung
 	 */
 	int getAlloyPosByType(Alloy& alloyIn);
@@ -337,7 +337,7 @@ public:
 	 * @param firmNameIn
 	 * name der Firma  welche die Bestellung aufgibt
 	 * @param idIn
-	 * Bestellnummer
+	 * Bestellnummer(unsigned int IMMER NUR POSITIVE WERTE)
 	 *
 	 */
 	Order(float amountIn, std::string firmNameIn,unsigned int idIn);
@@ -348,10 +348,41 @@ public:
 	 * gibt die Menge der Bestellung wieder
 	 */
 	float getAmount();
+
+	/**
+	 * @fn std::string getFirmName()
+	 * gibt den Namen der auftraggebenden Firma wieder
+	 */
 	std::string getFirmName();
+
+	/**
+	 * @fn unsigned int getId()
+	 * gibt einen immer posetiven Integer wieder, welcher die Bestellungsid wiedergibt
+	 */
 	unsigned int getId();
+
+	/**
+	 * @fn void setAmount(float amountIn)
+	 * setzt/überschreibt die Menge der Bestellung
+	 * @param amountIn
+	 * die neue Bestellmenge
+	 */
 	void setAmount(float amountIn);
+
+	/**
+	 * @fn void setFirmName(std::string firmNameIn)
+	 * setzt/überschreibt den Namen der auftraggebenden Firma
+	 * @param firmNameIn
+	 * neuer Firmenname
+	 */
 	void setFirmName(std::string firmNameIn);
+
+	/**
+	 * @fn void setId(unsigned int idIn)
+	 * setzt/überschreibt die Id der Bestellung
+	 * @param idIn
+	 * neue Id(unsigned int IMMER NUR POSITIVE WERTE)
+	 */
 	void setId(unsigned int idIn);
 };
 
@@ -360,18 +391,77 @@ private:
 	Alloy alloy;
 	std::vector<Order> order;
 public:
+	/**
+	 * @fn Supplier()
+	 * Konstruktor mit leeren Werten des Typen Supplier
+	 */
 	Supplier();
+
+	/**
+	 * @fn Supplier(Alloy alloyIn)
+	 * Konstruktor mit Anfangswert
+	 * @param alloyIn
+	 * Legierung des Zulieferes
+	 * hier noch keine Bestellung erst in setOrder
+	 */
 	Supplier(Alloy alloyIn);
 	//~Supplier();
+
+	/**
+	 * @fn setOrder(Order orderIn)
+	 * fügt eine neue Bestellung dem vector Order hinzu
+	 * @param
+	 * orderIn
+	 * neue Bestellung
+	 */
 	void setOrder(Order orderIn);
+
+	/**
+	 * @fn std::vector<Order> getOrder()
+	 * gibt eine Kopie des vectors mit den Bestellungen wieder
+	 */
 	std::vector<Order> getOrder();
+
+	/**
+	 * @fn Alloy getAlloy()
+	 * gibt eine Kopie der Legierung des Zulieferer wieder
+	 */
 	Alloy getAlloy();
-	bool saveSupplier(std::string nameIn, std::string spacerIn);
-	bool readSupplier(std::string filename, std::string spacerIn);
+
+
+	//bool saveSupplier(std::string nameIn, std::string spacerIn); muss noch neu überdacht werden speichern und lesen der Zulieferer noch nicht ganz gelöst
+	//bool readSupplier(std::string filename, std::string spacerIn);
+
+	/**
+	 * @fn int getOrderPosById(unsigned int idIn)
+	 * gibt einen integer mit der Position der gesuchten Bestellung im Vector wieder.
+	 * wenn die Legierung nicht gefunden wurde wird eine -1 zurückgeben
+	 * @param idIn
+	 * Id der gesuchten Bestellung
+	 */
 	int getOrderPosById(unsigned int idIn);
+
+	/**
+	 * @fn editOrderById(unsigned int idIn,Order edit)
+	 * bearbeitet die gesuchte Bestellung mit den neuen Werten, sucht mit der Id
+	 * Gibt wahr wider wenn gesuchte Bestellung gefunden wurde, falsch wenn nicht
+	 * @param idIn
+	 * Id der gesuchten Bestellung
+	 * @param edit
+	 * Kopie der neuen Bestellung
+	 */
 	bool editOrderById(unsigned int idIn,Order edit);
+
+	/**
+	 * @fn bool removerOrderById(unsigned int idIn)
+	 * entfernt eine Bestellung mit der gesuchten Id.
+	 * Gibt wahr wider wenn gesuchte Bestellung gefunden wurde, falsch wenn nicht
+	 * @param idIn
+	 * Id der gesuchten Bestellung
+	 */
 	bool removerOrderById(unsigned int idIn);
-	void printOrder();
+
+	//void printOrder(); noch in bearbeitung
 };
 
 
