@@ -64,7 +64,7 @@ public:
 
 	/**
 	*	@fn	setAmount(float ammountIn)
-	*	setzen/überschreiben der Menger de Legierung
+	*	setzen/überschreiben der Menger der Legierung
 	*	@param amountIn
 	*	neuer Wert der Menge;
 	*/
@@ -246,6 +246,7 @@ public:
 	/**
 	 * @fn bool removeAlloyByName(std::string alloyNameIn)
 	 * entfernt eine Legierung mit dem gesuchten Namen aus dem Lager
+	 * Gibt wahr wider wenn gesuchte Legierung gefunden wurde, falsch wenn nicht
 	 * @param alloyNameIn
 	 * Name der gesuchten Legierung
 	 */
@@ -253,7 +254,8 @@ public:
 
 	/**
 	 * @fn bool removeAlloyByName(std::string alloyNameIn)
-	 * entfernt eine Legierung mit der gesuchten Legierung aus dem Lager
+	 * entfernt eine Legierung mit der gesuchten Legierung aus dem Lager.
+	 * Gibt wahr wider wenn gesuchte Legierung gefunden wurde, falsch wenn nicht
 	 * @param alloyIn
 	 * Referenz der gesuchten Legierung
 	 */
@@ -262,6 +264,7 @@ public:
 	/**
 	 * @fn bool saveStorage(std::string nameIn, std::string spacerIn)
 	 * Speichert das Lager in einer csv Datei;
+	 * Gibt wahr wider wenn beendet wurde
 	 * @param nameIn
 	 * gewünschter Dateiname
 	 * @param spacerIn
@@ -271,7 +274,8 @@ public:
 
 	/**
 	 * @fn bool readStorage(std::string filname, std::string spacerIn)
-	 * Liest  das Lager aus einer csv Datei und gibt es in das Lager zurück;
+	 * Liest  das Lager aus einer csv Datei und gibt es in das Lager zurück
+	 * Gibt wahr wider wenn beendet wurde
 	 * @param filname
 	 * der zu öffnende Dateiname
 	 * @param spacerIn
@@ -280,10 +284,36 @@ public:
 	bool readStorage(std::string filename,std::string spacerIn);
 
 	/**
-	 *
+	 * @fn std::vector<float> makeAlloyMix(std::vector<std::string> namesIn,Alloy& wantedIn)
+	 * gibt die Verältnisse der gegebenen Legierung als Vector mit der Postions im Verglich zu der Pos. der gebenen Namen
+	 * der gesuchten Legierung wieder und entfernt die benötigte Menge aus dem Lager
+	 * @param namesIn
+	 * ein Vector mit den Namen der gegebenen Legierungen
+	 * @param  wantedIn
+	 * eine Referenz der gewünschten Legierung
 	 */
 	std::vector<float> makeAlloyMix(std::vector<std::string> namesIn,Alloy& wantedIn);
+
+	/**
+	 * @fn bool editAlloyByName(std::string namesIn ,Alloy edit)
+	 * bearbeitet die gesuchte Legierung mit den neuen Werten, sucht mit Namen.
+	 * Gibt wahr wider wenn gesuchte Legierung gefunden wurde, falsch wenn nicht
+	 * @param namesIn
+	 * Name der gesuchten Legierung
+	 * @param edit
+	 * Kopie der neuen Legierung
+	 */
 	bool editAlloyByName(std::string namesIn ,Alloy edit);
+
+	/**
+	 * @fn bool editAlloyByType(Alloy in ,Alloy edit)
+	 * bearbeitet die gesuchte Legierung mit den neuen Werten, sucht mit einer Kopie des gesuchten Alloys.
+	 * Gibt wahr wider wenn gesuchte Legierung gefunden wurde, falsch wenn nicht
+	 * @param in
+	 * kopie der gesuchten Legierung
+	 * @param edit
+	 * Kopie der neuen Legierung
+	 */
 	bool editAlloyByType(Alloy in ,Alloy edit);
 };
 
