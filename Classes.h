@@ -30,49 +30,49 @@ public:
 	 * @param float amountIn
 	 * Anfangswert von der Menge/amount
 	 */
-	Alloy(float copperIn, float zincIn, float tinIn, std::string nameIn,float amountIn);
+	Alloy(float copperIn, float zincIn, float tinIn, std::string nameIn, float amountIn);
 
 	/**
-	*	@fn	float getCopper()
-	*	gibt den Kuppfer/Copper gehalt der Legierung wieder
-	*/
+	 *	@fn	float getCopper()
+	 *	gibt den Kuppfer/Copper gehalt der Legierung wieder
+	 */
 	float getCopper();
 
 	/**
-	*	@fn	float getZinc()
-	*	gibt den Zink/Zinc gehalt der Legierung wieder
-	*/
+	 *	@fn	float getZinc()
+	 *	gibt den Zink/Zinc gehalt der Legierung wieder
+	 */
 	float getZinc();
 
 	/**
-	*	@fn	float getTin()
-	*	gibt den Zinn/Tin gehalt der Legierung wieder
-	*/
+	 *	@fn	float getTin()
+	 *	gibt den Zinn/Tin gehalt der Legierung wieder
+	 */
 	float getTin();
 
 	/**
-	*	@fn	std::string getName()
-	*	gibt den Namen der Legierung wieder
-	*/
+	 *	@fn	std::string getName()
+	 *	gibt den Namen der Legierung wieder
+	 */
 	std::string getName();
 
 	/**
-	*	@fn	float getAmount()
-	*	gibt die Menge der Legierung wieder
-	*/
+	 *	@fn	float getAmount()
+	 *	gibt die Menge der Legierung wieder
+	 */
 	float getAmount();
 
 	/**
-	*	@fn	setAmount(float ammountIn)
-	*	setzen/überschreiben der Menger der Legierung
-	*	@param amountIn
-	*	neuer Wert der Menge;
-	*/
+	 *	@fn	setAmount(float ammountIn)
+	 *	setzen/überschreiben der Menger der Legierung
+	 *	@param amountIn
+	 *	neuer Wert der Menge;
+	 */
 	void setAmount(float ammountIn);
 
 	/**
 	 *	@fn	operator==(const Alloy &b)
-	 *	Vergleicht zwei Legierungen auf gleichheit a ==b und gibt wahr oder falsch wieder
+	 *	Vergleicht zwei Legierungen auf gleichheit a == b und gibt wahr oder falsch wieder
 	 *	@param b
 	 *	Ist der zu vergleichende Alloy
 	 */
@@ -87,8 +87,9 @@ public:
 	bool operator!=(const Alloy &b);
 
 	//void normalize();
-};
 
+	void print();
+};
 
 class Firm {
 private:
@@ -124,12 +125,12 @@ public:
 	 * @fn std::string getName()
 	 * gibt den Namen der Firma wieder
 	 */
-    std::string getName();
+	std::string getName();
 
-    /**
-     * @fn std::string getStreet()
-     * gibt den Straßennamen wieder
-     */
+	/**
+	 * @fn std::string getStreet()
+	 * gibt den Straßennamen wieder
+	 */
 	std::string getStreet();
 
 	/**
@@ -137,7 +138,6 @@ public:
 	 * gibt die Postleitzahl wieder
 	 */
 	std::string getZip();
-
 
 	/**
 	 * @fn std::string getCity()
@@ -192,7 +192,7 @@ public:
 	void setComment(std::string commentIn);
 };
 
-class Storage : public Firm{
+class Storage: public Firm {
 private:
 	std::vector<Alloy> alloy;
 public:
@@ -233,7 +233,7 @@ public:
 	 * @param alloyIn
 	 * Referenz der gesuchten Legierung
 	 */
-	int getAlloyPosByType(Alloy& alloyIn);
+	int getAlloyPosByType(Alloy &alloyIn);
 
 	/**
 	 * @fn void addAlloy(Alloy alloyIn)
@@ -259,7 +259,7 @@ public:
 	 * @param alloyIn
 	 * Referenz der gesuchten Legierung
 	 */
-	bool removeAlloyByType(Alloy& alloyIn);
+	bool removeAlloyByType(Alloy &alloyIn);
 
 	/**
 	 * @fn bool saveStorage(std::string nameIn, std::string spacerIn)
@@ -281,7 +281,7 @@ public:
 	 * @param spacerIn
 	 * spacer in der Datei
 	 */
-	bool readStorage(std::string filename,std::string spacerIn);
+	bool readStorage(std::string filename, std::string spacerIn);
 
 	/**
 	 * @fn std::vector<float> makeAlloyMix(std::vector<std::string> namesIn,Alloy& wantedIn)
@@ -292,7 +292,7 @@ public:
 	 * @param  wantedIn
 	 * eine Referenz der gewünschten Legierung
 	 */
-	std::vector<float> makeAlloyMix(std::vector<std::string> namesIn,Alloy& wantedIn);
+	std::vector<float> makeAlloyMix(std::vector<std::string> namesIn, Alloy &wantedIn);
 
 	/**
 	 * @fn bool editAlloyByName(std::string namesIn ,Alloy edit)
@@ -303,7 +303,7 @@ public:
 	 * @param edit
 	 * Kopie der neuen Legierung
 	 */
-	bool editAlloyByName(std::string namesIn ,Alloy edit);
+	bool editAlloyByName(std::string namesIn, Alloy edit);
 
 	/**
 	 * @fn bool editAlloyByType(Alloy in ,Alloy edit)
@@ -314,10 +314,10 @@ public:
 	 * @param edit
 	 * Kopie der neuen Legierung
 	 */
-	bool editAlloyByType(Alloy in ,Alloy edit);
+	bool editAlloyByType(Alloy in, Alloy edit);
 };
 
-class Order{
+class Order {
 private:
 	float amount;
 	std::string firmName;
@@ -340,7 +340,7 @@ public:
 	 * Bestellnummer(unsigned int IMMER NUR POSITIVE WERTE)
 	 *
 	 */
-	Order(float amountIn, std::string firmNameIn,unsigned int idIn);
+	Order(float amountIn, std::string firmNameIn, unsigned int idIn);
 	//~Order();
 
 	/**
@@ -386,7 +386,7 @@ public:
 	void setId(unsigned int idIn);
 };
 
-class Supplier : public Firm{
+class Supplier: public Firm {
 private:
 	Alloy alloy;
 	std::vector<Order> order;
@@ -428,7 +428,6 @@ public:
 	 */
 	Alloy getAlloy();
 
-
 	//bool saveSupplier(std::string nameIn, std::string spacerIn); muss noch neu überdacht werden speichern und lesen der Zulieferer noch nicht ganz gelöst
 	//bool readSupplier(std::string filename, std::string spacerIn);
 
@@ -450,7 +449,7 @@ public:
 	 * @param edit
 	 * Kopie der neuen Bestellung
 	 */
-	bool editOrderById(unsigned int idIn,Order edit);
+	bool editOrderById(unsigned int idIn, Order edit);
 
 	/**
 	 * @fn bool removerOrderById(unsigned int idIn)
@@ -463,9 +462,4 @@ public:
 
 	//void printOrder(); noch in bearbeitung
 };
-
-
-
-
-
 

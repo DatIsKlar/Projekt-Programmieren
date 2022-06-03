@@ -1,29 +1,29 @@
 #include "Classes.h"
 //test1
-Supplier::Supplier(){
+Supplier::Supplier() {
 	alloy;
 	order;
 }
 
-Supplier::Supplier(Alloy alloyIn){
+Supplier::Supplier(Alloy alloyIn) {
 	alloy = alloyIn;
 	order;
 }
 
-void Supplier::setOrder(Order orderIn){
-		this->order.push_back(orderIn);
+void Supplier::setOrder(Order orderIn) {
+	this->order.push_back(orderIn);
 }
 
-std::vector<Order> Supplier::getOrder(){
-		return this->order;
+std::vector<Order> Supplier::getOrder() {
+	return this->order;
 }
 
-Alloy Supplier::getAlloy(){
+Alloy Supplier::getAlloy() {
 	return this->alloy;
 }
 
-int Supplier::getOrderPosById(unsigned int idIn){
-	unsigned int x=0;
+int Supplier::getOrderPosById(unsigned int idIn) {
+	unsigned int x = 0;
 	for (auto i : this->order) {
 		if (i.getId() == idIn) {
 			return x;
@@ -33,24 +33,22 @@ int Supplier::getOrderPosById(unsigned int idIn){
 	return -1;
 }
 
-bool Supplier::editOrderById(unsigned int idIn, Order edit){
+bool Supplier::editOrderById(unsigned int idIn, Order edit) {
 	int x = this->getOrderPosById(idIn);
-	if(x>=0){
+	if (x >= 0) {
 		this->order.at(x) = edit;
 		return true;
-	}
-	else
+	} else
 		return false;
 
 }
 
-bool Supplier::removerOrderById(unsigned int idIn){
+bool Supplier::removerOrderById(unsigned int idIn) {
 	int x = this->getOrderPosById(idIn);
-	if(x>=0){
-		this->order.erase(this->order.begin()+x); // @suppress("Invalid arguments")
+	if (x >= 0) {
+		this->order.erase(this->order.begin() + x); // @suppress("Invalid arguments")
 		return true;
-	}
-	else
+	} else
 		return false;
 }
 

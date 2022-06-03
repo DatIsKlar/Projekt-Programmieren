@@ -57,4 +57,3 @@ void Firm::setComment(std::string commentIn) {
 	this->comment = commentIn;
 }
 
-
