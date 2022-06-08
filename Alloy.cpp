@@ -9,15 +9,15 @@ Alloy::Alloy() {
 }
 
 Alloy::Alloy(float copperIn, float zincIn, float tinIn, std::string nameIn, float amountIn) {
-
 	float complet_value = copperIn + zincIn + tinIn;
 	if ((complet_value > 1 || complet_value < 1)) {
 		if (complet_value > 1 && (complet_value < 100 || complet_value > 100)) {
-			//do error
+			//do error sollte am besten schon bei der eingabe geprüft werden und nich erst hier. Um wieder holte eingabe einfacher zu gestalten
 		} else {
 			copperIn /= 100;
 			zincIn /= 100;
 			tinIn /= 100;
+
 		}
 	}
 
@@ -83,24 +83,3 @@ void Alloy::print() {
 	std::cout << this->copper << "\n" << this->zinc << "\n" << this->tin << "\n";
 
 }
-
-//void Alloy::normalize() {
-//
-//	if (this->mode == 'a') {
-//		this->copper = this->copper / 100;
-//		this->zinc = this->zinc / 100;
-//		this->tin = this->tin / 100;
-//	}
-//
-//	if (this->mode == 'x') {
-//		if (this->copper + this->zinc + this->tin == 100) {
-//			this->copper = this->copper / 100;
-//			this->zinc = this->zinc / 100;
-//			this->tin = this->tin / 100;
-//		} else if (this->copper + this->zinc + this->tin != 100
-//				&& this->copper + this->zinc + this->tin != 1) {
-//			//error
-//		}
-//	}
-//}
-

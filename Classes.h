@@ -1,6 +1,12 @@
+#ifndef CLASSES_H_
+#define CLASSES_H_
+
 #include <vector>
 #include <string>
 #include <armadillo>
+#include <fstream>
+#include <sstream>
+#include "Data.h"
 
 class Alloy {
 private:
@@ -85,8 +91,6 @@ public:
 	 *	Ist der zu vergleichende Alloy
 	 */
 	bool operator!=(const Alloy &b);
-
-	//void normalize();
 
 	void print();
 };
@@ -404,7 +408,7 @@ public:
 	 * Legierung des Zulieferes
 	 * hier noch keine Bestellung erst in setOrder
 	 */
-	Supplier(Alloy alloyIn);
+	Supplier(Alloy alloyIn, std::string nameIn);
 	//~Supplier();
 
 	/**
@@ -463,3 +467,5 @@ public:
 	//void printOrder(); noch in bearbeitung
 };
 
+
+#endif /* CLASSES_H_ */

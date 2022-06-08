@@ -1,6 +1,4 @@
 #include "Classes.h"
-#include <fstream>
-#include <sstream>
 
 Storage::Storage() {
 	alloy;
@@ -83,10 +81,8 @@ bool Storage::saveStorage(std::string filename, std::string spacer) {
 }
 
 bool Storage::readStorage(std::string filename, std::string spacer) {
-	std::ifstream myfile;
-	myfile.open(filename + ".csv");
-	std::string line;
-	int x = 0;
+//	std::ifstream myfile;
+//	myfile.open(filename + ".csv");
 	std::vector<std::string> splitt;
 	unsigned int posCopper = 0;
 	unsigned int posZinc = 0;
@@ -94,105 +90,57 @@ bool Storage::readStorage(std::string filename, std::string spacer) {
 	unsigned int posName = 0;
 	unsigned int posAmount = 0;
 	unsigned int posFirmName = 0;
-	unsigned int total_length = 0;
+
 	char spacer_ = spacer[0];
-	if (myfile.is_open()) {
-		while (getline(myfile, line)) {
-			x++;
-			if (x == 1) {
-				unsigned int j = 0;
-				std::vector<std::string> pos;
-				for (unsigned int i = 0; i < line.length(); i++) {
-					if (line[i] == spacer_) {
-						std::string temp;
-						for (unsigned int z = j; z < i; z++) {
-							temp += line[z];
-						}
-						j = i + 1;
-						pos.push_back(temp);
-					}
-					if (i == line.find_last_of(spacer_)) {
-						std::string temp;
-						for (unsigned int z = i + 1; z < line.length(); z++) {
-							temp += line[z];
-						}
-						pos.push_back(temp);
-					}
+	std::vector<std::string> pos = data::getHeaderText(spacer_, filename);
+	unsigned int z = 0;
+	for (auto i : pos) {
+		z++;
+		if (i == "Copper" || i == "Kupfer") {
+			posCopper = z;
+		} else if (i == "Zinc" || i == "Zink") {
+			posZinc = z;
 
-				}
-				unsigned int z = 0;
-				for (auto i : pos) {
-					z++;
-					if (i == "Copper" || i == "Kupfer") {
-						posCopper = z;
-					} else if (i == "Zinc" || i == "Zink") {
-						posZinc = z;
-
-					} else if (i == "Tin" || i == " Zinn") {
-						posTin = z;
-					} else if (i == "Amount" || i == " Menge") {
-						posAmount = z;
-					} else if (i == "Name") {
-						posName = z;
-					} else if (i == "Firm") {
-						posFirmName = z;
-					}
-					total_length = z;
-				}
-
-			}
-			if (x >= 2) {
-				unsigned int j = 0;
-				for (unsigned int i = 0; i < line.length(); i++) {
-					if (line[i] == spacer_) {
-						std::string temp;
-						for (unsigned int z = j; z < i; z++) {
-							temp += line[z];
-						}
-						j = i + 1;
-						splitt.push_back(temp);
-					}
-					if (i == line.find_last_of(spacer_)) {
-						std::string temp;
-						for (unsigned int z = i + 1; z < line.length(); z++) {
-							temp += line[z];
-						}
-						splitt.push_back(temp);
-					}
-				}
-			}
-
+		} else if (i == "Tin" || i == " Zinn") {
+			posTin = z;
+		} else if (i == "Amount" || i == " Menge") {
+			posAmount = z;
+		} else if (i == "Name") {
+			posName = z;
+		} else if (i == "Firm") {
+			posFirmName = z;
 		}
-		myfile.close();
-		unsigned int split = 0;
-		float copper = 0;
-		float zinc = 0;
-		float tin = 0;
-		std::string name = "";
-		float amount = 0;
-		std::string firm = "";
-		for (auto i : splitt) {
-			split++;
-			if (split == posCopper) {
-				copper = std::stof(i);
-			} else if (split == posZinc) {
-				zinc = std::stof(i);
-			} else if (split == posTin) {
-				tin = std::stof(i);
-			} else if (split == posName) {
-				name = i;
-			} else if (split == posAmount) {
-				amount = std::stof(i);
-			} else if (split == posFirmName) {
-				firm = i;
-			}
-
-			if (split == total_length) {
-				this->alloy.push_back(Alloy(copper, zinc, tin, name, amount));
-				split = 0;
-			}
-
+	}
+	splitt = data::getBodyText(spacer_, filename);
+	unsigned int split = 0;
+	unsigned int total_length = pos.size();
+	float copper = 0;
+	float zinc = 0;
+	float tin = 0;
+	std::string name = "";
+	float amount = 0;
+	std::string firm = "";
+	for (auto i : splitt) {
+		split++;
+		if (split == posCopper) {
+			copper = std::stof(i);
+		} else if (split == posZinc) {
+			zinc = std::stof(i);
+		} else if (split == posTin) {
+			tin = std::stof(i);
+		} else if (split == posName) {
+			name = i;
+		} else if (split == posAmount) {
+			amount = std::stof(i);
+		} else if (split == posFirmName) {
+			firm = i;
 		}
+
+		if (split == total_length) {
+			this->alloy.push_back(Alloy(copper, zinc, tin, name, amount));
+			split = 0;
+		}
+
 	}
 	return true;
 }
