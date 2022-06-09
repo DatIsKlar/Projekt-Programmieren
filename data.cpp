@@ -5,11 +5,11 @@ std::vector<std::string> getHeaderText(char spacer, std::string filename) {
 	std::ifstream myfile;
 	std::string line;
 	myfile.open(filename + ".csv");
-	unsigned int x = 0;
-	std::vector<std::string> pos;
+	unsigned int currentLine = 0;
+	std::vector<std::string> headers;
 	while (getline(myfile, line)) {
-		x++;
-		if (x == 1) {
+		currentLine++;
+		if (currentLine == 1) {
 			unsigned int j = 0;
 			for (unsigned int i = 0; i < line.length(); i++) {
 				if (line[i] == spacer) {
@@ -18,32 +18,32 @@ std::vector<std::string> getHeaderText(char spacer, std::string filename) {
 						temp += line[z];
 					}
 					j = i + 1;
-					pos.push_back(temp);
+					headers.push_back(temp);
 				}
 				if (i == line.find_last_of(spacer)) {
 					std::string temp;
 					for (unsigned int z = i + 1; z < line.length(); z++) {
 						temp += line[z];
 					}
-					pos.push_back(temp);
+					headers.push_back(temp);
 				}
 			}
-			return pos;
+			return headers;
 		}
 	}
 	myfile.close();
-	return pos;
+	return headers;
 }
 
 std::vector<std::string> getBodyText(char spacer, std::string filename) {
 	std::ifstream myfile;
 	std::string line;
 	myfile.open(filename + ".csv");
-	std::vector<std::string> splitt;
-	unsigned int x = 0;
+	std::vector<std::string> body;
+	unsigned int currentLine = 0;
 	while (getline(myfile, line)) {
-		x++;
-		if (x >= 2) {
+		currentLine++;
+		if (currentLine >= 2) {
 			unsigned int j = 0;
 			for (unsigned int i = 0; i < line.length(); i++) {
 				if (line[i] == spacer) {
@@ -52,91 +52,91 @@ std::vector<std::string> getBodyText(char spacer, std::string filename) {
 						temp += line[z];
 					}
 					j = i + 1;
-					splitt.push_back(temp);
+					body.push_back(temp);
 				}
 				if (i == line.find_last_of(spacer)) {
 					std::string temp;
 					for (unsigned int z = i + 1; z < line.length(); z++) {
 						temp += line[z];
 					}
-					splitt.push_back(temp);
+					body.push_back(temp);
 				}
 			}
 		}
 	}
 	myfile.close();
-	return splitt;
+	return body;
 }
 
 std::vector<std::string> getTextData(std::string filename, std::string spacer, std::vector<std::string> search) {
-	unsigned int total_length = 0;
+	unsigned int totalLength = 0;
 	char spacer_ = spacer[0];
 	std::vector<std::string> pos = getHeaderText(spacer_, filename);
 	std::vector<unsigned int> pos_(pos.size());
 
-	unsigned int z = 0;
-	int start_val = -1;
+	unsigned int currentPosition = 0;
+	int startPos = -1;
 	for (auto i : pos) {
 		for (auto x : search) {
 			if (i == x) {
-				if (start_val == -1)
-					start_val = z;
+				if (startPos == -1)
+					startPos = currentPosition;
 
-				pos_.at(z) = z;
+				pos_.at(currentPosition) = currentPosition;
 			}
 		}
-		z++;
-		total_length = z;
+		currentPosition++;
+		totalLength = currentPosition;
 	}
 
 
 	std::vector<std::string> splitt = getBodyText(spacer_, filename);
-	unsigned int split = 0;
-	std::vector<std::string> test;
+	unsigned int splittPostition = 0;
+	std::vector<std::string> valuesAfterFile;
 	for (auto i : splitt) {
-		unsigned int x_ = start_val;
+		unsigned int x_ = startPos;
 		for (auto x : search) {
-			if (split == pos_[x_]) {
-				test.push_back(i);
+			if (splittPostition == pos_[x_]) {
+				valuesAfterFile.push_back(i);
 			}
 			x_++;
 		}
-		split++;
-		if (split == total_length) {
-			split = 0;
+		splittPostition++;
+		if (splittPostition == totalLength) {
+			splittPostition = 0;
 		}
 	}
 
-	std::vector<unsigned int> pos_search;
+	std::vector<unsigned int> posSearch;
 	for (auto i : pos) {
 		unsigned int y = 0;
 		for (auto x : search) {
 			if (i == x) {
-				pos_search.push_back(y);
+				posSearch.push_back(y);
 			}
 			y++;
 		}
 	}
 
-	std::vector<unsigned int> delta_pos;
-	for (unsigned int y_ = 0; y_ < pos_search.size(); y_++) {
-		int delta = (int) pos_search.at(y_) - (int) pos_.at(y_);
+	std::vector<int> delta_pos;
+	for (unsigned int y_ = 0; y_ < posSearch.size(); y_++) {
+		int delta = (int) posSearch.at(y_) - (int) pos_.at(y_);
 		delta_pos.push_back(delta);
 
 	}
 
-	std::vector<std::string> sortet(test.size());
+	std::vector<std::string> valuesAfterSearch(valuesAfterFile.size());
 	unsigned int y_x = 0;
 	int y_x_ = 0;
-	for (auto i : test) {
-		sortet.at(y_x_ + delta_pos.at(y_x)) = i;
+	for (auto i : valuesAfterFile) {
+		valuesAfterSearch.at(y_x_ + delta_pos.at(y_x)) = i;
 		y_x++;
 		if (y_x == delta_pos.size())
 			y_x = 0;
 		y_x_++;
 	}
 
-	return sortet;
+	return valuesAfterSearch;
 }
 
 }
