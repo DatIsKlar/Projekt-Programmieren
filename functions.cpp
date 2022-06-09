@@ -1,7 +1,6 @@
-
 #include "Functions.h"
 
-namespace functions{
+namespace functions {
 std::vector<Supplier> readSupplierFile(std::string filename, std::string spacer) {
 	std::vector<Supplier> vec_;
 	unsigned int posCopper = 0;
@@ -64,28 +63,43 @@ std::vector<Supplier> readSupplierFile(std::string filename, std::string spacer)
 	}
 	return vec_;
 }
+bool isNumber(std::string number) {
+//	unsigned int x = 0;
+//	unsigned int posCount = 0;
+//	unsigned int pos = 0;
+//	unsigned int le_ = 0;
+//	for (auto i : number) {
+//		++posCount;
+//		if (i == '.') {
+//			x++;
+//			pos = posCount;
+//			le_++;
+//		}
+//		if (posCount != pos && isdigit(i)) {
+//			le_++;
+//		}
+//	}
+//	if (le_ == number.length() && x <= 1)
+//		return true;
+//	else
+//		return false;
 
-bool isNumber(std::string number){
-	unsigned int x = 0;
-	unsigned int posCount = 0;
-	unsigned int pos = 0;
-	unsigned int le_ = 0;
-	for(auto i:number){
-		++posCount;
-		if(i == '.'){
-			x++;
-			pos = posCount;
-			le_++;
+	try{
+		std::string::size_type sz;
+		stoi(number,&sz);
+		if(sz == number.length())
+			return true;
+		else{
+			stof(number,&sz);
+				if(sz == number.length())
+					return true;
+				else
+					return false;
 		}
-		if(posCount !=pos && isdigit(i)){
-			le_++;
-		}
+	}catch(const std::invalid_argument& ia){
+		return false;
 	}
-	if(le_ == number.length() && x <=1)
-		return true;
-		else
-			return false;
-}
 }
 
+}
 
