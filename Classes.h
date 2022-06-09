@@ -7,6 +7,7 @@
 #include <fstream>
 #include <sstream>
 #include "Data.h"
+#include <iostream>
 
 class Alloy {
 private:

@@ -89,6 +89,7 @@ std::vector<std::string> getTextData(std::string filename, std::string spacer, s
 		total_length = z;
 	}
 
+
 	std::vector<std::string> splitt = getBodyText(spacer_, filename);
 	unsigned int split = 0;
 	std::vector<std::string> test;
@@ -117,12 +118,11 @@ std::vector<std::string> getTextData(std::string filename, std::string spacer, s
 		}
 	}
 
-	std::vector<int> delta_pos;
-	unsigned int y_ = 0;
-	for (auto i : search) {
+	std::vector<unsigned int> delta_pos;
+	for (unsigned int y_ = 0; y_ < pos_search.size(); y_++) {
 		int delta = (int) pos_search.at(y_) - (int) pos_.at(y_);
 		delta_pos.push_back(delta);
-		y_++;
+
 	}
 
 	std::vector<std::string> sortet(test.size());
@@ -135,6 +135,7 @@ std::vector<std::string> getTextData(std::string filename, std::string spacer, s
 			y_x = 0;
 		y_x_++;
 	}
+
 	return sortet;
 }
 

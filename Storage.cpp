@@ -81,66 +81,17 @@ bool Storage::saveStorage(std::string filename, std::string spacer) {
 }
 
 bool Storage::readStorage(std::string filename, std::string spacer) {
-//	std::ifstream myfile;
-//	myfile.open(filename + ".csv");
-	std::vector<std::string> splitt;
-	unsigned int posCopper = 0;
-	unsigned int posZinc = 0;
-	unsigned int posTin = 0;
-	unsigned int posName = 0;
-	unsigned int posAmount = 0;
-	unsigned int posFirmName = 0;
+	std::vector<std::string> search = {"Copper","Zinc","Tin","Amount","Name"};
+	std::vector<std::string> data_ = data::getTextData(filename, spacer, search);
 
-	char spacer_ = spacer[0];
-	std::vector<std::string> pos = data::getHeaderText(spacer_, filename);
-	unsigned int z = 0;
-	for (auto i : pos) {
-		z++;
-		if (i == "Copper" || i == "Kupfer") {
-			posCopper = z;
-		} else if (i == "Zinc" || i == "Zink") {
-			posZinc = z;
-
-		} else if (i == "Tin" || i == " Zinn") {
-			posTin = z;
-		} else if (i == "Amount" || i == " Menge") {
-			posAmount = z;
-		} else if (i == "Name") {
-			posName = z;
-		} else if (i == "Firm") {
-			posFirmName = z;
+	for(unsigned int x = 0; x<data_.size(); x+=search.size()){
+		if(x%search.size() == 0){
+			try{
+				this->alloy.push_back(Alloy(std::stof(data_.at(x)), std::stof(data_.at(x+1)), std::stof(data_.at(x+2)), data_.at(x+4), std::stof(data_.at(x+3))));
+			}catch(const std::invalid_argument& ia){
+				return false;
+			}
 		}
-	}
-	splitt = data::getBodyText(spacer_, filename);
-	unsigned int split = 0;
-	unsigned int total_length = pos.size();
-	float copper = 0;
-	float zinc = 0;
-	float tin = 0;
-	std::string name = "";
-	float amount = 0;
-	std::string firm = "";
-	for (auto i : splitt) {
-		split++;
-		if (split == posCopper) {
-			copper = std::stof(i);
-		} else if (split == posZinc) {
-			zinc = std::stof(i);
-		} else if (split == posTin) {
-			tin = std::stof(i);
-		} else if (split == posName) {
-			name = i;
-		} else if (split == posAmount) {
-			amount = std::stof(i);
-		} else if (split == posFirmName) {
-			firm = i;
-		}
-
-		if (split == total_length) {
-			this->alloy.push_back(Alloy(copper, zinc, tin, name, amount));
-			split = 0;
-		}
-
 	}
 	return true;
 }
