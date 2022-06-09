@@ -13,7 +13,6 @@
 //Funktionen werden hier einmal eingetragen wie man an readSupplierFile sehen kann und die Richtige funktion wird dann wie readSupplierFile auch in functions.cpp
 //im namespace noch mal definiert aber diesmal mit dem code
 namespace functions{
-std::vector<Supplier> readSupplierFile(std::string filename, std::string spacer);
 bool isNumber(std::string number);
 }
 
