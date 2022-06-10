@@ -62,7 +62,7 @@ bool Storage::saveStorage(std::string filename, std::string spacer) {
 	std::ofstream myfile;
 
 	myfile.open(filename + ".csv");
-	myfile << "Type" + spacer + "Copper" + spacer + "Zinc" + spacer + "Tin" + spacer + "Name" + spacer + "Amount" + "\n";
+	myfile << "Modus" + spacer + "Kupfer" + spacer + "Zink" + spacer + "Zinn" + spacer + "Name" + spacer + "Menge" + "\n";
 	for (Alloy i : this->alloy) {
 		char mode = 'x';
 		if (i.getCopper() + i.getZinc() + i.getTin() == 1)
@@ -119,8 +119,8 @@ std::vector<float> Storage::makeAlloyMix(std::vector<std::string> namesIn, Alloy
 		unsigned int a_ = this->getAlloyPosByName(i);
 		float finalAmount = this->alloy.at(a_).getAmount() - solution[f] * wantedIn.getAmount();
 		f++;
-		if (finalAmount >= 0)
-			this->alloy.at(a_).setAmount(finalAmount); //setzten der neuen Menge im Lager
+//		if (finalAmount >= 0)
+//			this->alloy.at(a_).setAmount(finalAmount); //setzten der neuen Menge im Lager
 		//else
 		//error
 

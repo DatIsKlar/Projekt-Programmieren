@@ -120,7 +120,7 @@ std::vector<std::string> getTextData(std::string filename, std::string spacer, s
 
 	std::vector<int> delta_pos;
 	for (unsigned int y_ = 0; y_ < posSearch.size(); y_++) {
-		int delta = (int) posSearch.at(y_) - (int) pos_.at(y_);
+		int delta = static_cast<int>(posSearch.at(y_)) - static_cast<int>(pos_.at(y_));
 		delta_pos.push_back(delta);
 
 	}

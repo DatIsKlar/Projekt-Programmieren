@@ -14,7 +14,12 @@
 //im namespace noch mal definiert aber diesmal mit dem code
 namespace functions{
 bool isNumber(std::string number);
+int eingabe(int o, std::string CC);
+bool isInt(float numberIn);
+bool saveSupplier(std::string filename, std::string spacer, std::vector<Supplier> sup)
 
-int test;
+}
+
+
 
 #endif /* FUNCTIONS_H_ */
