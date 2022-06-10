@@ -116,18 +116,9 @@ std::vector<float> Storage::makeAlloyMix(std::vector<std::string> namesIn, Alloy
 	arma::vec solution = solve(Gauss, wanted);
 	int f = 0;
 	for (auto i : namesIn) {
-		unsigned int a_ = this->getAlloyPosByName(i);
-		float finalAmount = this->alloy.at(a_).getAmount() - solution[f] * wantedIn.getAmount();
-		f++;
-//		if (finalAmount >= 0)
-//			this->alloy.at(a_).setAmount(finalAmount); //setzten der neuen Menge im Lager
-		//else
-		//error
-
-		returnAmount.push_back(solution[f]);
+		returnAmount.push_back(solution[f]* wantedIn.getAmount());
 	}
 	return returnAmount;
-
 }
 
 bool Storage::editAlloyByName(std::string namesIn, Alloy edit) {
