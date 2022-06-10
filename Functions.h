@@ -14,8 +14,7 @@
 //im namespace noch mal definiert aber diesmal mit dem code
 namespace functions{
 bool isNumber(std::string number);
-}
 
-
+int test;
 
 #endif /* FUNCTIONS_H_ */
