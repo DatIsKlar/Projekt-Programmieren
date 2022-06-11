@@ -114,10 +114,18 @@ std::vector<float> Storage::makeAlloyMix(std::vector<std::string> namesIn, Alloy
 	}
 
 	arma::vec solution = solve(Gauss, wanted);
+	float isPos = 0;
 	int f = 0;
 	for (auto i : namesIn) {
-		returnAmount.push_back(solution[f]* wantedIn.getAmount());
+		float calc = solution[f]* wantedIn.getAmount();
+		unsigned int a_ = this->getAlloyPosByName(i);
+		returnAmount.push_back(calc);
+		float check = this->alloy.at(a_).getAmount()-calc;
+		if(check <0){
+			isPos = -1;
+		}
 	}
+	returnAmount.push_back(isPos);
 	return returnAmount;
 }
 

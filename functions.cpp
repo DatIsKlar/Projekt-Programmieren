@@ -10,7 +10,7 @@ bool isNumber(std::string number) {
 			return true;
 		else {
 			stof(number, &size);
-			if (size)
+			if (size == number.length())
 				return true;
 			else
 				return false;
@@ -58,6 +58,7 @@ bool saveSupplier(std::string filename, std::string spacer, std::vector<Supplier
 	myfile.close();
 	return true;
 }
+
 
 }
 

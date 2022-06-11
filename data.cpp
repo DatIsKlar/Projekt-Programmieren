@@ -73,17 +73,21 @@ std::vector<std::string> getTextData(std::string filename, std::string spacer, s
 	char spacer_ = spacer[0];
 	std::vector<std::string> pos = getHeaderText(spacer_, filename);
 	std::vector<unsigned int> pos_(pos.size());
+	std::vector<unsigned int> posSearch;
 
 	unsigned int currentPosition = 0;
 	int startPos = -1;
 	for (auto i : pos) {
+		unsigned int y = 0;
 		for (auto x : search) {
 			if (i == x) {
 				if (startPos == -1)
 					startPos = currentPosition;
 
+				posSearch.push_back(y);
 				pos_.at(currentPosition) = currentPosition;
 			}
+			y++;
 		}
 		currentPosition++;
 		totalLength = currentPosition;
@@ -107,16 +111,16 @@ std::vector<std::string> getTextData(std::string filename, std::string spacer, s
 		}
 	}
 
-	std::vector<unsigned int> posSearch;
-	for (auto i : pos) {
-		unsigned int y = 0;
-		for (auto x : search) {
-			if (i == x) {
-				posSearch.push_back(y);
-			}
-			y++;
-		}
-	}
+//	std::vector<unsigned int> posSearch;
+//	for (auto i : pos) {
+//		unsigned int y = 0;
+//		for (auto x : search) {
+//			if (i == x) {
+//				posSearch.push_back(y);
+//			}
+//			y++;
+//		}
+//	}
 
 	std::vector<int> delta_pos;
 	for (unsigned int y_ = 0; y_ < posSearch.size(); y_++) {
