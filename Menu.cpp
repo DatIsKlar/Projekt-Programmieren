@@ -87,9 +87,14 @@ void anschriftPflegen(Firm &eigeneFirma) {
 						<< eigeneFirma.getComment() << std::endl;
 				std::cout << "Bitte geben Sie die neue Adresse ein."
 						<< std::endl;
+				std::cout << "Name: " << std::endl;
+				std::string neueName;
+				std::cin.ignore(500, '\n');
+				std::getline(std::cin, neueName);
+				eigeneFirma.setName(neueName);
 				std::cout << "Strassenname: " << std::endl;
 				std::string neueStrasse;
-				std::cin.ignore(500, '\n');
+				//std::cin.ignore(500, '\n');
 				std::getline(std::cin, neueStrasse);
 				eigeneFirma.setStreet(neueStrasse);
 				std::cout << "ZIP-Code: " << std::endl;
