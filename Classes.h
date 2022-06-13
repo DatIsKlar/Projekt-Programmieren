@@ -414,12 +414,21 @@ public:
 
 	/**
 	 * @fn setOrder(Order orderIn)
+	 * fügt eine neue Legierung hinzu
+	 * @param
+	 * alloyIn
+	 * neue Legierung
+	 */
+	void setOrder(Order orderIn);
+
+	/**
+	 * @fn setAlloy(Alloy alloyIn)
 	 * fügt eine neue Bestellung dem vector Order hinzu
 	 * @param
 	 * orderIn
 	 * neue Bestellung
 	 */
-	void setOrder(Order orderIn);
+	void setAlloy(Alloy alloyIn);
 
 	/**
 	 * @fn std::vector<Order> getOrder()

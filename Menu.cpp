@@ -451,6 +451,40 @@ std::vector<Supplier> supplierPlfegen(std::vector<Supplier> suppliers) {
 	return suppliers;
 }
 
+Supplier supplierNew(){
+	Supplier s(Alloy(),"","","","","");
+	std::cout << "Bitte geben Sie die Daten des Zuliefers an."
+			<< std::endl;
+	//dummy alloy
+	s.setAlloy(Alloy());
+	std::cout << "Name: " << std::endl;
+	std::string neueName;
+	std::cin.ignore(500, '\n');
+	std::getline(std::cin, neueName);
+	s.setName(neueName);
+	std::cout << "Strassenname: " << std::endl;
+	std::string strasse;
+	//std::cin.ignore(500, '\n');
+	std::getline(std::cin, strasse);
+	s.setStreet(strasse);
+	std::cout << "ZIP-Code: " << std::endl;
+	std::string zip;
+	//std::cin.ignore(500, '\n');
+	std::getline(std::cin, zip);
+	s.setZip(zip);
+	std::cout << "City: " << std::endl;
+	std::string city;
+	//std::cin.ignore(500, '\n');
+	std::getline(std::cin, city);
+	s.setCity(city);
+	std::cout << "Comment: " << std::endl;
+	std::string comment;
+	//std::cin.ignore(500, '\n');
+	std::getline(std::cin, comment);
+	s.setComment(comment);
+
+	return s;
+}
 }
 
 

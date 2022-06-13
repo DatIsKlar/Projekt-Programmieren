@@ -5,6 +5,7 @@
 #include "Data.h"
 #include "Functions.h"
 #include "Menu.h"
+
 std::vector<Supplier> suppliers;
 int main() {
 
@@ -101,11 +102,12 @@ int main() {
 							break; //Exit
 
 						case 1: //Neuerstellung
-							std::cout << "\n 1.1.2 Neuerstellung";
+							std::cout << "\n 1.1.2 Neuerstellung"<<std::endl;
+							suppliers.push_back(menu::supplierNew());
 							break;
 
 						case 2: //Übersicht
-							std::cout << "\n 1.1.1 Übersicht";
+							std::cout << "\n 1.1.1 Übersicht"<<std::endl;
 							menu::supplierPlfegen(suppliers);
 							break;
 						}

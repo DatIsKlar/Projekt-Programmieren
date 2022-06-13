@@ -15,7 +15,7 @@
 namespace menu{
 void anschriftPflegen(Firm& eigeneFirma);
 std::vector<Supplier> supplierPlfegen(std::vector<Supplier> suppliers);
-
+Supplier supplierNew();
 }
 
 
