@@ -4,12 +4,21 @@
 Supplier::Supplier() {
 	alloy;
 	order;
+	this->setName("");
+	this->setStreet("");
+	this->setZip("");
+	this->setCity("");
+	this->setComment("");
 }
 
-Supplier::Supplier(Alloy alloyIn, std::string nameIn) {
+Supplier::Supplier(Alloy alloyIn, std::string nameIn, std::string streetIn, std::string zipIn, std::string cityIn, std::string commentIn) {
 	alloy = alloyIn;
 	order;
 	this->setName(nameIn);
+	this->setStreet(streetIn);
+	this->setZip(zipIn);
+	this->setCity(cityIn);
+	this->setComment(commentIn);
 }
 
 void Supplier::setOrder(Order orderIn) {

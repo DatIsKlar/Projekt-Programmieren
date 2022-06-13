@@ -5,7 +5,7 @@
 #include "Data.h"
 #include "Functions.h"
 
-
+std::vector<Supplier> suppliers;
 int main() {
 
 		Firm eigeneFirma("meineName", "meineStr", "12345", "cottbus", "meinKommentar");
@@ -63,7 +63,7 @@ int main() {
 
 						case 1: //Eigene Anschrift
 								std::cout << "\n 1.1 Eigene Anschrift";
-								functions::anschriftplfegen(eigeneFirma);
+								functions::anschriftPflegen(eigeneFirma);
 								break;
 
 						case 2: //Lieferant´

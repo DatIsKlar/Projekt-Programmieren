@@ -409,7 +409,7 @@ public:
 	 * Legierung des Zulieferes
 	 * hier noch keine Bestellung erst in setOrder
 	 */
-	Supplier(Alloy alloyIn, std::string nameIn);
+	Supplier(Alloy alloyIn, std::string nameIn, std::string streetIn, std::string zipIn, std::string cityIn, std::string commentIn);
 	//~Supplier();
 
 	/**
