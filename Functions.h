@@ -17,7 +17,7 @@ bool isNumber(std::string number);
 int eingabe(int o, std::string CC);
 bool isInt(float numberIn);
 bool saveSupplier(std::string filename, std::string spacer, std::vector<Supplier> sup);
-
+void  anschriftplfegen(Firm& eigeneFirma);
 }
 
 

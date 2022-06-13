@@ -34,7 +34,7 @@ int Storage::getAlloyPosByType(Alloy &in) {
 	return -1; //-1 ist ein fehler
 }
 
-void Storage::addAlloy(Alloy alloy_i) {
+void Storage::addAlloy(const Alloy& alloy_i) {
 	this->alloy.push_back(alloy_i);
 }
 

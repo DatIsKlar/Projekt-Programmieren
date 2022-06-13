@@ -8,6 +8,7 @@
 #include <iostream>
 
 namespace data {
+bool fileExists(std::string filename);
 std::vector<std::string> getHeaderText(char spacer,std::string filename);
 std::vector<std::string> getBodyText(char spacer,std::string filename);
 

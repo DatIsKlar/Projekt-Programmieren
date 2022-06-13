@@ -246,7 +246,7 @@ public:
 	 * @param alloyIn
 	 * Legierung welche dem lager hinzugefügt werden soll
 	 */
-	void addAlloy(Alloy alloyIn);
+	void addAlloy(const Alloy& alloyIn);
 
 	/**
 	 * @fn bool removeAlloyByName(std::string alloyNameIn)

@@ -1,6 +1,15 @@
 #include "Data.h"
 
 namespace data {
+
+bool fileExists(std::string filename){
+	std::ifstream myfile;
+	myfile.open(filename + ".csv");
+	if(myfile)
+		return true;
+	else
+		return false;
+}
 std::vector<std::string> getHeaderText(char spacer, std::string filename) {
 	std::ifstream myfile;
 	std::string line;
