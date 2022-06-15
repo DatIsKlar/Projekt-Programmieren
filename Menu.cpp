@@ -218,7 +218,7 @@ void anschriftPflegen(Firm &eigeneFirma) {
 
 }
 
-std::vector<Supplier> supplierPlfegen(std::vector<Supplier> suppliers) {
+void supplierPlfegen(std::vector<Supplier> &suppliers) {
 	/**
 	 * Dieses 'Menue' geht nur eine Ebene tief, d.h. man wählt eine Option aus und wird dann
 	 * durch den Prozess durchgeführt.
@@ -227,17 +227,34 @@ std::vector<Supplier> supplierPlfegen(std::vector<Supplier> suppliers) {
 	 *
 	 * Die Einbindung der eigenen Firma wurde hier auch noch nicht realisiert.
 	 */
-	unsigned sup = 1;
-	unsigned y = 0;
-	for (auto i : suppliers) {
-		y++;
-		std::cout << y << "	" << i.getName() << std::endl;
-	}
-	std::cin >> sup;
 
+
+	unsigned y = 1;
+	std::string y_in = "";
 	std::string choiceA;
 
 	do {
+
+		unsigned sup = 0;
+		for (auto i : suppliers) {
+			sup++;
+			std::cout << sup << " " << i.getName() << std::endl;
+
+		}
+		std::cout<<"0. beenden"<<std::endl;
+
+		do{
+			std::cin >> y_in;
+			if(functions::eingabe(suppliers.size()+1, y_in) == -1){
+				std::cout << "Ungueltige Eingabe, bitte neu eingeben: " << std::endl;
+			}
+		}while(functions::eingabe(suppliers.size()+1, y_in) == -1);
+		y = stoi(y_in);
+		if(y == 0)
+			return;
+
+
+
 		std::cout << "Was moechten Sie bearbeiten? \n 1. Ganze Adresse bearbeiten \n "
 				"2. Strasse bearbeiten \n 3. ZIP bearbeiten \n 4. City bearbeiten"
 				"\n 5. Comment bearbeiten \n 6. Namen bearbeiten \n 0. beenden" << std::endl;
@@ -403,7 +420,7 @@ std::vector<Supplier> supplierPlfegen(std::vector<Supplier> suppliers) {
 	//auswahl
 	//suppliers.at(auswahl-1).Set..
 
-	return suppliers;
+	return;
 }
 
 Supplier supplierNew() {

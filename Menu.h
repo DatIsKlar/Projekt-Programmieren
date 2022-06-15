@@ -13,7 +13,7 @@
 
 namespace menu {
 void anschriftPflegen(Firm &eigeneFirma);
-std::vector<Supplier> supplierPlfegen(std::vector<Supplier> suppliers);
+void supplierPlfegen(std::vector<Supplier> &suppliers);
 Supplier supplierNew();
 }
 
