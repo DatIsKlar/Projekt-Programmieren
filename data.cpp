@@ -2,14 +2,15 @@
 
 namespace data {
 
-bool fileExists(std::string filename){
+bool fileExists(std::string filename) {
 	std::ifstream myfile;
 	myfile.open(filename + ".csv");
-	if(myfile)
+	if (myfile)
 		return true;
 	else
 		return false;
 }
+
 std::vector<std::string> getHeaderText(char spacer, std::string filename) {
 	std::ifstream myfile;
 	std::string line;
@@ -101,7 +102,6 @@ std::vector<std::string> getTextData(std::string filename, std::string spacer, s
 		currentPosition++;
 		totalLength = currentPosition;
 	}
-
 
 	std::vector<std::string> splitt = getBodyText(spacer_, filename);
 	unsigned int splittPostition = 0;

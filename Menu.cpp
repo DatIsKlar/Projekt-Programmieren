@@ -7,7 +7,7 @@
 #include "Menu.h"
 #include "Functions.h"
 
-namespace menu{
+namespace menu {
 void anschriftPflegen(Firm &eigeneFirma) {
 	/**
 	 * Dieses 'Menue' geht nur eine Ebene tief, d.h. man wählt eine Option aus und wird dann
@@ -20,19 +20,16 @@ void anschriftPflegen(Firm &eigeneFirma) {
 	std::string choiceA;
 
 	do {
-		std::cout
-				<< "Was moechten Sie bearbeiten? \n 1. Ganze Adresse bearbeiten \n "
-						"2. Strasse bearbeiten \n 3. ZIP bearbeiten \n 4. City bearbeiten"
-						"\n 5. Comment bearbeiten \n 6. Namen bearbeiten \n 0. beenden"
-				<< std::endl;
+		std::cout << "Was moechten Sie bearbeiten? \n 1. Ganze Adresse bearbeiten \n "
+				"2. Strasse bearbeiten \n 3. ZIP bearbeiten \n 4. City bearbeiten"
+				"\n 5. Comment bearbeiten \n 6. Namen bearbeiten \n 0. beenden" << std::endl;
 
 		// bsp objekt unsere eigener Firma, wird später aus anderer Datei genommen
 		//Firm EigeneFirma;
 		do {
 			std::cin >> choiceA;
 			if (functions::eingabe(7, choiceA) == -1) {
-				std::cout << "Ungueltige Eingabe, bitte neu eingeben: \n"
-						<< std::endl;
+				std::cout << "Ungueltige Eingabe, bitte neu eingeben: \n" << std::endl;
 			}
 		} while (functions::eingabe(7, choiceA) == -1);
 
@@ -47,12 +44,10 @@ void anschriftPflegen(Firm &eigeneFirma) {
 
 		case 1: {
 			std::string checkAdresse = eigeneFirma.getStreet();
-			checkAdresse.append(eigeneFirma.getZip()).append(
-					eigeneFirma.getCity()).append(eigeneFirma.getComment());
+			checkAdresse.append(eigeneFirma.getZip()).append(eigeneFirma.getCity()).append(eigeneFirma.getComment());
 
 			if (checkAdresse == "") {
-				std::cout << "Bitte geben Sie die Adresse der Firma ein."
-						<< std::endl;
+				std::cout << "Bitte geben Sie die Adresse der Firma ein." << std::endl;
 				std::cout << "Name: " << std::endl;
 				std::string neueName;
 				std::cin.ignore(500, '\n');
@@ -79,14 +74,9 @@ void anschriftPflegen(Firm &eigeneFirma) {
 				std::getline(std::cin, comment);
 				eigeneFirma.setComment(comment);
 			} else {
-				std::cout << "Die aktuelle Adresse lautet:" << std::endl
-						<<eigeneFirma.getName() <<std::endl
-						<< eigeneFirma.getStreet() << std::endl;
-				std::cout << eigeneFirma.getZip() << std::endl
-						<< eigeneFirma.getCity() << std::endl
-						<< eigeneFirma.getComment() << std::endl;
-				std::cout << "Bitte geben Sie die neue Adresse ein."
-						<< std::endl;
+				std::cout << "Die aktuelle Adresse lautet:" << std::endl << eigeneFirma.getName() << std::endl << eigeneFirma.getStreet() << std::endl;
+				std::cout << eigeneFirma.getZip() << std::endl << eigeneFirma.getCity() << std::endl << eigeneFirma.getComment() << std::endl;
+				std::cout << "Bitte geben Sie die neue Adresse ein." << std::endl;
 				std::cout << "Name: " << std::endl;
 				std::string neueName;
 				std::cin.ignore(500, '\n');
@@ -121,17 +111,14 @@ void anschriftPflegen(Firm &eigeneFirma) {
 			std::string checkStrasse = eigeneFirma.getStreet();
 			if (checkStrasse == "") {
 				std::string strassenname;
-				std::cout << "Bitte geben Sie die Strasse der Firma ein."
-						<< std::endl;
+				std::cout << "Bitte geben Sie die Strasse der Firma ein." << std::endl;
 				std::cin.ignore(500, '\n');
 				std::getline(std::cin, strassenname);
 				eigeneFirma.setStreet(strassenname);
 			} else {
 				std::string neueStrassenName;
-				std::cout << "Der aktuelle Strassenname lautet: "
-						<< eigeneFirma.getStreet() << ". \n" << std::endl;
-				std::cout << "Bitte geben Sie den neuen Strassennamen ein."
-						<< std::endl;
+				std::cout << "Der aktuelle Strassenname lautet: " << eigeneFirma.getStreet() << ". \n" << std::endl;
+				std::cout << "Bitte geben Sie den neuen Strassennamen ein." << std::endl;
 				std::cin.ignore(500, '\n');
 				std::getline(std::cin, neueStrassenName);
 				eigeneFirma.setStreet(neueStrassenName);
@@ -143,17 +130,14 @@ void anschriftPflegen(Firm &eigeneFirma) {
 		{
 			std::string checkZip = eigeneFirma.getZip();
 			if (checkZip == "") {
-				std::cout << "Bitte geben Sie den ZIP-Code der Firma ein."
-						<< std::endl;
+				std::cout << "Bitte geben Sie den ZIP-Code der Firma ein." << std::endl;
 				std::string zip;
 				std::cin.ignore(500, '\n');
 				std::getline(std::cin, zip);
 				eigeneFirma.setZip(zip);
 			} else {
-				std::cout << "Der aktuelle ZIP-Code lautet: "
-						<< eigeneFirma.getZip() << ". \n" << std::endl;
-				std::cout << "Bitte geben Sie den neuen ZIP-Code ein."
-						<< std::endl;
+				std::cout << "Der aktuelle ZIP-Code lautet: " << eigeneFirma.getZip() << ". \n" << std::endl;
+				std::cout << "Bitte geben Sie den neuen ZIP-Code ein." << std::endl;
 				std::string neueZip;
 				std::cin.ignore(500, '\n');
 				std::getline(std::cin, neueZip);
@@ -167,15 +151,13 @@ void anschriftPflegen(Firm &eigeneFirma) {
 			std::string checkCity = eigeneFirma.getCity();
 			if (checkCity == "") {
 				std::string stadt;
-				std::cout << "Bitte geben Sie die Stadt der Firma ein."
-						<< std::endl;
+				std::cout << "Bitte geben Sie die Stadt der Firma ein." << std::endl;
 				std::cin.ignore(500, '\n');
 				std::getline(std::cin, stadt);
 				eigeneFirma.setCity(stadt);
 			} else {
 				std::string neueStadt;
-				std::cout << "Die aktuelle Stadt lautet: "
-						<< eigeneFirma.getCity() << ". \n" << std::endl;
+				std::cout << "Die aktuelle Stadt lautet: " << eigeneFirma.getCity() << ". \n" << std::endl;
 				std::cout << "Bitte geben Sie die neue Stadt ein." << std::endl;
 				std::cin.ignore(500, '\n');
 				std::getline(std::cin, neueStadt);
@@ -188,18 +170,15 @@ void anschriftPflegen(Firm &eigeneFirma) {
 		{
 			std::string checkComment = eigeneFirma.getComment();
 			if (checkComment == "") {
-				std::cout << "Bitte geben Sie einen Kommentar ein."
-						<< std::endl;
+				std::cout << "Bitte geben Sie einen Kommentar ein." << std::endl;
 				std::string comment;
 				std::cin.ignore(500, '\n');
 				std::getline(std::cin, comment);
 				eigeneFirma.setComment(comment);
 				break;
 			} else {
-				std::cout << "Aktueller Kommentar: " << eigeneFirma.getComment()
-						<< ". \n" << std::endl;
-				std::cout << "Bitte geben Sie einen neuen Kommentar ein. \n"
-						<< std::endl;
+				std::cout << "Aktueller Kommentar: " << eigeneFirma.getComment() << ". \n" << std::endl;
+				std::cout << "Bitte geben Sie einen neuen Kommentar ein. \n" << std::endl;
 				std::string neuerKommentar;
 				std::cin.ignore(500, '\n');
 				std::getline(std::cin, neuerKommentar);
@@ -218,10 +197,8 @@ void anschriftPflegen(Firm &eigeneFirma) {
 				eigeneFirma.setName(name);
 				break;
 			} else {
-				std::cout << "Aktueller Name: " << eigeneFirma.getName()
-						<< ". \n" << std::endl;
-				std::cout << "Bitte geben Sie einen neuen Namen ein. \n"
-						<< std::endl;
+				std::cout << "Aktueller Name: " << eigeneFirma.getName() << ". \n" << std::endl;
+				std::cout << "Bitte geben Sie einen neuen Namen ein. \n" << std::endl;
 				std::string neuerName;
 				std::cin.ignore(500, '\n');
 				std::getline(std::cin, neuerName);
@@ -261,19 +238,16 @@ std::vector<Supplier> supplierPlfegen(std::vector<Supplier> suppliers) {
 	std::string choiceA;
 
 	do {
-		std::cout
-				<< "Was moechten Sie bearbeiten? \n 1. Ganze Adresse bearbeiten \n "
-						"2. Strasse bearbeiten \n 3. ZIP bearbeiten \n 4. City bearbeiten"
-						"\n 5. Comment bearbeiten \n 6. Namen bearbeiten \n 0. beenden"
-				<< std::endl;
+		std::cout << "Was moechten Sie bearbeiten? \n 1. Ganze Adresse bearbeiten \n "
+				"2. Strasse bearbeiten \n 3. ZIP bearbeiten \n 4. City bearbeiten"
+				"\n 5. Comment bearbeiten \n 6. Namen bearbeiten \n 0. beenden" << std::endl;
 
 		// bsp objekt unsere eigener Firma, wird später aus anderer Datei genommen
 		//Firm EigeneFirma;
 		do {
 			std::cin >> choiceA;
 			if (functions::eingabe(7, choiceA) == -1) {
-				std::cout << "Ungueltige Eingabe, bitte neu eingeben: \n"
-						<< std::endl;
+				std::cout << "Ungueltige Eingabe, bitte neu eingeben: \n" << std::endl;
 			}
 		} while (functions::eingabe(7, choiceA) == -1);
 
@@ -287,12 +261,8 @@ std::vector<Supplier> supplierPlfegen(std::vector<Supplier> suppliers) {
 		} // ende case 6
 
 		case 1: {
-			std::cout << "Die aktuelle Adresse lautet:" << std::endl
-					<<suppliers.at(y - 1).getName() <<std::endl
-					<< suppliers.at(y - 1).getStreet() << std::endl;
-			std::cout << suppliers.at(y - 1).getZip() << std::endl
-					<< suppliers.at(y - 1).getCity() << std::endl
-					<< suppliers.at(y - 1).getComment() << std::endl;
+			std::cout << "Die aktuelle Adresse lautet:" << std::endl << suppliers.at(y - 1).getName() << std::endl << suppliers.at(y - 1).getStreet() << std::endl;
+			std::cout << suppliers.at(y - 1).getZip() << std::endl << suppliers.at(y - 1).getCity() << std::endl << suppliers.at(y - 1).getComment() << std::endl;
 			std::cout << "Bitte geben Sie die neue Adresse ein." << std::endl;
 			std::cout << "Name: " << std::endl;
 			std::string neueName;
@@ -327,18 +297,14 @@ std::vector<Supplier> supplierPlfegen(std::vector<Supplier> suppliers) {
 			std::string checkStrasse = suppliers.at(y - 1).getStreet();
 			if (checkStrasse == "") {
 				std::string strassenname;
-				std::cout << "Bitte geben Sie die Strasse der Firma ein."
-						<< std::endl;
+				std::cout << "Bitte geben Sie die Strasse der Firma ein." << std::endl;
 				std::cin.ignore(500, '\n');
 				std::getline(std::cin, strassenname);
 				suppliers.at(y - 1).setStreet(strassenname);
 			} else {
 				std::string neueStrassenName;
-				std::cout << "Der aktuelle Strassenname lautet: "
-						<< suppliers.at(y - 1).getStreet() << ". \n"
-						<< std::endl;
-				std::cout << "Bitte geben Sie den neuen Strassennamen ein."
-						<< std::endl;
+				std::cout << "Der aktuelle Strassenname lautet: " << suppliers.at(y - 1).getStreet() << ". \n" << std::endl;
+				std::cout << "Bitte geben Sie den neuen Strassennamen ein." << std::endl;
 				std::cin.ignore(500, '\n');
 				std::getline(std::cin, neueStrassenName);
 				suppliers.at(y - 1).setStreet(neueStrassenName);
@@ -350,17 +316,14 @@ std::vector<Supplier> supplierPlfegen(std::vector<Supplier> suppliers) {
 		{
 			std::string checkZip = suppliers.at(y - 1).getZip();
 			if (checkZip == "") {
-				std::cout << "Bitte geben Sie den ZIP-Code der Firma ein."
-						<< std::endl;
+				std::cout << "Bitte geben Sie den ZIP-Code der Firma ein." << std::endl;
 				std::string zip;
 				std::cin.ignore(500, '\n');
 				std::getline(std::cin, zip);
 				suppliers.at(y - 1).setZip(zip);
 			} else {
-				std::cout << "Der aktuelle ZIP-Code lautet: "
-						<< suppliers.at(y - 1).getZip() << ". \n" << std::endl;
-				std::cout << "Bitte geben Sie den neuen ZIP-Code ein."
-						<< std::endl;
+				std::cout << "Der aktuelle ZIP-Code lautet: " << suppliers.at(y - 1).getZip() << ". \n" << std::endl;
+				std::cout << "Bitte geben Sie den neuen ZIP-Code ein." << std::endl;
 				std::string neueZip;
 				std::cin.ignore(500, '\n');
 				std::getline(std::cin, neueZip);
@@ -374,15 +337,13 @@ std::vector<Supplier> supplierPlfegen(std::vector<Supplier> suppliers) {
 			std::string checkCity = suppliers.at(y - 1).getCity();
 			if (checkCity == "") {
 				std::string stadt;
-				std::cout << "Bitte geben Sie die Stadt der Firma ein."
-						<< std::endl;
+				std::cout << "Bitte geben Sie die Stadt der Firma ein." << std::endl;
 				std::cin.ignore(500, '\n');
 				std::getline(std::cin, stadt);
 				suppliers.at(y - 1).setCity(stadt);
 			} else {
 				std::string neueStadt;
-				std::cout << "Die aktuelle Stadt lautet: "
-						<< suppliers.at(y - 1).getCity() << ". \n" << std::endl;
+				std::cout << "Die aktuelle Stadt lautet: " << suppliers.at(y - 1).getCity() << ". \n" << std::endl;
 				std::cout << "Bitte geben Sie die neue Stadt ein." << std::endl;
 				std::cin.ignore(500, '\n');
 				std::getline(std::cin, neueStadt);
@@ -395,19 +356,15 @@ std::vector<Supplier> supplierPlfegen(std::vector<Supplier> suppliers) {
 		{
 			std::string checkComment = suppliers.at(y - 1).getComment();
 			if (checkComment == "") {
-				std::cout << "Bitte geben Sie einen Kommentar ein."
-						<< std::endl;
+				std::cout << "Bitte geben Sie einen Kommentar ein." << std::endl;
 				std::string comment;
 				std::cin.ignore(500, '\n');
 				std::getline(std::cin, comment);
 				suppliers.at(y - 1).setComment(comment);
 				break;
 			} else {
-				std::cout << "Aktueller Kommentar: "
-						<< suppliers.at(y - 1).getComment() << ". \n"
-						<< std::endl;
-				std::cout << "Bitte geben Sie einen neuen Kommentar ein. \n"
-						<< std::endl;
+				std::cout << "Aktueller Kommentar: " << suppliers.at(y - 1).getComment() << ". \n" << std::endl;
+				std::cout << "Bitte geben Sie einen neuen Kommentar ein. \n" << std::endl;
 				std::string neuerKommentar;
 				std::cin.ignore(500, '\n');
 				std::getline(std::cin, neuerKommentar);
@@ -426,10 +383,8 @@ std::vector<Supplier> supplierPlfegen(std::vector<Supplier> suppliers) {
 				suppliers.at(y - 1).setName(name);
 				break;
 			} else {
-				std::cout << "Aktueller Name: " << suppliers.at(y - 1).getName()
-						<< ". \n" << std::endl;
-				std::cout << "Bitte geben Sie einen neuen Namen ein. \n"
-						<< std::endl;
+				std::cout << "Aktueller Name: " << suppliers.at(y - 1).getName() << ". \n" << std::endl;
+				std::cout << "Bitte geben Sie einen neuen Namen ein. \n" << std::endl;
 				std::string neuerName;
 				std::cin.ignore(500, '\n');
 				std::getline(std::cin, neuerName);
@@ -451,10 +406,9 @@ std::vector<Supplier> supplierPlfegen(std::vector<Supplier> suppliers) {
 	return suppliers;
 }
 
-Supplier supplierNew(){
-	Supplier s(Alloy(),"","","","","");
-	std::cout << "Bitte geben Sie die Daten des Zuliefers an."
-			<< std::endl;
+Supplier supplierNew() {
+	Supplier s(Alloy(), "", "", "", "", "");
+	std::cout << "Bitte geben Sie die Daten des Zuliefers an." << std::endl;
 	//dummy alloy
 	s.setAlloy(Alloy());
 	std::cout << "Name: " << std::endl;
@@ -486,5 +440,4 @@ Supplier supplierNew(){
 	return s;
 }
 }
-
 

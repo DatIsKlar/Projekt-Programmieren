@@ -34,7 +34,7 @@ int Storage::getAlloyPosByType(Alloy &in) {
 	return -1; //-1 ist ein fehler
 }
 
-void Storage::addAlloy(const Alloy& alloy_i) {
+void Storage::addAlloy(const Alloy &alloy_i) {
 	this->alloy.push_back(alloy_i);
 }
 
@@ -81,14 +81,14 @@ bool Storage::saveStorage(std::string filename, std::string spacer) {
 }
 
 bool Storage::readStorage(std::string filename, std::string spacer) {
-	std::vector<std::string> search = {"Copper","Zinc","Tin","Name","Amount"};
+	std::vector<std::string> search = { "Copper", "Zinc", "Tin", "Name", "Amount" };
 	std::vector<std::string> data_ = data::getTextData(filename, spacer, search);
 
-	for(unsigned int x = 0; x<data_.size(); x+=search.size()){
-		if(x%search.size() == 0){
-			try{
-				this->alloy.push_back(Alloy(std::stof(data_.at(x)), std::stof(data_.at(x+1)), std::stof(data_.at(x+2)), data_.at(x+3), std::stof(data_.at(x+4))));
-			}catch(const std::invalid_argument& ia){
+	for (unsigned int x = 0; x < data_.size(); x += search.size()) {
+		if (x % search.size() == 0) {
+			try {
+				this->alloy.push_back(Alloy(std::stof(data_.at(x)), std::stof(data_.at(x + 1)), std::stof(data_.at(x + 2)), data_.at(x + 3), std::stof(data_.at(x + 4))));
+			} catch (const std::invalid_argument &ia) {
 				return false;
 			}
 		}
@@ -117,11 +117,11 @@ std::vector<float> Storage::makeAlloyMix(std::vector<std::string> namesIn, Alloy
 	float isPos = 0;
 	int f = 0;
 	for (auto i : namesIn) {
-		float calc = solution[f]* wantedIn.getAmount();
+		float calc = solution[f] * wantedIn.getAmount();
 		unsigned int a_ = this->getAlloyPosByName(i);
 		returnAmount.push_back(calc);
-		float check = this->alloy.at(a_).getAmount()-calc;
-		if(check <0){
+		float check = this->alloy.at(a_).getAmount() - calc;
+		if (check < 0) {
 			isPos = -1;
 		}
 	}

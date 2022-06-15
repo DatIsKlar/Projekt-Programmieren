@@ -25,7 +25,7 @@ void Supplier::setOrder(Order orderIn) {
 	this->order.push_back(orderIn);
 }
 
-void Supplier::setAlloy(Alloy alloyIn){
+void Supplier::setAlloy(Alloy alloyIn) {
 	this->alloy = alloyIn;
 }
 
