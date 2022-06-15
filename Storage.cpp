@@ -83,12 +83,17 @@ bool Storage::saveStorage(std::string filename, std::string spacer) {
 bool Storage::readStorage(std::string filename, std::string spacer) {
 	std::vector<std::string> search = { "Copper", "Zinc", "Tin", "Name", "Amount" };
 	std::vector<std::string> data_ = data::getTextData(filename, spacer, search);
+	if(data_.size() == 1)
+		if(data_.at(0) == "false")
+			return false;
 
 	for (unsigned int x = 0; x < data_.size(); x += search.size()) {
 		if (x % search.size() == 0) {
 			try {
 				this->alloy.push_back(Alloy(std::stof(data_.at(x)), std::stof(data_.at(x + 1)), std::stof(data_.at(x + 2)), data_.at(x + 3), std::stof(data_.at(x + 4))));
 			} catch (const std::invalid_argument &ia) {
+				return false;
+			}catch(const std::out_of_range  &ia){
 				return false;
 			}
 		}

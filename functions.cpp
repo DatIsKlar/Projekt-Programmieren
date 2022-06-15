@@ -71,6 +71,9 @@ bool saveSupplier(std::string filename, std::string spacer, std::vector<Supplier
 bool readSupplier(std::string filename, std::string spacer, std::vector<Supplier> &suppliers) {
 	std::vector<std::string> search = { "Kupfer", "Zink", "Zinn", "Name", "Menge", "Firmname", "Strasse", "Plz", "Stadt", "Kommentar" };
 	std::vector<std::string> data_ = data::getTextData(filename, spacer, search);
+	if(data_.size() == 1)
+		if(data_.at(0) == "false")
+			return false;
 
 	for (unsigned int x = 0; x < data_.size(); x += search.size()) {
 		if (x % search.size() == 0) {
@@ -78,6 +81,8 @@ bool readSupplier(std::string filename, std::string spacer, std::vector<Supplier
 				Alloy a(std::stof(data_.at(x)), std::stof(data_.at(x + 1)), std::stof(data_.at(x + 2)), data_.at(x + 3), std::stof(data_.at(x + 4)));
 				suppliers.push_back(Supplier(a, data_.at(x + 5), data_.at(x + 6), data_.at(x + 7), data_.at(x + 8), data_.at(x + 9)));
 			} catch (const std::invalid_argument &ia) {
+				return false;
+			}catch(const std::out_of_range  &ia){
 				return false;
 			}
 		}
