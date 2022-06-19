@@ -486,9 +486,9 @@ Alloy alloyNew(Storage &stor){
 	return Alloy(copper,zinc,tin,name,amount);
 }
 
-Supplier supplierNew(Storage &stor) {
+Supplier supplierNew(Alloy alloyIn) {
 	Supplier s(Alloy(), "", "", "", "", "");
-	s.setAlloy(alloyNew(stor));
+	s.setAlloy(alloyIn);
 	std::cout << "Bitte geben Sie die Daten des Zuliefers an." << std::endl;
 	//dummy alloy
 	std::cout << "Name: " << std::endl;
