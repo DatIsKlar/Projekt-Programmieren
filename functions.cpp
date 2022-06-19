@@ -24,6 +24,13 @@ bool isInt(float numberIn) {
 	return (numberIn == static_cast<int>(numberIn));
 }
 
+bool isPositive(std::string numberIn){
+	if(isNumber(numberIn))
+		return (stof(numberIn) >=0);
+	else
+		return false;
+}
+
 bool isValidZip(std::string zipIn) {
 	if (isNumber(zipIn))
 		if (isInt(stoi(zipIn)))

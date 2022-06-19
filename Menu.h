@@ -14,7 +14,8 @@
 namespace menu {
 void anschriftPflegen(Firm &eigeneFirma);
 void supplierPlfegen(std::vector<Supplier> &suppliers);
-Supplier supplierNew();
+Alloy alloyNew(Storage &stor);
+Supplier supplierNew(Storage &stor);
 }
 
 #endif /* MENU_H_ */

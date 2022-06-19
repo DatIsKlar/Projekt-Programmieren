@@ -44,6 +44,16 @@ int eingabe(int o, std::string CC);
 bool isInt(float numberIn);
 
 /**
+ * @fn bool isPositive(std::string numberIn)
+ * Überprüft ob der eingegebene string eine posetive Zahl ist.
+ * Gibt true wieder wenn wahr and false wenn falsch.
+ * @param std::string numberIn
+ * string welcher Überprüft werden soll.
+ */
+bool isPositive(std::string numberIn);
+
+
+/**
  * @fn bool saveSupplier(std::string filename, std::string spacer, std::vector<Supplier> sup)
  * Speichert ein vector vom typ Supplier in einer csv datei.
  * Gibt true wieder wenn wahr and false wenn falsch.
