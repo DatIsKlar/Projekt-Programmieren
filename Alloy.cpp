@@ -80,6 +80,6 @@ bool Alloy::operator!=(const Alloy &b) {
 
 void Alloy::print() {
 
-	std::cout << this->copper << "\n" << this->zinc << "\n" << this->tin << "\n";
+	std::cout << this->copper << " " << this->zinc << " " << this->tin << " ";
 
 }
