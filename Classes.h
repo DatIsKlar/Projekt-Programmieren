@@ -71,7 +71,7 @@ public:
 
 	/**
 	 *	@fn	setAmount(float ammountIn)
-	 *	setzen/überschreiben der Menger der Legierung
+	 *	setzen/ueberschreiben der Menger der Legierung
 	 *	@param amountIn
 	 *	neuer Wert der Menge;
 	 */
@@ -116,13 +116,13 @@ public:
 	 * @param std::string nameIn
 	 * Setzen vom Namen
 	 * @param std::string streetIn
-	 * Setzten der Straße
+	 * Setzten der Straï¿½e
 	 * @param std::sring zipIn
 	 * Setzten der Postleitzahl
 	 * @param std:.string cityIn
 	 * Setzten der Stadt
 	 * @param std:.string commandIn
-	 * Kommentar über die Firma
+	 * Kommentar ï¿½ber die Firma
 	 */
 	Firm(std::string nameIn, std::string streetIn, std::string zipIn, std::string cityIn, std::string commentIn);
 
@@ -134,7 +134,7 @@ public:
 
 	/**
 	 * @fn std::string getStreet()
-	 * gibt den Straßennamen wieder
+	 * gibt den Straï¿½ennamen wieder
 	 */
 	std::string getStreet();
 
@@ -158,7 +158,7 @@ public:
 
 	/**
 	 * @fn void setname(std::string nameIn)
-	 * setzte/überschreibt Firmennamen
+	 * setzte/ï¿½berschreibt Firmennamen
 	 * @param nameIn
 	 * der zu setztende Name
 	 */
@@ -166,15 +166,15 @@ public:
 
 	/**
 	 * @fn void setStreet(std::string streetIn)
-	 * setzt/überschreibt den Straßennamen
+	 * setzt/ï¿½berschreibt den Straï¿½ennamen
 	 * @param steetIn
-	 * der zu setztende Straßenname
+	 * der zu setztende Straï¿½enname
 	 */
 	void setStreet(std::string streetIn);
 
 	/**
 	 * @fn void setZip(std::string zipIn)
-	 * setzt/überschreibt die Postleitzahl
+	 * setzt/ï¿½berschreibt die Postleitzahl
 	 * @param zipnIn
 	 * die zu setztende Postleitzahl
 	 */
@@ -182,7 +182,7 @@ public:
 
 	/**
 	 * @fn void setCity(std::string cityIn)
-	 * setzt/überschreibt den Stadtnamen
+	 * setzt/ï¿½berschreibt den Stadtnamen
 	 * @param cityIn
 	 * der zu setztende Stadtnamen
 	 */
@@ -190,7 +190,7 @@ public:
 
 	/**
 	 * @fn void commentZip(std::string commentIn)
-	 * setzt/überschreibt den Kommentar
+	 * setzt/ï¿½berschreibt den Kommentar
 	 * @param commentIn
 	 * der zu setztende Kommentar
 	 */
@@ -211,7 +211,7 @@ public:
 	 * @fn Storage(std::vector<Alloy> aI)
 	 * Konstruktor mit Anfangswerten des typen Storage
 	 * @param alloyIn
-	 * nimmt ein Vector des typen Alloys für die Anfangswerte
+	 * nimmt ein Vector des typen Alloys fï¿½r die Anfangswerte
 	 * wenn noch kein Vector vorliegt nimmt leeren konstruktor und Funktion addAlloy
 	 */
 	Storage(std::vector<Alloy> alloyIn);
@@ -225,7 +225,7 @@ public:
 	/**
 	 * @fn int getAlloyPosByName(std::string alloyNameIn)
 	 * gibt einen integer mit der Position der gesuchten Legierung im Vector wieder.
-	 * wenn die Legierung nicht gefunden wurde wird eine -1 zurückgeben
+	 * wenn die Legierung nicht gefunden wurde wird eine -1 zurï¿½ckgeben
 	 * @param alloyNameIn
 	 * Name der gesuchten Legierung
 	 */
@@ -234,19 +234,19 @@ public:
 	/**
 	 * @fn int getAlloyPosByType(Alloy& alloyIn)
 	 * gibt einen integer mit der Position der gesuchten Legierung im Vector wieder.
-	 * wenn die Legierung nicht gefunden wurde wird eine -1 zurückgeben
+	 * wenn die Legierung nicht gefunden wurde wird eine -1 zurï¿½ckgeben
 	 * @param alloyIn
 	 * Referenz der gesuchten Legierung
 	 */
-	int getAlloyPosByType(Alloy &alloyIn);
+	int getAlloyPosByType(Alloy alloyIn);
 
 	/**
 	 * @fn void addAlloy(Alloy alloyIn)
 	 * packt ein Legierung dem Lager hinzu/Vector
 	 * @param alloyIn
-	 * Legierung welche dem lager hinzugefügt werden soll
+	 * Legierung welche dem lager hinzugefï¿½gt werden soll
 	 */
-	void addAlloy(Alloy alloyIn);
+	void addAlloy(const Alloy &alloyIn);
 
 	/**
 	 * @fn bool removeAlloyByName(std::string alloyNameIn)
@@ -271,33 +271,22 @@ public:
 	 * Speichert das Lager in einer csv Datei;
 	 * Gibt wahr wider wenn beendet wurde
 	 * @param nameIn
-	 * gewünschter Dateiname
+	 * gewï¿½nschter Dateiname
 	 * @param spacerIn
-	 * gewünschter spacer in der Datei
+	 * gewï¿½nschter spacer in der Datei
 	 */
 	bool saveStorage(std::string nameIn, std::string spacerIn);
 
 	/**
 	 * @fn bool readStorage(std::string filname, std::string spacerIn)
-	 * Liest  das Lager aus einer csv Datei und gibt es in das Lager zurück
+	 * Liest  das Lager aus einer csv Datei und gibt es in das Lager zurï¿½ck
 	 * Gibt wahr wider wenn beendet wurde
 	 * @param filname
-	 * der zu öffnende Dateiname
+	 * der zu ï¿½ffnende Dateiname
 	 * @param spacerIn
 	 * spacer in der Datei
 	 */
 	bool readStorage(std::string filename, std::string spacerIn);
-
-	/**
-	 * @fn std::vector<float> makeAlloyMix(std::vector<std::string> namesIn,Alloy& wantedIn)
-	 * gibt die Verältnisse der gegebenen Legierung als Vector mit der Postions im Verglich zu der Pos. der gebenen Namen
-	 * der gesuchten Legierung wieder und entfernt die benötigte Menge aus dem Lager
-	 * @param namesIn
-	 * ein Vector mit den Namen der gegebenen Legierungen
-	 * @param  wantedIn
-	 * eine Referenz der gewünschten Legierung
-	 */
-	std::vector<float> makeAlloyMix(std::vector<std::string> namesIn, Alloy &wantedIn);
 
 	/**
 	 * @fn bool editAlloyByName(std::string namesIn ,Alloy edit)
@@ -325,8 +314,7 @@ public:
 class Order {
 private:
 	float amount;
-	std::string firmName;
-	unsigned int id;
+	Firm firm;
 public:
 	/**
 	 * @fn Order()
@@ -345,7 +333,7 @@ public:
 	 * Bestellnummer(unsigned int IMMER NUR POSITIVE WERTE)
 	 *
 	 */
-	Order(float amountIn, std::string firmNameIn, unsigned int idIn);
+	Order(float amountIn, Firm firma);
 	//~Order();
 
 	/**
@@ -358,17 +346,11 @@ public:
 	 * @fn std::string getFirmName()
 	 * gibt den Namen der auftraggebenden Firma wieder
 	 */
-	std::string getFirmName();
-
-	/**
-	 * @fn unsigned int getId()
-	 * gibt einen immer posetiven Integer wieder, welcher die Bestellungsid wiedergibt
-	 */
-	unsigned int getId();
+	Firm getFirm();
 
 	/**
 	 * @fn void setAmount(float amountIn)
-	 * setzt/überschreibt die Menge der Bestellung
+	 * setzt/ï¿½berschreibt die Menge der Bestellung
 	 * @param amountIn
 	 * die neue Bestellmenge
 	 */
@@ -376,19 +358,12 @@ public:
 
 	/**
 	 * @fn void setFirmName(std::string firmNameIn)
-	 * setzt/überschreibt den Namen der auftraggebenden Firma
+	 * setzt/ï¿½berschreibt den Namen der auftraggebenden Firma
 	 * @param firmNameIn
 	 * neuer Firmenname
 	 */
-	void setFirmName(std::string firmNameIn);
+	void setFirmName(Firm firmaIn);
 
-	/**
-	 * @fn void setId(unsigned int idIn)
-	 * setzt/überschreibt die Id der Bestellung
-	 * @param idIn
-	 * neue Id(unsigned int IMMER NUR POSITIVE WERTE)
-	 */
-	void setId(unsigned int idIn);
 };
 
 class Supplier: public Firm {
@@ -409,17 +384,26 @@ public:
 	 * Legierung des Zulieferes
 	 * hier noch keine Bestellung erst in setOrder
 	 */
-	Supplier(Alloy alloyIn, std::string nameIn);
+	Supplier(Alloy alloyIn, std::string nameIn, std::string streetIn, std::string zipIn, std::string cityIn, std::string commentIn);
 	//~Supplier();
 
 	/**
 	 * @fn setOrder(Order orderIn)
-	 * fügt eine neue Bestellung dem vector Order hinzu
+	 * fï¿½gt eine neue Legierung hinzu
+	 * @param
+	 * alloyIn
+	 * neue Legierung
+	 */
+	void setOrder(Order orderIn);
+
+	/**
+	 * @fn setAlloy(Alloy alloyIn)
+	 * fï¿½gt eine neue Bestellung dem vector Order hinzu
 	 * @param
 	 * orderIn
 	 * neue Bestellung
 	 */
-	void setOrder(Order orderIn);
+	void setAlloy(Alloy alloyIn);
 
 	/**
 	 * @fn std::vector<Order> getOrder()
@@ -433,40 +417,9 @@ public:
 	 */
 	Alloy getAlloy();
 
-	//bool saveSupplier(std::string nameIn, std::string spacerIn); muss noch neu überdacht werden speichern und lesen der Zulieferer noch nicht ganz gelöst
+	//bool saveSupplier(std::string nameIn, std::string spacerIn); muss noch neu ï¿½berdacht werden speichern und lesen der Zulieferer noch nicht ganz gelï¿½st
 	//bool readSupplier(std::string filename, std::string spacerIn);
 
-	/**
-	 * @fn int getOrderPosById(unsigned int idIn)
-	 * gibt einen integer mit der Position der gesuchten Bestellung im Vector wieder.
-	 * wenn die Legierung nicht gefunden wurde wird eine -1 zurückgeben
-	 * @param idIn
-	 * Id der gesuchten Bestellung
-	 */
-	int getOrderPosById(unsigned int idIn);
-
-	/**
-	 * @fn editOrderById(unsigned int idIn,Order edit)
-	 * bearbeitet die gesuchte Bestellung mit den neuen Werten, sucht mit der Id
-	 * Gibt wahr wider wenn gesuchte Bestellung gefunden wurde, falsch wenn nicht
-	 * @param idIn
-	 * Id der gesuchten Bestellung
-	 * @param edit
-	 * Kopie der neuen Bestellung
-	 */
-	bool editOrderById(unsigned int idIn, Order edit);
-
-	/**
-	 * @fn bool removerOrderById(unsigned int idIn)
-	 * entfernt eine Bestellung mit der gesuchten Id.
-	 * Gibt wahr wider wenn gesuchte Bestellung gefunden wurde, falsch wenn nicht
-	 * @param idIn
-	 * Id der gesuchten Bestellung
-	 */
-	bool removerOrderById(unsigned int idIn);
-
-	//void printOrder(); noch in bearbeitung
 };
-
 
 #endif /* CLASSES_H_ */

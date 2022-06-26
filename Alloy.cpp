@@ -57,9 +57,9 @@ bool Alloy::operator==(const Alloy &b) {
 	bool zinc = this->zinc == b.zinc;
 	bool tin = this->tin == b.tin;
 	bool name = this->name == b.name;
-	bool amount = this->amount == b.amount;
+	//bool amount = this->amount == b.amount;
 
-	if (copper && zinc && tin && name && amount)
+	if (copper && zinc && tin && name)//&amount
 		return true;
 	else
 		return false;
@@ -70,9 +70,9 @@ bool Alloy::operator!=(const Alloy &b) {
 	bool zinc = this->zinc == b.zinc;
 	bool tin = this->tin == b.tin;
 	bool name = this->name == b.name;
-	bool amount = this->amount == b.amount;
+	//bool amount = this->amount == b.amount;
 
-	if (copper && zinc && tin && name && amount)
+	if (copper && zinc && tin && name)//&amount
 		return false;
 	else
 		return true;
@@ -80,6 +80,6 @@ bool Alloy::operator!=(const Alloy &b) {
 
 void Alloy::print() {
 
-	std::cout << this->copper << "\n" << this->zinc << "\n" << this->tin << "\n";
+	std::cout << this->copper << " " << this->zinc << " " << this->tin << " ";
 
 }

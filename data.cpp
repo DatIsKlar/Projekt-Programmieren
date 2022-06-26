@@ -1,6 +1,16 @@
 #include "Data.h"
 
 namespace data {
+
+bool fileExists(std::string filename) {
+	std::ifstream myfile;
+	myfile.open(filename + ".csv");
+	if (myfile)
+		return true;
+	else
+		return false;
+}
+
 std::vector<std::string> getHeaderText(char spacer, std::string filename) {
 	std::ifstream myfile;
 	std::string line;
@@ -72,34 +82,39 @@ std::vector<std::string> getTextData(std::string filename, std::string spacer, s
 	unsigned int totalLength = 0;
 	char spacer_ = spacer[0];
 	std::vector<std::string> pos = getHeaderText(spacer_, filename);
-	std::vector<unsigned int> pos_(pos.size());
+	std::vector<std::string> splitt = getBodyText(spacer_, filename);
 
+	std::vector<unsigned int> pos_(pos.size());
+	std::vector<unsigned int> posSearch;
 	unsigned int currentPosition = 0;
 	int startPos = -1;
 	for (auto i : pos) {
+		unsigned int y = 0;
 		for (auto x : search) {
 			if (i == x) {
 				if (startPos == -1)
 					startPos = currentPosition;
 
+				posSearch.push_back(y);
 				pos_.at(currentPosition) = currentPosition;
 			}
+			y++;
 		}
 		currentPosition++;
 		totalLength = currentPosition;
 	}
+	if(posSearch.size() != search.size()){
+		std::vector<std::string> a = {"false"};
+		return a;
+	}
 
-
-	std::vector<std::string> splitt = getBodyText(spacer_, filename);
 	unsigned int splittPostition = 0;
 	std::vector<std::string> valuesAfterFile;
 	for (auto i : splitt) {
-		unsigned int x_ = startPos;
-		for (auto x : search) {
-			if (splittPostition == pos_[x_]) {
+		for(unsigned int x_ = startPos; x_ <pos_.size(); x_++){
+			if (splittPostition == pos_.at(x_)) {
 				valuesAfterFile.push_back(i);
 			}
-			x_++;
 		}
 		splittPostition++;
 		if (splittPostition == totalLength) {
@@ -107,16 +122,18 @@ std::vector<std::string> getTextData(std::string filename, std::string spacer, s
 		}
 	}
 
-	std::vector<unsigned int> posSearch;
-	for (auto i : pos) {
-		unsigned int y = 0;
-		for (auto x : search) {
-			if (i == x) {
-				posSearch.push_back(y);
-			}
-			y++;
-		}
-	}
+
+
+//	std::vector<unsigned int> posSearch;
+//	for (auto i : pos) {
+//		unsigned int y = 0;
+//		for (auto x : search) {
+//			if (i == x) {
+//				posSearch.push_back(y);
+//			}
+//			y++;
+//		}
+//	}
 
 	std::vector<int> delta_pos;
 	for (unsigned int y_ = 0; y_ < posSearch.size(); y_++) {
