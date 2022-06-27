@@ -22,7 +22,7 @@ void anschriftPflegen(Firm &eigeneFirma) {
 	do {
 		std::cout << "Was moechten Sie bearbeiten? \n 1. Ganze Adresse bearbeiten \n "
 				"2. Strasse bearbeiten \n 3. ZIP bearbeiten \n 4. City bearbeiten"
-				"\n 5. Comment bearbeiten \n 6. Namen bearbeiten \n 0. beenden" << std::endl;
+				"\n 5. Comment bearbeiten \n 6. Namen bearbeiten \n 0. zurueck" << std::endl;
 
 		// bsp objekt unsere eigener Firma, wird später aus anderer Datei genommen
 		//Firm EigeneFirma;
@@ -38,7 +38,7 @@ void anschriftPflegen(Firm &eigeneFirma) {
 		switch (stoi(choiceA)) {
 		case 0: // programm beenden
 		{
-			std::cout << "Programm beendet." << std::endl;
+			std::cout << "Zurueck." << std::endl;
 			break;
 		} // ende case 6
 
@@ -570,9 +570,12 @@ int bestellung(Storage &Lager,std::vector<Supplier> &sup, Firm firm){
 	std::cout << "Moechten sie ein Bestellprotokol? " << std::endl << "1. Ja "<<std::endl ;
 	Alloy kopieA = a;
 	kopieA.setAmount(stof(x_in)+a.getAmount());
-	sup.at(auswahl-1).setOrder(Order(stof(x_in),firm));
+	Order meineBestellung(stof(x_in),firm);
+	sup.at(auswahl-1).setOrder(meineBestellung);
 	Lager.editAlloyByType(a, kopieA);
 	//std::cout<<Lager.getAlloys().at(Lager.getAlloyPosByType(a)).getAmount()<<" "<<Lager.getAlloys().at(Lager.getAlloyPosByType(a)).getName()<<std::endl;
+
+	functions::html(sup.at(auswahl-1),kopieA,meineBestellung);
 	return 0;
 }
 
@@ -585,7 +588,7 @@ void produktion(Storage &Lager,std::vector<Supplier> &sup, Firm firm) {
 	Alloy test;
 	std::vector<Alloy> Auswahl;
 	do {
-		std::cout << " Bitte waehlen sie die gewnschten Legierungen aus indem sie die Nummern eingeben. \n sind Sie fertig, geben sie eien 0 ein. \n";
+		std::cout << " Bitte waehlen sie die gewuenschten Legierungen aus, indem sie die Nummern eingeben. \n Sind Sie fertig, geben sie eine 0 ein. \n";
 
 		//Deklarationen
 		std::string y_in = "";
@@ -633,32 +636,54 @@ void produktion(Storage &Lager,std::vector<Supplier> &sup, Firm firm) {
 		std::cout << " Bitte geben sie die gewuenschte Ziellegierung ein: " << std::endl;
 		test = alloyNew(Lager);
 		mengen = functions::makeAlloyMix(Auswahl, test);
-		if (mengen.at(mengen.size() - 1) == -1)
+		if (mengen.size() == 0)
 			std::cout << "Produktion so nicht möglich" << std::endl;
-	} while (mengen.at(mengen.size() - 1) == -1);
+	} while (mengen.size() == 0);
+
 
 	//Abzug Material Lager
 	std::vector<bool> istM;
 	std::vector<Alloy> b2 = Lager.getAlloys();
-	int ver = -1;
+	std::vector<Alloy> print;
+	int ver = 0;
 	unsigned int x2 = 0;
 
 	for(auto i: Auswahl){
-		bool a2 = (Lager.getAlloys().at(Lager.getAlloyPosByType(i)).getAmount() - mengen.at(x2)) >=0;
+		float amount = Lager.getAlloys().at(Lager.getAlloyPosByType(i)).getAmount();
+		bool a2 = (amount - mengen.at(x2)*(test.getAmount())) <0;
+		if(!a2){
+			x2++;
+			continue;
+		}
 
 		do{
-			std::cout<<Lager.getAlloys().at(Lager.getAlloyPosByType(i)).getName()<<" "<<"Hat nicht genug im Lager, benötigt "<<mengen.at(x2)<<" hat aber nur "<<
+			std::cout<<Lager.getAlloys().at(Lager.getAlloyPosByType(i)).getName()<<" "<<"Hat nicht genug im Lager, benötigt "<<mengen.at(x2)*test.getAmount()<<" hat aber nur "<<
 			Lager.getAlloys().at(Lager.getAlloyPosByType(i)).getAmount()<<std::endl;
 			ver = bestellung(Lager,sup,firm);
-			a2 = (Lager.getAlloys().at(Lager.getAlloyPosByType(i)).getAmount() - mengen.at(x2)) >=0;
-		}while(!a2);
-		//std::cout<<(b2.at(Lager.getAlloyPosByType(i)).getAmount() - mengen.at(x2))<<" "<<(b2.at(Lager.getAlloyPosByType(i)).getName())<<std::endl;
-			//BESTELLUNGSFUNKTION!!!
-			// bzw ABBRUCH
+			a2 = (Lager.getAlloys().at(Lager.getAlloyPosByType(i)).getAmount() - mengen.at(x2)*test.getAmount()) <0;
+		}while(a2 or ver  == 0);
+		if(ver == 0){
+			std::cout<<"Produktion beendet"<<std::endl;
+			return;
 		}
-	//Lager Abziehen
 
+		//Lager Abziehen
+		if(a2){
+			Alloy kop = i;
+			kop.setAmount((Lager.getAlloys().at(Lager.getAlloyPosByType(i)).getAmount() - mengen.at(x2)));
+			Lager.editAlloyByType(i,kop);
+			kop.setAmount(mengen.at(x2));
+			print.push_back(kop);
+		}
+		x2++;
+		//std::cout<<(b2.at(Lager.getAlloyPosByType(i)).getAmount() - mengen.at(x2))<<" "<<(b2.at(Lager.getAlloyPosByType(i)).getName())<<std::endl;
+			//BESTELLUNGSFUNKTION!!!		// bzw ABBRUCH
+	}
+	print.push_back(test);
 	//Protokollierungswunsch
+//	for(auto i: print){
+//		std::cout<<i.getAmount()<<std::endl;
+//	}
 }
 
 }

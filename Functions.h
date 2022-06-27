@@ -90,6 +90,8 @@ bool readSupplier(std::string filename, std::string spacer, std::vector<Supplier
  */
 std::vector<float> makeAlloyMix(std::vector<Alloy> alloyIn, Alloy &wantedIn);
 //std::vector<float> makeAlloyMixLager(Storage &Lager, Alloy &wantedIn);
+
+void html(Supplier Zulieferer,Alloy meineLeg,Order meineBestellung);
 }
 
 #endif /* FUNCTIONS_H_ */
