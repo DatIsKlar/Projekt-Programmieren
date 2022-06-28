@@ -78,6 +78,19 @@ bool Alloy::operator!=(const Alloy &b) {
 		return true;
 }
 
+bool Alloy::operator%(const Alloy &b) {
+	bool copper = this->copper == b.copper;
+	bool zinc = this->zinc == b.zinc;
+	bool tin = this->tin == b.tin;
+	//bool name = this->name == b.name;
+	//bool amount = this->amount == b.amount;
+
+	if (copper && zinc && tin)//&amount
+		return true;
+	else
+		return false;
+}
+
 void Alloy::print() {
 
 	std::cout << this->copper << " " << this->zinc << " " << this->tin << " ";

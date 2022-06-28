@@ -9,79 +9,24 @@
 std::vector<Supplier> suppliers;
 int main() {
 
-//	std::vector<Alloy> alloyIn;
-//	Alloy AEins(0.8,0.2,0,"Uno",15);
-//	Alloy AZwei(0.95,0,0.05,"Dos",15);
-//	Alloy ADrei(0.8,0.1,0.1,"Tres",15);
-//	Alloy AVier(0.9,0.05,0.05,"Quatro",15);
-//	Alloy AVF(0.7,0.3,0,"Quatro",15);
-//	alloyIn.push_back(AEins);
-//	alloyIn.push_back(AZwei);
-//	alloyIn.push_back(ADrei);
-//	alloyIn.push_back(AVier);
-//	alloyIn.push_back(AVF);
-//	Alloy wantedIn(0.9, 0.05, 0.05,"want",15);
-//	Storage lager(alloyIn);
-//	Firm eigeneFirma("meineFirma", "meineStr", "02034", "Berlin", "meinKomment");
-//	Supplier Zulieferer(AEins,"meinSupp", "suppStr", "12345", "Berlin", "SuppKomentar");
-//	Alloy meineLeg(50, 30, 20, "Legierung1", 2);
-//	Order meineBestellung(200, eigeneFirma);
-//	suppliers.push_back(Zulieferer);
-//	menu::produktion(lager,suppliers, eigeneFirma);
-
-//	arma::vec wanted = { 0.9, 0.05, 0.05 };
-//	std::vector<arma::vec> vec_;
-//	std::vector<float> returnAmount;
-//	arma::vec solution;
-//	bool status = false;
-//	for (auto i : alloyIn)
-//		if (i == wantedIn)
-//			//doo
-//
-//		do {
-//
-//			std::vector<arma::vec> vec_;
-//			for (auto i : alloyIn) {
-//				arma::vec alloyNew = { i.getCopper(), i.getZinc(), i.getTin() };
-//				vec_.push_back(alloyNew);
-//			}
-//
-//			int size = 0;
-//			if (vec_.size() < 2)
-//				size = 2;
-//			else if (vec_.size() < 3 && vec_.size() == 2)
-//				size = 1;
-//			arma::mat Gauss(0, size, arma::fill::zeros);
-//
-//			for(auto i : vec_){
-//				Gauss.insert_cols(0, i);
-//			}
-//
-//			arma::vec solution;
-//			status = solve(solution, Gauss, wanted, arma::solve_opts::no_approx);
-//			for (int x = 0; x < solution.size(); x++) {
-//				if (solution[x] < 0)
-//					status = false;
-//			}
-//
-//		} while (status);
-//
-
-	Firm eigeneFirma("meinName", "meineStr", "12345", "Cottbus","meinKommentar");
-		Alloy AEins(0.8,0.2,0,"Uno",15);
-		Alloy AZwei(0.95,0,0.05,"Dos",15);
-		Alloy ADrei(0.8,0.1,0.1,"Tres",15);
-		Alloy AVier(0.9,0.05,0.05,"Quatro",15);
-	Storage Lager;
-	Lager.readStorage("test", ";");
-	Lager.addAlloy(AEins);
-	Lager.addAlloy(AZwei);
-	Lager.addAlloy(ADrei);
-	Lager.addAlloy(AVier);
-	suppliers.push_back(Supplier(AEins,"test1","t","t","t","t"));
-	suppliers.push_back(Supplier(AZwei,"test2","t","t","t","t"));
-	suppliers.push_back(Supplier(ADrei,"test3","t","t","t","t"));
-	suppliers.push_back(Supplier(AVier,"test4","t","t","t","t"));
+	std::vector<Alloy> alloyIn;
+	Alloy AEins(0.8,0.2,0,"Uno",15);
+	Alloy AZwei(0.95,0,0.05,"Dos",15);
+	Alloy ADrei(0.8,0.1,0.1,"Tres",15);
+	Alloy AVier(0.9,0.05,0.05,"Quatro",15);
+	Alloy AVF(0.7,0.3,0,"Quatro",15);
+	alloyIn.push_back(AEins);
+	alloyIn.push_back(AZwei);
+	alloyIn.push_back(ADrei);
+	alloyIn.push_back(AVier);
+	alloyIn.push_back(AVF);
+	Alloy wantedIn(0.9, 0.05, 0.05,"want",15);
+	Storage Lager(alloyIn);
+	Firm eigeneFirma("meineFirma", "meineStr", "02034", "Berlin", "meinKomment");
+	Supplier Zulieferer(AEins,"meinSupp", "suppStr", "12345", "Berlin", "SuppKomentar");
+	Alloy meineLeg(50, 30, 20, "Legierung1", 2);
+	Order meineBestellung(200, eigeneFirma);
+	suppliers.push_back(Zulieferer);
 
 	/**
 		 *  Die MenuefXXXhrung geht drei Ebenen in die Tiefe, also man kann max. drei Punkte nacheinander ablaufen

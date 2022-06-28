@@ -110,17 +110,21 @@ bool readSupplier(std::string filename, std::string spacer, std::vector<Supplier
 std::vector<float> makeAlloyMix(std::vector<Alloy> alloyIn, Alloy &wantedIn) {
 	std::vector<arma::vec> vec_;
 	std::vector<float> returnAmount;
-	if(alloyIn.size() == 1){
-		if(alloyIn.at(0) == wantedIn){
-			returnAmount.push_back(1);
-			return returnAmount;
-		}
-	}
+	bool check = false;
 	for (auto i : alloyIn) {
 		arma::vec alloyNew = { i.getCopper(), i.getZinc(), i.getTin() };
 		vec_.push_back(alloyNew);
-
+		if(i%wantedIn){
+			returnAmount.push_back(1);
+			check = true;
+		}else
+			returnAmount.push_back(0);
 	}
+	if(check)
+		return returnAmount;
+	else
+		returnAmount.clear();
+
 
 	int size = 0;
 	if (vec_.size() < 2)
@@ -140,11 +144,7 @@ std::vector<float> makeAlloyMix(std::vector<Alloy> alloyIn, Alloy &wantedIn) {
 //	}catch(std::runtime_error &i){
 //
 //	}
-
 	bool status = solve(solution, Gauss, wanted);
-	std::cout<<Gauss<<std::endl;
-	std::cout<<wanted<<std::endl;
-	std::cout<<solution<<std::endl;
 	int f = solution.size()-1;
 	if(!status){
 		returnAmount.clear();
@@ -160,8 +160,11 @@ std::vector<float> makeAlloyMix(std::vector<Alloy> alloyIn, Alloy &wantedIn) {
 		}else if(solution[f-size]<-1e-5){
 			returnAmount.clear();
 			break;
+		}else if(solution[f-size]>1){
+			returnAmount.clear();
+			break;
 		}
-		returnAmount.push_back(solution[f]);
+		returnAmount.push_back(solution[f-size]);
 		f--;
 	}
 	return returnAmount;

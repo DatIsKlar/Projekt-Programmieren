@@ -123,7 +123,6 @@ std::vector<std::string> getTextData(std::string filename, std::string spacer, s
 	}
 
 
-
 //	std::vector<unsigned int> posSearch;
 //	for (auto i : pos) {
 //		unsigned int y = 0;

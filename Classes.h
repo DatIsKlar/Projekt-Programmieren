@@ -93,6 +93,8 @@ public:
 	 */
 	bool operator!=(const Alloy &b);
 
+	bool operator%(const Alloy &b);
+
 	void print();
 };
 
