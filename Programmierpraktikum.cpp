@@ -24,9 +24,17 @@ int main() {
 	Storage Lager(alloyIn);
 	Firm eigeneFirma("meineFirma", "meineStr", "02034", "Berlin", "meinKomment");
 	Supplier Zulieferer(AEins,"meinSupp", "suppStr", "12345", "Berlin", "SuppKomentar");
+	Supplier Zulieferer2(AZwei,"meinSupp", "suppStr", "12345", "Berlin", "SuppKomentar");
+	Supplier Zulieferer3(ADrei,"meinSupp", "suppStr", "12345", "Berlin", "SuppKomentar");
+	Supplier Zulieferer4(AVier,"meinSupp", "suppStr", "12345", "Berlin", "SuppKomentar");
 	Alloy meineLeg(50, 30, 20, "Legierung1", 2);
 	Order meineBestellung(200, eigeneFirma);
 	suppliers.push_back(Zulieferer);
+	suppliers.push_back(Zulieferer2);
+	suppliers.push_back(Zulieferer3);
+	suppliers.push_back(Zulieferer4);
+
+
 
 	/**
 		 *  Die MenuefXXXhrung geht drei Ebenen in die Tiefe, also man kann max. drei Punkte nacheinander ablaufen
@@ -152,8 +160,14 @@ int main() {
 				break;
 
 			case 4: //Bestellung
-				std::cout << "\n4 Bestellung: ";
-				std::cout << "Eingabe Wunschmenge und Anteile\n";
+				std::cout << "\n4 Bestellung: "<<std::endl;
+				//Storage newLager = Lager;
+				int bestellungSucces = menu::bestellung(Lager,suppliers,eigeneFirma);
+				for(auto i : Lager.getAlloys()){
+					std::cout<<i.getName()<<" 0test "<<i.getAmount()<<std::endl;
+				}
+				//Lager = newLager;
+
 				break;
 			}
 		Lager.saveStorage("test",";");

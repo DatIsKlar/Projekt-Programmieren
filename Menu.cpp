@@ -571,7 +571,7 @@ int bestellung(Storage &lager,std::vector<Supplier> &supplierVec, Firm firm){
 	Order meineBestellung(stof(amountIn),firm);
 	supplierVec.at(auswahl-1).setOrder(meineBestellung);
 	lager.editAlloyByType(alloySupplier, alloySupplierCopy);
-	//std::cout<<Lager.getAlloys().at(Lager.getAlloyPosByType(a)).getAmount()<<" "<<Lager.getAlloys().at(Lager.getAlloyPosByType(a)).getName()<<std::endl;
+	std::cout<<lager.getAlloys().at(lager.getAlloyPosByType(alloySupplier)).getAmount()<<" "<<lager.getAlloys().at(lager.getAlloyPosByType(alloySupplier)).getName()<<std::endl;
 	//lagerKopie = Lager.getAlloys();
 	//HTML
 	functions::html(supplierVec.at(auswahl-1),alloySupplierCopy,meineBestellung);
@@ -600,7 +600,8 @@ void produktion(Storage &lager,std::vector<Supplier> &supplierVec, Firm firm) {
 			unsigned counterSupplier = 0;
 			for (auto i : alloyVec) {
 				counterSupplier++;
-				std::cout << counterSupplier << " " << i.getName() << std::endl;
+				std::cout<<counterSupplier<<" Legierung: "<<i.getName()<<" Kupfer: "<<i.getCopper()<<"  Zink:"<<i.getZinc()<<" Zinn:"<<i.getTin()<<std::endl;
+				//std::cout << counterSupplier << " " << i.getName() <<": "<<i.getCopper()<< << std::endl;
 
 			}
 
@@ -656,7 +657,9 @@ void produktion(Storage &lager,std::vector<Supplier> &supplierVec, Firm firm) {
 		do{
 			std::cout<<lager.getAlloys().at(lager.getAlloyPosByType(alloyIterator)).getName()<<" "<<"Hat nicht genug im Lager, benoetigt "<<mengen.at(counterMengen)*alloyWanted.getAmount()
 			<<" hat aber nur "<<lager.getAlloys().at(lager.getAlloyPosByType(alloyIterator)).getAmount()<<std::endl;
-			bestellungSucces = bestellung(lager,supplierVec,firm);
+			Storage newLager = lager;
+			bestellungSucces = bestellung(newLager,supplierVec,firm);
+			lager = newLager;
 			orderAmount = (lager.getAlloys().at(lager.getAlloyPosByType(alloyIterator)).getAmount() - mengen.at(counterMengen)*alloyWanted.getAmount()) <0;
 			if(bestellungSucces == -1)
 				 break;
@@ -672,7 +675,6 @@ void produktion(Storage &lager,std::vector<Supplier> &supplierVec, Firm firm) {
 			copyAlloy.setAmount((lager.getAlloys().at(lager.getAlloyPosByType(alloyIterator)).getAmount() - mengen.at(counterMengen)));
 			lager.editAlloyByType(alloyIterator,copyAlloy);
 			copyAlloy.setAmount(mengen.at(counterMengen));
-			print.push_back(kop);
 		}
 		counterMengen++;
 		//std::cout<<(b2.at(Lager.getAlloyPosByType(i)).getAmount() - mengen.at(x2))<<" "<<(b2.at(Lager.getAlloyPosByType(i)).getName())<<std::endl;
