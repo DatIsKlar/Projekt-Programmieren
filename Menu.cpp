@@ -520,87 +520,87 @@ Supplier supplierNew(Alloy alloyIn) {
 	return s;
 }
 
-int bestellung(Storage &Lager,std::vector<Supplier> &sup, Firm firm){
-	std::vector<Alloy> lagerKopie = Lager.getAlloys();
+int bestellung(Storage &lager,std::vector<Supplier> &supplierVec, Firm firm){
+	std::vector<Alloy> lagerKopie = lager.getAlloys();
 	int auswahl = 1;
-	std::string y_in = "";
+	std::string supplierChoiceIn = "";
 	// Liste Zulieferer
 
 	bool mengeCheck = false;
 	// Auswahl Zulieferer
 	do {
-		unsigned int x_ = 0;
-		if( sup.size() ==0)
+		unsigned int counterSupplier = 0;
+		if( supplierVec.size() ==0)
 			std::cout<<"Es gibt keine Zuhliefere"<<std::endl;
-		for (auto i : sup) {
-			x_++;
+		for (auto i : supplierVec) {
+			counterSupplier++;
 			Alloy output;
 			output = i.getAlloy();
-			std::cout<<x_<<". "<<i.getName()<<" Legierung: "<<output.getName()<<" Kupfer: "<<output.getCopper()<<"  Zink:"<<output.getZinc()<<
+			std::cout<<counterSupplier<<". "<<i.getName()<<" Legierung: "<<output.getName()<<" Kupfer: "<<output.getCopper()<<"  Zink:"<<output.getZinc()<<
 			" Zinn:"<<output.getTin()<<std::endl;
 
 		}
 		std::cout << "0. beenden" << std::endl;
-		std::cin >> y_in;
-		auswahl = functions::eingabe(sup.size() + 1, y_in);
+		std::cin >> supplierChoiceIn;
+		auswahl = functions::eingabe(supplierVec.size() + 1, supplierChoiceIn);
 		if (auswahl == -1) {
 			std::cout << "Ungueltige Eingabe, bitte neu eingeben: " << std::endl;
 		}
 	} while (auswahl == -1);
 	if (auswahl == 0)
 		return -1;
-	Alloy a;
-	a = sup.at(auswahl-1).getAlloy();
-	int pos = Lager.getAlloyPosByType(a);
-	float menge = Lager.getAlloys().at(pos).getAmount();
+	Alloy alloySupplier;
+	alloySupplier = supplierVec.at(auswahl-1).getAlloy();
+	int alloyPosLager = lager.getAlloyPosByType(alloySupplier);
+	float menge = lager.getAlloys().at(alloyPosLager).getAmount();
 	// Eingabe Wunschmenge
-	std::string x_in ="";
+	std::string amountIn ="";
 	std::cout<<"Menge die Sie bestellen wollen: "<<std::endl;
 	do {
-			std::cin >> x_in;
-			if(functions::isPositive(x_in)){
-				if (std::numeric_limits<float>::max()-menge < stof(x_in) )
+			std::cin >> amountIn;
+			if(functions::isPositive(amountIn)){
+				if (std::numeric_limits<float>::max()-menge < stof(amountIn) )
 					std::cout << "Ungueltige Eingabe, bitte neu eingeben: " << std::endl;
 				else
 					mengeCheck = true;
 			}
 		} while (!mengeCheck);
 
-	Alloy kopieA = a;
-	kopieA.setAmount(stof(x_in)+Lager.getAlloys().at(pos).getAmount());
-	Order meineBestellung(stof(x_in),firm);
-	sup.at(auswahl-1).setOrder(meineBestellung);
-	Lager.editAlloyByType(a, kopieA);
+	Alloy alloySupplierCopy = alloySupplier;
+	alloySupplierCopy.setAmount(stof(amountIn)+lager.getAlloys().at(alloyPosLager).getAmount());
+	Order meineBestellung(stof(amountIn),firm);
+	supplierVec.at(auswahl-1).setOrder(meineBestellung);
+	lager.editAlloyByType(alloySupplier, alloySupplierCopy);
 	//std::cout<<Lager.getAlloys().at(Lager.getAlloyPosByType(a)).getAmount()<<" "<<Lager.getAlloys().at(Lager.getAlloyPosByType(a)).getName()<<std::endl;
 	//lagerKopie = Lager.getAlloys();
 	//HTML
-	functions::html(sup.at(auswahl-1),kopieA,meineBestellung);
+	functions::html(supplierVec.at(auswahl-1),alloySupplierCopy,meineBestellung);
 	return 0;
 }
 
 
 
-void produktion(Storage &Lager,std::vector<Supplier> &sup, Firm firm) {
+void produktion(Storage &lager,std::vector<Supplier> &supplierVec, Firm firm) {
 
 	std::vector<float> mengen;
 	mengen.push_back(-1);
-	Alloy test;
+	Alloy alloyWanted;
 	std::vector<Alloy> Auswahl;
 	do {
 		std::cout << " Bitte waehlen sie die gewuenschten Legierungen aus, indem sie die Nummern eingeben. \n Sind Sie fertig, geben sie eine 0 ein. \n";
 
 		//Deklarationen
-		std::string y_in = "";
-		std::string choiceA;
-		int a = 0;
+		std::string alloyChoice = "";
+		//std::string choiceA;
+		int alloyChoiceNumber = 0;
 
 		//Ausgabe Liste vorhandener Legierungen
-		std::vector<Alloy> alloyVec = Lager.getAlloys();
+		std::vector<Alloy> alloyVec = lager.getAlloys();
 		do {
-			unsigned sup = 0;
+			unsigned counterSupplier = 0;
 			for (auto i : alloyVec) {
-				sup++;
-				std::cout << sup << " " << i.getName() << std::endl;
+				counterSupplier++;
+				std::cout << counterSupplier << " " << i.getName() << std::endl;
 
 			}
 
@@ -609,21 +609,21 @@ void produktion(Storage &Lager,std::vector<Supplier> &sup, Firm firm) {
 			//Auswahl der Legierungen(wieviele?)
 
 			do {
-				std::cin >> y_in;
-				if (functions::eingabe(alloyVec.size() + 1, y_in) == -1) {
+				std::cin >> alloyChoice;
+				if (functions::eingabe(alloyVec.size() + 1, alloyChoice) == -1) {
 					std::cout << "Ungueltige Eingabe, bitte neu eingeben: " << std::endl;
 				}
 
-			} while (functions::eingabe(alloyVec.size() + 1, y_in) == -1);
+			} while (functions::eingabe(alloyVec.size() + 1, alloyChoice) == -1);
 
-			if (stoi(y_in) == 0) {
+			if (stoi(alloyChoice) == 0) {
 				break;
 			}
-			Auswahl.push_back(alloyVec.at(stoi(y_in) - 1));
-			alloyVec.erase(alloyVec.begin() + stoi(y_in) - 1);
-			a = stoi(y_in);
+			Auswahl.push_back(alloyVec.at(stoi(alloyChoice) - 1));
+			alloyVec.erase(alloyVec.begin() + stoi(alloyChoice) - 1);
+			alloyChoiceNumber = stoi(alloyChoice);
 
-		} while (a != 0);
+		} while (alloyChoiceNumber != 0);
 
 		for (auto i : Auswahl) {
 			std::cout << i.getName() << std::endl;
@@ -632,63 +632,54 @@ void produktion(Storage &Lager,std::vector<Supplier> &sup, Firm firm) {
 		//Eingabeaufforderung Arroy
 
 		std::cout << " Bitte geben sie die gewuenschte Ziellegierung ein: " << std::endl;
-		test = alloyNew(Lager);
-		mengen = functions::makeAlloyMix(Auswahl, test);
+		alloyWanted = alloyNew(lager);
+		mengen = functions::makeAlloyMix(Auswahl, alloyWanted);
 		if (mengen.size() == 0)
 			std::cout << "Produktion so nicht möglich" << std::endl;
 	} while (mengen.size() == 0);
 
 
 	//Abzug Material Lager
-	std::vector<bool> istM;
-	std::vector<Alloy> b2 = Lager.getAlloys();
-	std::vector<Alloy> print;
-	int ver = 0;
-	unsigned int x2 = 0;
-	for(auto i: mengen){
-		std::cout<<i<<std::endl;
-	}
-	for(auto i: Auswahl){
-		float amount = Lager.getAlloys().at(Lager.getAlloyPosByType(i)).getAmount();
-		std::cout<<x2<<std::endl;
-		bool a2 = (amount - mengen.at(x2)*(test.getAmount())) <0;
-		if(!a2)
-			ver = -1;
-		if(!a2){
-			x2++;
+	std::vector<Alloy> lagerAlloysCopy = lager.getAlloys();
+	int bestellungSucces = 0;
+	unsigned int counterMengen = 0;
+	for(auto alloyIterator: Auswahl){
+		float amount = lager.getAlloys().at(lager.getAlloyPosByType(alloyIterator)).getAmount();
+		bool orderAmount = (amount - mengen.at(counterMengen)*(alloyWanted.getAmount())) <0;
+		if(!orderAmount)
+			bestellungSucces = -1;
+		if(!orderAmount){
+			counterMengen++;
 			continue;
 		}
 
 		do{
-			std::cout<<Lager.getAlloys().at(Lager.getAlloyPosByType(i)).getName()<<" "<<"Hat nicht genug im Lager, benoetigt "<<mengen.at(x2)*test.getAmount()
-			<<" hat aber nur "<<Lager.getAlloys().at(Lager.getAlloyPosByType(i)).getAmount()<<std::endl;
-			ver = bestellung(Lager,sup,firm);
-			a2 = (Lager.getAlloys().at(Lager.getAlloyPosByType(i)).getAmount() - mengen.at(x2)*test.getAmount()) <0;
-			if(ver == -1)
+			std::cout<<lager.getAlloys().at(lager.getAlloyPosByType(alloyIterator)).getName()<<" "<<"Hat nicht genug im Lager, benoetigt "<<mengen.at(counterMengen)*alloyWanted.getAmount()
+			<<" hat aber nur "<<lager.getAlloys().at(lager.getAlloyPosByType(alloyIterator)).getAmount()<<std::endl;
+			bestellungSucces = bestellung(lager,supplierVec,firm);
+			orderAmount = (lager.getAlloys().at(lager.getAlloyPosByType(alloyIterator)).getAmount() - mengen.at(counterMengen)*alloyWanted.getAmount()) <0;
+			if(bestellungSucces == -1)
 				 break;
-		}while(a2);
-		if(ver == -1){
+		}while(orderAmount);
+		if(bestellungSucces == -1){
 			std::cout<<"Produktion beendet"<<std::endl;
 			return;
 		}
 
 		//Lager Abziehen
-		if(a2){
-			Alloy kop = i;
-			kop.setAmount((Lager.getAlloys().at(Lager.getAlloyPosByType(i)).getAmount() - mengen.at(x2)));
-			Lager.editAlloyByType(i,kop);
-			kop.setAmount(mengen.at(x2));
+		if(orderAmount){
+			Alloy copyAlloy = alloyIterator;
+			copyAlloy.setAmount((lager.getAlloys().at(lager.getAlloyPosByType(alloyIterator)).getAmount() - mengen.at(counterMengen)));
+			lager.editAlloyByType(alloyIterator,copyAlloy);
+			copyAlloy.setAmount(mengen.at(counterMengen));
 			print.push_back(kop);
 		}
-		x2++;
+		counterMengen++;
 		//std::cout<<(b2.at(Lager.getAlloyPosByType(i)).getAmount() - mengen.at(x2))<<" "<<(b2.at(Lager.getAlloyPosByType(i)).getName())<<std::endl;
 			//BESTELLUNGSFUNKTION!!!		// bzw ABBRUCH
 	}
-	print.push_back(test);
 	//Protokollierungswunsch
-//	for(auto i: print){
-//		std::cout<<i.getAmount()<<std::endl;
-//	}
+
 }
 
 }
