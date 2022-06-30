@@ -35,10 +35,8 @@ int main() {
 //	suppliers.push_back(Zulieferer3);
 //	suppliers.push_back(Zulieferer4);
 
-	filesave::readStorage("test", ";", Lager);
-	for(auto i: Lager.getAlloys()){
-		std::cout<<i.getName()<<std::endl;
-	}
+	functions::html(Zulieferer, meineLeg, meineBestellung);
+
 	//functions::saveSupplier("testsup", ";", suppliers);
 
 //	/**

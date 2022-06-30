@@ -169,7 +169,18 @@ void html(Supplier Zulieferer,Alloy meineLeg,Order meineBestellung){
 
 	Firm eigeneFirma = meineBestellung.getFirm();
 	std::ofstream html_file;
-	html_file.open("Bestellformular.html");
+	unsigned int number = 1;
+	std::string name = "Bestellformular_"+Zulieferer.getName()+".html";
+
+	std::cout<<data::fileExists(name)<<std::endl;
+	while(data::fileExists(name)){
+		std::string s = std::to_string(number);
+		name = "Bestellformular_"+Zulieferer.getName()+"_"+s+".html";
+		std::cout<<"here"<<std::endl;
+		number++;
+	}
+
+	html_file.open(name);
 	if (html_file.is_open())
 	{
 		html_file << "<h1 style=\"text-align:center;\">"

@@ -20,7 +20,7 @@ namespace filesave{
  * @param std::string spacer
  * spacer ( in csv am besten ";" )
  * @param std::vector<Supplier> &sup
- * Refnerz des vector mit in welchem die Supplier gespeichert werden sollen
+ * Referenz des vector mit in welchem die Supplier gespeichert werden sollen
  */
 bool readSupplier(std::string filename, std::string spacer, std::vector<Supplier> &suppliers);
 

@@ -34,7 +34,7 @@ int Storage::getAlloyPosByType(const Alloy in) {
 	return -1; //-1 ist ein fehler
 }
 
-void Storage::addAlloy(const Alloy &alloy_i) {
+void Storage::addAlloy(const Alloy alloy_i) {
 	this->alloy.push_back(alloy_i);
 }
 
@@ -48,7 +48,7 @@ bool Storage::removeAlloyByName(std::string alloyNameIn) {
 
 }
 
-bool Storage::removeAlloyByType(const Alloy &alloyIn) {
+bool Storage::removeAlloyByType(const Alloy alloyIn) {
 	int x = this->getAlloyPosByType(alloyIn);
 	if (x >= 0) {
 		this->alloy.erase(this->alloy.begin() + x); // @suppress("Invalid arguments")
@@ -68,7 +68,7 @@ bool Storage::editAlloyByName(std::string namesIn, Alloy edit) {
 
 }
 
-bool Storage::editAlloyByType(Alloy alloyIn, Alloy edit) {
+bool Storage::editAlloyByType(const Alloy alloyIn, Alloy edit) {
 	int x = this->getAlloyPosByType(alloyIn);
 	if (x >= 0) {
 		this->alloy.at(x) = edit;
