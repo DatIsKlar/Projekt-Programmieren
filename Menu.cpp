@@ -237,7 +237,9 @@ void supplierPlfegen(std::vector<Supplier> &suppliers) {
 		unsigned sup = 0;
 		for (auto i : suppliers) {
 			sup++;
-			std::cout << sup << " " << i.getName() << std::endl;
+			Alloy output = i.getAlloy();
+			std::cout<<sup<<". Name: "<<i.getName()<<" | Legierung: "<<output.getName()<<" | Kupfer: "<<output.getCopper()<<" |  Zink:"<<output.getZinc()<<
+			" | Zinn:"<<output.getTin()<<" |  Anschrift: "<<i.getStreet()<<" "<<i.getZip()<<", "<<i.getCity()<<std::endl;
 
 		}
 		std::cout << "0. beenden" << std::endl;
