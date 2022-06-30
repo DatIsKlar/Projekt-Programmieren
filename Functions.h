@@ -52,33 +52,6 @@ bool isInt(float numberIn);
  */
 bool isPositive(std::string numberIn);
 
-
-/**
- * @fn bool saveSupplier(std::string filename, std::string spacer, std::vector<Supplier> sup)
- * Speichert ein vector vom typ Supplier in einer csv datei.
- * Gibt true wieder wenn wahr and false wenn falsch.
- * @param std::string filename
- * dateiname
- * @param std::string spacer
- * spacer ( in csv am besten ";" )
- * @param std::vector<Supplier> sup
- * Kopie des vector mit den Supplier
- */
-bool saveSupplier(std::string filename, std::string spacer, std::vector<Supplier> sup);
-
-/**
- * @fn bool saveSupplier(std::string filename, std::string spacer, std::vector<Supplier> sup)
- * Speichert ein vector vom typ Supplier in einer csv datei.
- * Gibt true wieder wenn erfolgreich and false wenn nicht.
- * @param std::string filename
- * dateiname
- * @param std::string spacer
- * spacer ( in csv am besten ";" )
- * @param std::vector<Supplier> &sup
- * Refnerz des vector mit in welchem die Supplier gespeichert werden sollen
- */
-bool readSupplier(std::string filename, std::string spacer, std::vector<Supplier> &suppliers);
-
 /**
  * @fn std::vector<float> makeAlloyMix(std::vector<std::string> namesIn,Alloy& wantedIn)
  * gibt die Ver�ltnisse der gegebenen Legierung als Vector mit der Postions im Verglich zu der Pos. der gebenen Namen

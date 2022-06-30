@@ -420,7 +420,7 @@ void supplierPlfegen(std::vector<Supplier> &suppliers) {
 	return;
 }
 
-Alloy alloyNew(Storage &stor) {
+Alloy alloyNewLager(Storage &stor) {
 	float copper = 0;
 	float zinc = 0;
 	float tin = 0;
@@ -469,6 +469,68 @@ Alloy alloyNew(Storage &stor) {
 		if (stor.getAlloyPosByName(name) != -1)
 			std::cout << "Legierung mit diesem Namen existier bereits" << std::endl;
 	} while (stor.getAlloyPosByName(name) != -1);
+
+	do {
+		std::string amountString;
+		do {
+			std::cout << "Menge " << std::endl;
+			std::cin >> amountString;
+			if (!functions::isPositive(amountString))
+				std::cout << "Nicht erlaubter Wert" << std::endl;
+		} while (!functions::isPositive(amountString));
+		amount = stof(amountString);
+		if (amount <= 0)
+			std::cout << "Menge kann nicht kleiner gleich 0 sein" << std::endl;
+	} while (amount <= 0);
+
+	return Alloy(copper, zinc, tin, name, amount);
+}
+
+Alloy alloyNewSupplier() {
+	float copper = 0;
+	float zinc = 0;
+	float tin = 0;
+	float amount = 0;
+	bool metals = false;
+	std::cout << "Bitte geben Sie die Daten der Legierung an." << std::endl;
+	//dummy alloy
+	do {
+		std::string copperString;
+		do {
+			std::cout << "Kupfer " << std::endl;
+			std::cin >> copperString;
+			if (!functions::isPositive(copperString))
+				std::cout << "Nicht erlaubter Wert" << std::endl;
+		} while (!functions::isPositive(copperString));
+		copper = stof(copperString);
+
+		std::string zincString;
+		do {
+			std::cout << "Zink " << std::endl;
+			std::cin >> zincString;
+			if (!functions::isPositive(zincString))
+				std::cout << "Nicht erlaubter Wert" << std::endl;
+		} while (!functions::isPositive(zincString));
+		zinc = stof(zincString);
+
+		std::string tinString;
+		do {
+			std::cout << "Zinn " << std::endl;
+			std::cin >> tinString;
+			if (!functions::isPositive(tinString))
+				std::cout << "Nicht erlaubter Wert" << std::endl;
+		} while (!functions::isPositive(tinString));
+		tin = stof(tinString);
+
+		metals = (copper + zinc + tin == 1) or (copper + zinc + tin == 100);
+		if (!metals)
+			std::cout << "Legierung hat mehr als 100% Bestandteile" << std::endl;
+
+	} while (!metals);
+
+	std::string name;
+	std::cout << "Name: " << std::endl;
+	std::cin >> name;
 
 	do {
 		std::string amountString;
@@ -578,8 +640,6 @@ int bestellung(Storage &lager,std::vector<Supplier> &supplierVec, Firm firm){
 	return 0;
 }
 
-
-
 void produktion(Storage &lager,std::vector<Supplier> &supplierVec, Firm firm) {
 
 	std::vector<float> mengen;
@@ -621,7 +681,7 @@ void produktion(Storage &lager,std::vector<Supplier> &supplierVec, Firm firm) {
 				break;
 			}
 			Auswahl.push_back(alloyVec.at(stoi(alloyChoice) - 1));
-			alloyVec.erase(alloyVec.begin() + stoi(alloyChoice) - 1);
+			alloyVec.erase(alloyVec.begin() + stoi(alloyChoice) - 1); // @suppress("Invalid arguments")
 			alloyChoiceNumber = stoi(alloyChoice);
 
 		} while (alloyChoiceNumber != 0);
@@ -633,7 +693,7 @@ void produktion(Storage &lager,std::vector<Supplier> &supplierVec, Firm firm) {
 		//Eingabeaufforderung Arroy
 
 		std::cout << " Bitte geben sie die gewuenschte Ziellegierung ein: " << std::endl;
-		alloyWanted = alloyNew(lager);
+		alloyWanted = alloyNewLager(lager);
 		mengen = functions::makeAlloyMix(Auswahl, alloyWanted);
 		if (mengen.size() == 0)
 			std::cout << "Produktion so nicht möglich" << std::endl;
@@ -683,6 +743,7 @@ void produktion(Storage &lager,std::vector<Supplier> &supplierVec, Firm firm) {
 	//Protokollierungswunsch
 
 }
+
 
 }
 

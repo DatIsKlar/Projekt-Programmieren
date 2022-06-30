@@ -240,7 +240,7 @@ public:
 	 * @param alloyIn
 	 * Referenz der gesuchten Legierung
 	 */
-	int getAlloyPosByType(Alloy alloyIn);
+	int getAlloyPosByType(const Alloy alloyIn);
 
 	/**
 	 * @fn void addAlloy(Alloy alloyIn)
@@ -266,29 +266,8 @@ public:
 	 * @param alloyIn
 	 * Referenz der gesuchten Legierung
 	 */
-	bool removeAlloyByType(Alloy &alloyIn);
+	bool removeAlloyByType(const Alloy &alloyIn);
 
-	/**
-	 * @fn bool saveStorage(std::string nameIn, std::string spacerIn)
-	 * Speichert das Lager in einer csv Datei;
-	 * Gibt wahr wider wenn beendet wurde
-	 * @param nameIn
-	 * gew�nschter Dateiname
-	 * @param spacerIn
-	 * gew�nschter spacer in der Datei
-	 */
-	bool saveStorage(std::string nameIn, std::string spacerIn);
-
-	/**
-	 * @fn bool readStorage(std::string filname, std::string spacerIn)
-	 * Liest  das Lager aus einer csv Datei und gibt es in das Lager zur�ck
-	 * Gibt wahr wider wenn beendet wurde
-	 * @param filname
-	 * der zu �ffnende Dateiname
-	 * @param spacerIn
-	 * spacer in der Datei
-	 */
-	bool readStorage(std::string filename, std::string spacerIn);
 
 	/**
 	 * @fn bool editAlloyByName(std::string namesIn ,Alloy edit)
