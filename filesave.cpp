@@ -54,12 +54,15 @@ bool saveStorage(std::string filename, std::string spacer, Storage lager) {
 	return true;
 }
 
-bool readSupplier(std::string filename, std::string spacer, std::vector<Supplier> &suppliers) {
+int readSupplier(std::string filename, std::string spacer, std::vector<Supplier> &suppliers) {
 	std::vector<std::string> search = { "Kupfer", "Zink", "Zinn", "Name", "Menge", "Firmname", "Strasse", "Plz", "Stadt", "Kommentar" };
 	std::vector<std::string> data_ = data::getTextData(filename, spacer, search);
+	if(!data::fileExists(filename+".csv"))
+		return 2;
+
 	if (data_.size() == 1)
 		if (data_.at(0) == "false")
-			return false;
+			return 3;
 	unsigned int y = 1;
 	unsigned int posSearch = 0;
 	unsigned int supIt = 0;
@@ -107,21 +110,24 @@ bool readSupplier(std::string filename, std::string spacer, std::vector<Supplier
 				std::cout<<"Unexpected data type at Line with Suppliers Alloy"<<line<<std::endl;
 				suppliers.push_back(menu::supplierNew(menu::alloyNewSupplier()));
 			} catch (const std::out_of_range &ia) {
-				return false;
+				return 4;
 			}
 		}
 	}
-	return true;
+	return 1;
 }
 
-bool readStorage(std::string filename, std::string spacer, Storage &lager) {
+int readStorage(std::string filename, std::string spacer, Storage &lager) {
 
 	std::vector<std::string> search = { "Kupfer", "Zink", "Zinn", "Name", "Menge" };
 	std::vector<std::string> data_ = data::getTextData(filename, spacer, search);
 
+	if(!data::fileExists(filename+".csv"))
+		return 2;
+
 	if(data_.size() == 1)
 		if(data_.at(0) == "false")
-			return false;
+			return 3;
 
 	unsigned int y = 1;
 	unsigned int posSearch = 0;
@@ -171,10 +177,10 @@ bool readStorage(std::string filename, std::string spacer, Storage &lager) {
 				std::cout<<"Unexpected data type at Line with Storage Alloy"<<line<<std::endl;
 				lager.addAlloy(menu::alloyNewSupplier());
 			}catch(const std::out_of_range  &ia){
-				return false;
+				return 4;
 			}
 		}
 	}
-	return true;
+	return 1;
 }
 }

@@ -35,7 +35,7 @@ int main() {
 //	suppliers.push_back(Zulieferer3);
 //	suppliers.push_back(Zulieferer4);
 
-	functions::html(Zulieferer, meineLeg, meineBestellung);
+	std::cout<<filesave::readSupplier("test", ";", suppliers);
 
 	//functions::saveSupplier("testsup", ";", suppliers);
 
