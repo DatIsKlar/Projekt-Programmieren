@@ -39,6 +39,8 @@ public:
 	 */
 	Alloy(float copperIn, float zincIn, float tinIn, std::string nameIn, float amountIn);
 
+	bool isValidAlloy();
+
 	/**
 	 *	@fn	float getCopper()
 	 *	gibt den Kuppfer/Copper gehalt der Legierung wieder

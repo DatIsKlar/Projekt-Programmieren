@@ -12,15 +12,14 @@ Alloy::Alloy(float copperIn, float zincIn, float tinIn, std::string nameIn, floa
 	float complet_value = copperIn + zincIn + tinIn;
 	if ((complet_value > 1 || complet_value < 1)) {
 		if (complet_value > 1 && (complet_value < 100 || complet_value > 100)) {
-			//do error sollte am besten schon bei der eingabe geprüft werden und nich erst hier. Um wieder holte eingabe einfacher zu gestalten
+			std::cout<<"Legierung nicht konform"<<std::endl;
+
 		} else {
 			copperIn /= 100;
 			zincIn /= 100;
 			tinIn /= 100;
-
 		}
 	}
-
 	copper = copperIn;
 	zinc = zincIn;
 	tin = tinIn;
@@ -28,6 +27,17 @@ Alloy::Alloy(float copperIn, float zincIn, float tinIn, std::string nameIn, floa
 	amount = amountIn;
 }
 
+bool Alloy::isValidAlloy(){
+	float complet_value = this->copper + this->zinc + this->tin;
+	if ((complet_value > 1 || complet_value < 1)) {
+		if (complet_value > 1 && (complet_value < 100 || complet_value > 100)) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	return true;
+}
 float Alloy::getCopper() {
 	return this->copper;
 }

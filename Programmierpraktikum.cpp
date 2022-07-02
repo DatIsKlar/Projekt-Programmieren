@@ -41,8 +41,29 @@ int main() {
 
 
 	Storage lager;
+//	std::string storageName = "storage";
+//	std::string suppliersName = "suppliers";
+	//todo einlesen datei falls die standart nicht existiert
 	int couldReadStorage = filesave::readStorage("storage", ";", lager);
 	int couldReadSuppliers = filesave::readSupplier("suppliers", ";", suppliers);
+//	if(couldReadStorage == 2){
+//		std::string choiceA;
+//		std::cout<<"Standart Datei existiert nicht möchte Sie eine manuell einlesen?"<<std::endl;
+//		std::cout<<"1. Yes"<<std::endl;
+//		std::cout<<"2. No"<<std::endl;
+//		std::cout<<"0. Exist Programm"<<std::endl;
+//		do {
+//			std::cin >> choiceA;
+//			if (functions::eingabe(3, choiceA) == -1) {
+//				std::cout << "ungueltige Eingabe, bitte neu eingeben: \n"
+//						<< std::endl;
+//			}
+//		} while (functions::eingabe(3, choiceA) == -1);
+//	}
+//	if(couldReadSuppliers == 2){
+//		std::cout<<"Standart Datei für Zuliefere existiert nicht möchte Sie eine manuell einlesen?"<<std::endl;
+//	}
+//
 
 	Firm eigeneFirma("meineFirma", "meineStr", "02034", "Berlin", "meinKomment");
 	/**
@@ -154,8 +175,16 @@ int main() {
 				//----------------------------------------------------------------------Ende B MenXXX
 
 			case 2: //Lager
-				std::cout << "\n 2 Lager: ";
-				std::cout << "Auflistung Legierungen\n";
+				{
+					std::cout << "\n 2 Lager: ";
+					std::cout << "Auflistung Legierungen\n";
+					unsigned counterNew = 0;
+					for (auto i : lager.getAlloys()) {
+						counterNew++;
+						std::cout<<counterNew<<" Legierung: "<<i.getName()<<" Kupfer: "<<i.getCopper()<<"  Zink:"<<i.getZinc()<<" Zinn:"<<i.getTin()<<std::endl;
+						//std::cout << counterSupplier << " " << i.getName() <<": "<<i.getCopper()<< << std::endl;
+					}
+				}
 				break;
 				//alloyHinzufügen menu::alloyNewLager(lager)
 
@@ -171,9 +200,6 @@ int main() {
 				std::cout << "\n4 Bestellung: "<<std::endl;
 				//Storage newLager = Lager;
 				int bestellungSucces = menu::bestellung(lager,suppliers,eigeneFirma);
-				for(auto i : lager.getAlloys()){
-					std::cout<<i.getName()<<" 0test "<<i.getAmount()<<std::endl;
-				}
 				//Lager = newLager;
 
 				break;

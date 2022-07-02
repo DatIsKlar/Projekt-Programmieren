@@ -105,7 +105,8 @@ int readSupplier(std::string filename, std::string spacer, std::vector<Supplier>
 			line++;
 			try {
 				Alloy a(std::stof(data_.at(x)), std::stof(data_.at(x + 1)), std::stof(data_.at(x + 2)), data_.at(x + 3), std::stof(data_.at(x + 4)));
-				suppliers.push_back(Supplier(a, data_.at(x + 5), data_.at(x + 6), data_.at(x + 7), data_.at(x + 8), data_.at(x + 9)));
+				if(a.isValidAlloy())
+					suppliers.push_back(Supplier(a, data_.at(x + 5), data_.at(x + 6), data_.at(x + 7), data_.at(x + 8), data_.at(x + 9)));
 			} catch (const std::invalid_argument &ia) {
 				std::cout<<"Unexpected data type at Line with Suppliers Alloy"<<line<<std::endl;
 				suppliers.push_back(menu::supplierNew(menu::alloyNewSupplier()));
@@ -172,7 +173,9 @@ int readStorage(std::string filename, std::string spacer, Storage &lager) {
 		if (x % search.size() == 0) {
 			line++;
 			try {
-				lager.addAlloy(Alloy(std::stof(data_.at(x)), std::stof(data_.at(x + 1)), std::stof(data_.at(x + 2)), data_.at(x + 3), std::stof(data_.at(x + 4))));
+				Alloy a(std::stof(data_.at(x)), std::stof(data_.at(x + 1)), std::stof(data_.at(x + 2)), data_.at(x + 3), std::stof(data_.at(x + 4)));
+				if(a.isValidAlloy())
+					lager.addAlloy(a);
 			} catch (const std::invalid_argument &ia) {
 				std::cout<<"Unexpected data type at Line with Storage Alloy"<<line<<std::endl;
 				lager.addAlloy(menu::alloyNewSupplier());

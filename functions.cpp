@@ -176,7 +176,6 @@ void html(Supplier Zulieferer,Alloy meineLeg,Order meineBestellung){
 	while(data::fileExists(name)){
 		std::string s = std::to_string(number);
 		name = "Bestellformular_"+Zulieferer.getName()+"_"+s+".html";
-		std::cout<<"here"<<std::endl;
 		number++;
 	}
 

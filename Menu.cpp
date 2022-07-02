@@ -600,8 +600,8 @@ int bestellung(Storage &lager,std::vector<Supplier> &supplierVec, Firm firm){
 			counterSupplier++;
 			Alloy output;
 			output = i.getAlloy();
-			std::cout<<counterSupplier<<". "<<i.getName()<<" Legierung: "<<output.getName()<<" Kupfer: "<<output.getCopper()<<"  Zink:"<<output.getZinc()<<
-			" Zinn:"<<output.getTin()<<std::endl;
+			std::cout<<counterSupplier<<". Name: "<<i.getName()<<" | Legierung: "<<output.getName()<<" | Kupfer: "<<output.getCopper()<<" |  Zink:"<<output.getZinc()<<
+			" | Zinn:"<<output.getTin()<<" |  Anschrift: "<<i.getStreet()<<" "<<i.getZip()<<", "<<i.getCity()<<std::endl;
 
 		}
 		std::cout << "0. beenden" << std::endl;
@@ -613,10 +613,12 @@ int bestellung(Storage &lager,std::vector<Supplier> &supplierVec, Firm firm){
 	} while (auswahl == -1);
 	if (auswahl == 0)
 		return -1;
+	float menge = 0;
 	Alloy alloySupplier;
 	alloySupplier = supplierVec.at(auswahl-1).getAlloy();
 	int alloyPosLager = lager.getAlloyPosByType(alloySupplier);
-	float menge = lager.getAlloys().at(alloyPosLager).getAmount();
+	if(alloyPosLager != -1)
+		menge = lager.getAlloys().at(alloyPosLager).getAmount();
 	// Eingabe Wunschmenge
 	std::string amountIn ="";
 	std::cout<<"Menge die Sie bestellen wollen: "<<std::endl;
@@ -631,12 +633,17 @@ int bestellung(Storage &lager,std::vector<Supplier> &supplierVec, Firm firm){
 		} while (!mengeCheck);
 
 	Alloy alloySupplierCopy = alloySupplier;
-	alloySupplierCopy.setAmount(stof(amountIn)+lager.getAlloys().at(alloyPosLager).getAmount());
 	Order meineBestellung(stof(amountIn),firm);
-	supplierVec.at(auswahl-1).setOrder(meineBestellung);
-	lager.editAlloyByType(alloySupplier, alloySupplierCopy);
-	std::cout<<lager.getAlloys().at(lager.getAlloyPosByType(alloySupplier)).getAmount()<<" "<<lager.getAlloys().at(lager.getAlloyPosByType(alloySupplier)).getName()<<std::endl;
-	//lagerKopie = Lager.getAlloys();
+	if(alloyPosLager == -1){
+		alloySupplierCopy.setAmount(stof(amountIn));
+		supplierVec.at(auswahl-1).setOrder(meineBestellung);
+		lager.addAlloy(alloySupplierCopy);
+	}else{
+		alloySupplierCopy.setAmount(stof(amountIn)+lager.getAlloys().at(alloyPosLager).getAmount());
+		supplierVec.at(auswahl-1).setOrder(meineBestellung);
+		lager.editAlloyByType(alloySupplier, alloySupplierCopy);
+	}
+
 	//HTML
 	functions::html(supplierVec.at(auswahl-1),alloySupplierCopy,meineBestellung);
 	return 0;
@@ -648,6 +655,11 @@ void produktion(Storage &lager,std::vector<Supplier> &supplierVec, Firm firm) {
 	mengen.push_back(-1);
 	Alloy alloyWanted;
 	std::vector<Alloy> Auswahl;
+	if(lager.getAlloys().size() == 0){
+		std::cout << " Keine Legierungen im Lager bitte Bestellen Sie welche"<<std::endl;
+		return;
+	}
+
 	do {
 		std::cout << " Bitte waehlen sie die gewuenschten Legierungen aus, indem sie die Nummern eingeben. \n Sind Sie fertig, geben sie eine 0 ein. \n";
 
@@ -745,7 +757,5 @@ void produktion(Storage &lager,std::vector<Supplier> &supplierVec, Firm firm) {
 	//Protokollierungswunsch
 
 }
-
-
 }
 
