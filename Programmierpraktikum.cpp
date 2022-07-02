@@ -192,8 +192,6 @@ int main() {
 				std::cout << "\n 3 Produktion: ";
 				std::cout << "Auflistung Legierungen + Auwahl jener\n";
 				menu::produktion(lager, suppliers,eigeneFirma);
-
-
 				break;
 
 			case 4: //Bestellung

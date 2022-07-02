@@ -662,6 +662,7 @@ void produktion(Storage &lager,std::vector<Supplier> &supplierVec, Firm firm) {
 
 	do {
 		std::cout << " Bitte waehlen sie die gewuenschten Legierungen aus, indem sie die Nummern eingeben. \n Sind Sie fertig, geben sie eine 0 ein. \n";
+		//todo abrechen Produktion;
 
 		//Deklarationen
 		std::string alloyChoice = "";
