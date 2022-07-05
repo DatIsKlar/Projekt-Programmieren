@@ -2,37 +2,27 @@
 
 Order::Order() {
 	amount = 0;
-	firmName = "";
-	id = 0;
+	firm;
 }
 
-Order::Order(float amountIn, std::string firmNameIn, unsigned int idIn) {
+Order::Order(float amountIn, Firm firmaIn) {
 	amount = amountIn;
-	firmName = firmNameIn;
-	id = idIn;
+	firm = firmaIn;
 }
 
 float Order::getAmount() {
 	return this->amount;
 }
 
-std::string Order::getFirmName() {
-	return this->firmName;
-}
-
-unsigned int Order::getId() {
-	return this->id;
+Firm Order::getFirm() {
+	return this->firm;
 }
 
 void Order::setAmount(float amountIn) {
 	this->amount = amountIn;
 }
 
-void Order::setFirmName(std::string firmNameIn) {
-	this->firmName = firmNameIn;
-}
-
-void Order::setId(unsigned int idIn) {
-	this->firmName = idIn;
+void Order::setFirmName(Firm firmaIn) {
+	this->firm = firmaIn;
 }
 

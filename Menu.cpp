@@ -10,10 +10,10 @@
 namespace menu {
 void anschriftPflegen(Firm &eigeneFirma) {
 	/**
-	 * Dieses 'Menue' geht nur eine Ebene tief, d.h. man wählt eine Option aus und wird dann
-	 * durch den Prozess durchgeführt.
-	 * An manchen Stellen muss die Eingabe zwei mal mit Enter bestätigt werden, bevor man
-	 * zum nächsten Punkt weitergeführt wird.
+	 * Dieses 'Menue' geht nur eine Ebene tief, d.h. man waehlt eine Option aus und wird dann
+	 * durch den Prozess durchgefuehrt.
+	 * An manchen Stellen muss die Eingabe zwei mal mit Enter bestaetigt werden, bevor man
+	 * zum naechsten Punkt weitergefuehrt wird.
 	 *
 	 * Die Einbindung der eigenen Firma wurde hier auch noch nicht realisiert.
 	 */
@@ -22,9 +22,9 @@ void anschriftPflegen(Firm &eigeneFirma) {
 	do {
 		std::cout << "Was moechten Sie bearbeiten? \n 1. Ganze Adresse bearbeiten \n "
 				"2. Strasse bearbeiten \n 3. ZIP bearbeiten \n 4. City bearbeiten"
-				"\n 5. Comment bearbeiten \n 6. Namen bearbeiten \n 0. beenden" << std::endl;
+				"\n 5. Comment bearbeiten \n 6. Namen bearbeiten \n 0. zurueck" << std::endl;
 
-		// bsp objekt unsere eigener Firma, wird später aus anderer Datei genommen
+		// bsp objekt unsere eigener Firma, wird spaeter aus anderer Datei genommen
 		//Firm EigeneFirma;
 		do {
 			std::cin >> choiceA;
@@ -38,7 +38,7 @@ void anschriftPflegen(Firm &eigeneFirma) {
 		switch (stoi(choiceA)) {
 		case 0: // programm beenden
 		{
-			std::cout << "Programm beendet." << std::endl;
+			std::cout << "Zurueck." << std::endl;
 			break;
 		} // ende case 6
 
@@ -220,14 +220,13 @@ void anschriftPflegen(Firm &eigeneFirma) {
 
 void supplierPlfegen(std::vector<Supplier> &suppliers) {
 	/**
-	 * Dieses 'Menue' geht nur eine Ebene tief, d.h. man wählt eine Option aus und wird dann
-	 * durch den Prozess durchgeführt.
-	 * An manchen Stellen muss die Eingabe zwei mal mit Enter bestätigt werden, bevor man
-	 * zum nächsten Punkt weitergeführt wird.
+	 * Dieses 'Menue' geht nur eine Ebene tief, d.h. man waehlt eine Option aus und wird dann
+	 * durch den Prozess durchgefuehrt.
+	 * An manchen Stellen muss die Eingabe zwei mal mit Enter bestaetigt werden, bevor man
+	 * zum naechsten Punkt weitergefaehrt wird.
 	 *
 	 * Die Einbindung der eigenen Firma wurde hier auch noch nicht realisiert.
 	 */
-
 
 	unsigned y = 1;
 	std::string y_in = "";
@@ -238,28 +237,28 @@ void supplierPlfegen(std::vector<Supplier> &suppliers) {
 		unsigned sup = 0;
 		for (auto i : suppliers) {
 			sup++;
-			std::cout << sup << " " << i.getName() << std::endl;
+			Alloy output = i.getAlloy();
+			std::cout << sup << ". Name: " << i.getName() << " | Legierung: " << output.getName() << " | Kupfer: " << output.getCopper() << " |  Zink:" << output.getZinc() << " | Zinn:" << output.getTin() << " |  Anschrift: " << i.getStreet() << " "
+					<< i.getZip() << ", " << i.getCity() << std::endl;
 
 		}
-		std::cout<<"0. beenden"<<std::endl;
+		std::cout << "0. beenden" << std::endl;
 
-		do{
+		do {
 			std::cin >> y_in;
-			if(functions::eingabe(suppliers.size()+1, y_in) == -1){
+			if (functions::eingabe(suppliers.size() + 1, y_in) == -1) {
 				std::cout << "Ungueltige Eingabe, bitte neu eingeben: " << std::endl;
 			}
-		}while(functions::eingabe(suppliers.size()+1, y_in) == -1);
+		} while (functions::eingabe(suppliers.size() + 1, y_in) == -1);
 		y = stoi(y_in);
-		if(y == 0)
+		if (y == 0)
 			return;
-
-
 
 		std::cout << "Was moechten Sie bearbeiten? \n 1. Ganze Adresse bearbeiten \n "
 				"2. Strasse bearbeiten \n 3. ZIP bearbeiten \n 4. City bearbeiten"
 				"\n 5. Comment bearbeiten \n 6. Namen bearbeiten \n 0. beenden" << std::endl;
 
-		// bsp objekt unsere eigener Firma, wird später aus anderer Datei genommen
+		// bsp objekt unsere eigener Firma, wird spaeter aus anderer Datei genommen
 		//Firm EigeneFirma;
 		do {
 			std::cin >> choiceA;
@@ -423,7 +422,7 @@ void supplierPlfegen(std::vector<Supplier> &suppliers) {
 	return;
 }
 
-Alloy alloyNew(Storage &stor){
+Alloy alloyNewLager(Storage &stor) {
 	float copper = 0;
 	float zinc = 0;
 	float tin = 0;
@@ -431,59 +430,124 @@ Alloy alloyNew(Storage &stor){
 	bool metals = false;
 	std::cout << "Bitte geben Sie die Daten der Legierung an." << std::endl;
 	//dummy alloy
-	do{
+	do {
 		std::string copperString;
-			do{
-				std::cout << "Kupfer " << std::endl;
-				std::cin>>copperString;
-				if(!functions::isPositive(copperString))
-					std::cout<<"Nicht erlaubter Wert"<<std::endl;
-			}while(!functions::isPositive(copperString));
-			copper = stof(copperString);
+		do {
+			std::cout << "Kupfer " << std::endl;
+			std::cin >> copperString;
+			if (!functions::isPositive(copperString))
+				std::cout << "Nicht erlaubter Wert" << std::endl;
+		} while (!functions::isPositive(copperString));
+		copper = stof(copperString);
 
-			std::string zincString;
-			do{
-				std::cout << "Zink " << std::endl;
-				std::cin>>zincString;
-				if(!functions::isPositive(zincString))
-					std::cout<<"Nicht erlaubter Wert"<<std::endl;
-			}while(!functions::isPositive(zincString));
-			zinc = stof(zincString);
+		std::string zincString;
+		do {
+			std::cout << "Zink " << std::endl;
+			std::cin >> zincString;
+			if (!functions::isPositive(zincString))
+				std::cout << "Nicht erlaubter Wert" << std::endl;
+		} while (!functions::isPositive(zincString));
+		zinc = stof(zincString);
 
-			std::string tinString;
-			do{
-				std::cout << "Zinn " << std::endl;
-				std::cin>>tinString;
-				if(!functions::isPositive(tinString))
-					std::cout<<"Nicht erlaubter Wert"<<std::endl;
-			}while(!functions::isPositive(tinString));
-			tin = stof(tinString);
+		std::string tinString;
+		do {
+			std::cout << "Zinn " << std::endl;
+			std::cin >> tinString;
+			if (!functions::isPositive(tinString))
+				std::cout << "Nicht erlaubter Wert" << std::endl;
+		} while (!functions::isPositive(tinString));
+		tin = stof(tinString);
 
-			metals = (copper + zinc + tin == 1) or (copper + zinc + tin == 100);
-			if(!metals)
-				std::cout<<"Legierung hat mehr als 100% Bestandteile"<<std::endl;
+		metals = (copper + zinc + tin == 1) or (copper + zinc + tin == 100);
+		if (!metals)
+			std::cout << "Legierung hat mehr als 100% Bestandteile" << std::endl;
 
-	}while(!metals);
+	} while (!metals);
 
 	std::string name;
-	do{
+	do {
 		std::cout << "Name: " << std::endl;
-		std::cin>>name;
-	}while(stor.getAlloyPosByName(name) != -1);
+		std::cin >> name;
+		if (stor.getAlloyPosByName(name) != -1)
+			std::cout << "Legierung mit diesem Namen existier bereits" << std::endl;
+	} while (stor.getAlloyPosByName(name) != -1);
 
-	do{
+	do {
 		std::string amountString;
-		do{
+		do {
 			std::cout << "Menge " << std::endl;
-			std::cin>>amountString;
-			if(!functions::isPositive(amountString))
-				std::cout<<"Nicht erlaubter Wert"<<std::endl;
-		}while(!functions::isPositive(amountString));
+			std::cin >> amountString;
+			if (!functions::isPositive(amountString))
+				std::cout << "Nicht erlaubter Wert" << std::endl;
+		} while (!functions::isPositive(amountString));
 		amount = stof(amountString);
+		if (amount <= 0)
+			std::cout << "Menge kann nicht kleiner gleich 0 sein" << std::endl;
+	} while (amount <= 0);
 
-	}while(amount <= 0);
+	return Alloy(copper, zinc, tin, name, amount);
+}
 
-	return Alloy(copper,zinc,tin,name,amount);
+Alloy alloyNewSupplier() {
+	float copper = 0;
+	float zinc = 0;
+	float tin = 0;
+	float amount = 0;
+	bool metals = false;
+	std::cout << "Bitte geben Sie die Daten der Legierung an." << std::endl;
+	//dummy alloy
+	do {
+		std::string copperString;
+		do {
+			std::cout << "Kupfer " << std::endl;
+			std::cin >> copperString;
+			if (!functions::isPositive(copperString))
+				std::cout << "Nicht erlaubter Wert" << std::endl;
+		} while (!functions::isPositive(copperString));
+		copper = stof(copperString);
+
+		std::string zincString;
+		do {
+			std::cout << "Zink " << std::endl;
+			std::cin >> zincString;
+			if (!functions::isPositive(zincString))
+				std::cout << "Nicht erlaubter Wert" << std::endl;
+		} while (!functions::isPositive(zincString));
+		zinc = stof(zincString);
+
+		std::string tinString;
+		do {
+			std::cout << "Zinn " << std::endl;
+			std::cin >> tinString;
+			if (!functions::isPositive(tinString))
+				std::cout << "Nicht erlaubter Wert" << std::endl;
+		} while (!functions::isPositive(tinString));
+		tin = stof(tinString);
+
+		metals = (copper + zinc + tin == 1) or (copper + zinc + tin == 100);
+		if (!metals)
+			std::cout << "Legierung hat mehr als 100% Bestandteile" << std::endl;
+
+	} while (!metals);
+
+	std::string name;
+	std::cout << "Name: " << std::endl;
+	std::cin >> name;
+
+	do {
+		std::string amountString;
+		do {
+			std::cout << "Menge " << std::endl;
+			std::cin >> amountString;
+			if (!functions::isPositive(amountString))
+				std::cout << "Nicht erlaubter Wert" << std::endl;
+		} while (!functions::isPositive(amountString));
+		amount = stof(amountString);
+		if (amount <= 0)
+			std::cout << "Menge kann nicht kleiner gleich 0 sein" << std::endl;
+	} while (amount <= 0);
+
+	return Alloy(copper, zinc, tin, name, amount);
 }
 
 Supplier supplierNew(Alloy alloyIn) {
@@ -518,6 +582,369 @@ Supplier supplierNew(Alloy alloyIn) {
 	s.setComment(comment);
 
 	return s;
+}
+
+int bestellung(Storage &lager, std::vector<Supplier> &supplierVec, Firm firm) {
+	std::vector<Alloy> lagerKopie = lager.getAlloys();
+	int auswahl = 1;
+	std::string supplierChoiceIn = "";
+	// Liste Zulieferer
+
+	bool mengeCheck = false;
+	// Auswahl Zulieferer
+	do {
+		unsigned int counterSupplier = 0;
+		if (supplierVec.size() == 0)
+			std::cout << "Es gibt keine Zuhliefere" << std::endl;
+		for (auto i : supplierVec) {
+			counterSupplier++;
+			Alloy output;
+			output = i.getAlloy();
+			std::cout << counterSupplier << ". Name: " << i.getName() << " | Legierung: " << output.getName() << " | Kupfer: " << output.getCopper() << " |  Zink:" << output.getZinc() << " | Zinn:" << output.getTin() << " |  Anschrift: "
+					<< i.getStreet() << " " << i.getZip() << ", " << i.getCity() << std::endl;
+
+		}
+		std::cout << "0. beenden" << std::endl;
+		std::cin >> supplierChoiceIn;
+		auswahl = functions::eingabe(supplierVec.size() + 1, supplierChoiceIn);
+		if (auswahl == -1) {
+			std::cout << "Ungueltige Eingabe, bitte neu eingeben: " << std::endl;
+		}
+	} while (auswahl == -1);
+	if (auswahl == 0)
+		return -1;
+	float menge = 0;
+	Alloy alloySupplier;
+	alloySupplier = supplierVec.at(auswahl - 1).getAlloy();
+	int alloyPosLager = lager.getAlloyPosByType(alloySupplier);
+	if (alloyPosLager != -1)
+		menge = lager.getAlloys().at(alloyPosLager).getAmount();
+	// Eingabe Wunschmenge
+	std::string amountIn = "";
+	std::cout << "Menge die Sie bestellen wollen: " << std::endl;
+	do {
+		std::cin >> amountIn;
+		if (functions::isPositive(amountIn)) {
+			if (std::numeric_limits<float>::max() - menge < stof(amountIn)) // @suppress("Symbol is not resolved")
+				std::cout << "Ungueltige Eingabe, bitte neu eingeben: " << std::endl;
+			else
+				mengeCheck = true;
+		}
+	} while (!mengeCheck);
+
+	Alloy alloySupplierCopy = alloySupplier;
+	Order meineBestellung(stof(amountIn), firm);
+	if (alloyPosLager == -1) {
+		alloySupplierCopy.setAmount(stof(amountIn));
+		supplierVec.at(auswahl - 1).setOrder(meineBestellung);
+		lager.addAlloy(alloySupplierCopy);
+	} else {
+		alloySupplierCopy.setAmount(stof(amountIn) + lager.getAlloys().at(alloyPosLager).getAmount());
+		supplierVec.at(auswahl - 1).setOrder(meineBestellung);
+		lager.editAlloyByType(alloySupplier, alloySupplierCopy);
+	}
+
+	//HTML
+	functions::html(supplierVec.at(auswahl - 1), alloySupplierCopy, meineBestellung);
+	return 0;
+}
+
+void ProdProtokoll(std::vector<Alloy> vek, Firm a, Alloy wanted, std::vector<float> mengen) {
+
+	std::cout << "Produktion Erfolgreich. Protokoll: \n \n";
+	std::cout << std::setprecision(0) << std::fixed;
+	std::string pr = "%";
+
+//--------------------------Name-----------------------------------------------------------------------
+	std::cout << std::setw(10) << std::setfill(' ') << "Name: ";
+	for (auto i : vek) {
+		std::cout << std::setw(i.getName().length() + 5) << std::setfill(' ') << i.getName();
+	}
+	std::cout << "\n";
+
+//-----------------------KupferProzent-----------------------------------------------------------------------
+	std::cout << std::setw(10) << "Kupfer: ";
+	for (auto i : vek) {
+
+		float a = (i.getCopper() * 100);
+		std::stringstream ss;
+		ss << a;
+		std::string str = ss.str() + pr;
+
+		std::cout << std::setw(i.getName().length() + 5) << std::setfill(' ') << str;
+	}
+	std::cout << "\n";
+
+//-----------------------ZinkProzent-----------------------------------------------------------------------
+	std::cout << std::setw(10) << "Zink: ";
+	for (auto i : vek) {
+
+		float a = (i.getZinc() * 100);
+		std::stringstream ss;
+		ss << a;
+		std::string str = ss.str() + pr;
+
+		std::cout << std::setw(i.getName().length() + 5) << std::setfill(' ') << str;
+	}
+	std::cout << "\n";
+
+//-----------------------ZinnProzent-----------------------------------------------------------------------
+	std::cout << std::setw(10) << "Zinn: ";
+	for (auto i : vek) {
+
+		float a = (i.getTin() * 100);
+		std::stringstream ss;
+		ss << a;
+		std::string str = ss.str() + pr;
+
+		std::cout << std::setw(i.getName().length() + 5) << std::setfill(' ') << str;
+	}
+	std::cout << "\n";
+
+//--------------------------Menge-----------------------------------------------------------------------
+	std::cout << std::setw(10) << "Menge: ";
+	unsigned int mengenIt = 0;
+	for (auto i : vek) {
+
+		float a = (wanted.getAmount() * mengen.at(mengenIt));
+		mengenIt++;
+		std::stringstream ss;
+		ss << a;
+		std::string str = ss.str() + "kg";
+
+		std::cout << std::setw(i.getName().length() + 5) << std::setfill(' ') << str;
+	}
+	std::cout << "\n";
+
+//--------------------------Ziellegierung----------------------------------------------------------------------
+
+	std::cout << " Liellegierung: " << wanted.getName() << "\t Kupfer: " << wanted.getCopper() << "\t Zink: " << wanted.getZinc() << "\t Zinn:\t" << wanted.getTin() <<
+							"\t Menge: " << wanted.getAmount() <<std::endl;
+
+
+
+
+//--------------------------Firmenadresse-----------------------------------------------------------------------
+	std::cout << "\n Produktionsfirma: \n";
+	std::cout << std::setw(10) << "Name: " << std::setw(10) << a.getName() << std::endl;
+	std::cout << std::setw(10) << "Adresse: " << std::setw(10) << a.getStreet() << " " << a.getZip() << " " << a.getCity() << std::endl;
+
+	std::cout << "\n Moechten sie die Protokollierung als Textdatei? \n 1. Ja / 2. Nein \n";
+
+	std::string s;
+	do {
+		std::cin >> s;
+		if (functions::eingabe(3, s) == -1) {
+			std::cout << "ungueltige Eingabe, bitte neu eingeben: " << std::endl;
+		}
+	} while (functions::eingabe(3, s) == -1);
+
+	if (stoi(s) == 1) {
+
+		//Vorbereitungen
+		std::fstream file;
+
+		std::string name = "Produktionsprotkoll_" + wanted.getName() + ".txt";
+		unsigned int number = 1;
+
+		while (data::fileExists(name)) {
+			std::string s = std::to_string(number);
+			name = "Produktionsprotkoll_" + wanted.getName() + "_" + s + ".txt";
+			number++;
+		}
+
+		file.open(name, std::ios::out);
+		file << "Produktion Erfolgreich. Protokoll: \n \n";
+		file << std::setprecision(0) << std::fixed;
+
+		//Textausgabe
+
+		std::string pr = "%";
+
+		//--------------------------Name-----------------------------------------------------------------------
+		file << std::setw(10) << std::setfill(' ') << "Name: ";
+		for (auto i : vek) {
+			file << std::setw(i.getName().length() + 5) << std::setfill(' ') << i.getName();
+		}
+		file << "\n";
+
+		//-----------------------KupferProzent-----------------------------------------------------------------------
+		file << std::setw(10) << "Kupfer: ";
+		for (auto i : vek) {
+
+			float a = (i.getCopper() * 100);
+			std::stringstream ss;
+			ss << a;
+			std::string str = ss.str() + pr;
+
+			file << std::setw(i.getName().length() + 5) << std::setfill(' ') << str;
+		}
+		file << "\n";
+
+		//-----------------------ZinkProzent-----------------------------------------------------------------------
+		file << std::setw(10) << "Zink: ";
+		for (auto i : vek) {
+
+			float a = (i.getZinc() * 100);
+			std::stringstream ss;
+			ss << a;
+			std::string str = ss.str() + pr;
+
+			file << std::setw(i.getName().length() + 5) << std::setfill(' ') << str;
+		}
+		file << "\n";
+
+		//-----------------------ZinnProzent-----------------------------------------------------------------------
+		file << std::setw(10) << "Zinn: ";
+		for (auto i : vek) {
+
+			float a = (i.getTin() * 100);
+			std::stringstream ss;
+			ss << a;
+			std::string str = ss.str() + pr;
+
+			file << std::setw(i.getName().length() + 5) << std::setfill(' ') << str;
+		}
+		file << "\n";
+
+		//--------------------------Menge-----------------------------------------------------------------------
+		file << std::setw(10) << "Menge: ";
+		mengenIt = 0;
+		for (auto i : vek) {
+
+			float a = (i.getAmount() * mengen.at(mengenIt));
+			mengenIt++;
+			std::stringstream ss;
+			ss << a;
+			std::string str = ss.str() + "kg";
+
+			file << std::setw(i.getName().length() + 5) << std::setfill(' ') << str;
+		}
+		file << "\n";
+
+		//--------------------------Firmenadresse-----------------------------------------------------------------------
+
+		file << "\n Produktionsfirma: \n";
+		file << std::setw(10) << "Name: " << std::setw(10) << a.getName() << std::endl;
+		file << std::setw(10) << "Adresse: " << std::setw(10) << a.getStreet() << " " << a.getZip() << " " << a.getCity() << std::endl;
+
+		file.close();
+
+	}
+}
+
+void produktion(Storage &lager, std::vector<Supplier> &supplierVec, Firm firm) {
+
+	std::vector<float> mengen;
+	mengen.push_back(-1);
+	Alloy alloyWanted;
+	std::vector<Alloy> Auswahl;
+	if (lager.getAlloys().size() == 0) {
+		std::cout << " Keine Legierungen im Lager bitte Bestellen Sie welche" << std::endl;
+		return;
+	}
+
+	do {
+		std::cout << " Bitte waehlen sie die gewuenschten Legierungen aus, indem sie die Nummern eingeben. \n Sind Sie fertig, geben sie eine 0 ein. \n";
+		//todo abrechen Produktion;
+
+		//Deklarationen
+		std::string alloyChoice = "";
+		//std::string choiceA;
+		int alloyChoiceNumber = 0;
+
+		//Ausgabe Liste vorhandener Legierungen
+		std::vector<Alloy> alloyVec = lager.getAlloys();
+		do {
+			unsigned counterSupplier = 0;
+			for (auto i : alloyVec) {
+				counterSupplier++;
+				std::cout << counterSupplier << " Legierung: " << i.getName() << "\t Kupfer: " << i.getCopper() << "\t Zink:" << i.getZinc() << "\t Zinn:" << i.getTin() << std::endl;
+				//std::cout << counterSupplier << " " << i.getName() <<": "<<i.getCopper()<< << std::endl;
+
+			}
+
+			std::cout << "0. Fertig" << std::endl;
+			std::cout << alloyVec.size() + 1 << ". Produktion Abbrechen" << std::endl;
+			//Auswahl der Legierungen(wieviele?)
+
+			do {
+				std::cin >> alloyChoice;
+				if (functions::eingabe(alloyVec.size() + 2, alloyChoice) == -1) {
+					std::cout << "Ungueltige Eingabe, bitte neu eingeben: " << std::endl;
+				}
+
+			} while (functions::eingabe(alloyVec.size() + 2, alloyChoice) == -1);
+
+			if (stoi(alloyChoice) == 0) {
+				break;
+			} else if (stoi(alloyChoice) == alloyVec.size() + 1) {
+				std::cout << "Produktion abgebrochen" << std::endl;
+				return;
+			}
+			Auswahl.push_back(alloyVec.at(stoi(alloyChoice) - 1));
+			alloyVec.erase(alloyVec.begin() + stoi(alloyChoice) - 1); // @suppress("Invalid arguments")
+			alloyChoiceNumber = stoi(alloyChoice);
+
+		} while (alloyChoiceNumber != 0);
+
+		for (auto i : Auswahl) {
+			std::cout << i.getName() << std::endl;
+		}
+
+		//Eingabeaufforderung Alloyy
+
+		std::cout << " Bitte geben sie die gewuenschte Ziellegierung ein: " << std::endl;
+		alloyWanted = alloyNewLager(lager);
+		mengen = functions::makeAlloyMix(Auswahl, alloyWanted);
+		if (mengen.size() == 0)
+			std::cout << "Produktion so nicht moeglich" << std::endl;
+	} while (mengen.size() == 0);
+
+	//Abzug Material Lager
+	std::vector<Alloy> lagerAlloysCopy = lager.getAlloys();
+	int bestellungSucces = 0;
+	unsigned int counterMengen = 0;
+	for (auto alloyIterator : Auswahl) {
+		float amount = lager.getAlloys().at(lager.getAlloyPosByType(alloyIterator)).getAmount();
+		bool orderAmount = (amount - mengen.at(counterMengen) * (alloyWanted.getAmount())) < 0;
+		if (!orderAmount)
+			bestellungSucces = -1;
+		if (!orderAmount) {
+			counterMengen++;
+			continue;
+		}
+
+		do {
+			std::cout << lager.getAlloys().at(lager.getAlloyPosByType(alloyIterator)).getName() << " " << "Hat nicht genug im Lager, benoetigt " << mengen.at(counterMengen) * alloyWanted.getAmount() << " hat aber nur "
+					<< lager.getAlloys().at(lager.getAlloyPosByType(alloyIterator)).getAmount() << std::endl;
+			Storage newLager = lager;
+			bestellungSucces = bestellung(newLager, supplierVec, firm);
+			lager = newLager;
+			orderAmount = (lager.getAlloys().at(lager.getAlloyPosByType(alloyIterator)).getAmount() - mengen.at(counterMengen) * alloyWanted.getAmount()) < 0;
+			if (bestellungSucces == -1)
+				break;
+		} while (orderAmount);
+		if (bestellungSucces == -1) {
+			std::cout << "Produktion beendet" << std::endl;
+			return;
+		}
+
+		//Lager Abziehen
+		if (orderAmount) {
+			Alloy copyAlloy = alloyIterator;
+			copyAlloy.setAmount((lager.getAlloys().at(lager.getAlloyPosByType(alloyIterator)).getAmount() - mengen.at(counterMengen)));
+			lager.editAlloyByType(alloyIterator, copyAlloy);
+			copyAlloy.setAmount(mengen.at(counterMengen));
+		}
+		counterMengen++;
+		//std::cout<<(b2.at(Lager.getAlloyPosByType(i)).getAmount() - mengen.at(x2))<<" "<<(b2.at(Lager.getAlloyPosByType(i)).getName())<<std::endl;
+		//BESTELLUNGSFUNKTION!!!		// bzw ABBRUCH
+	}
+	ProdProtokoll(Auswahl, firm, alloyWanted, mengen);
+//Protokollierungswunsch------------------------------
+
+	//menu::ProdProtokoll(alloyVec[], amount, firm)
 }
 
 }

@@ -4,7 +4,7 @@ namespace data {
 
 bool fileExists(std::string filename) {
 	std::ifstream myfile;
-	myfile.open(filename + ".csv");
+	myfile.open(filename);
 	if (myfile)
 		return true;
 	else
@@ -94,7 +94,6 @@ std::vector<std::string> getTextData(std::string filename, std::string spacer, s
 			if (i == x) {
 				if (startPos == -1)
 					startPos = currentPosition;
-
 				posSearch.push_back(y);
 				pos_.at(currentPosition) = currentPosition;
 			}
@@ -103,6 +102,7 @@ std::vector<std::string> getTextData(std::string filename, std::string spacer, s
 		currentPosition++;
 		totalLength = currentPosition;
 	}
+
 	if(posSearch.size() != search.size()){
 		std::vector<std::string> a = {"false"};
 		return a;
@@ -121,7 +121,6 @@ std::vector<std::string> getTextData(std::string filename, std::string spacer, s
 			splittPostition = 0;
 		}
 	}
-
 
 
 //	std::vector<unsigned int> posSearch;

@@ -10,10 +10,10 @@ namespace data {
 
 /**
  * @fn bool fileExists(std::string filename)
- * Überprüft ob eine Datei existiert.
+ * ueberprueft ob eine Datei existiert.
  * Gibt true wieder wenn es existiert falsch wenn nicht.
  * @param std::string filename
- * Dateiname welcher überprüft werden soll.
+ * Dateiname welcher ueberprueft werden soll.
  */
 bool fileExists(std::string filename);
 std::vector<std::string> getHeaderText(char spacer, std::string filename);

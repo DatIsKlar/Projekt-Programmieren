@@ -10,12 +10,21 @@
 
 #include "Data.h"
 #include "Classes.h"
+#include <sstream>
+#include <iomanip>
+#include <iostream>
 
 namespace menu {
 void anschriftPflegen(Firm &eigeneFirma);
 void supplierPlfegen(std::vector<Supplier> &suppliers);
-Alloy alloyNew(Storage &stor);
+Alloy alloyNewLager(Storage &stor);
+Alloy alloyNewSupplier();
 Supplier supplierNew(Alloy alloyIn);
+
+int bestellung(Storage &Lager, std::vector<Supplier> &sup, Firm firm);
+void ProdProtokoll(std::vector<Alloy> vek, Firm a, Alloy wanted, std::vector<float> mengen);
+void produktion(Storage &Lager, std::vector<Supplier> &sup, Firm firm);
+
 }
 
 #endif /* MENU_H_ */
