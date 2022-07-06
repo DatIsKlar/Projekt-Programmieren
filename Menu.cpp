@@ -652,7 +652,7 @@ int bestellung(Storage &lager, std::vector<Supplier> &supplierVec, Firm firm) {
 void ProdProtokoll(std::vector<Alloy> vek, Firm a, Alloy wanted, std::vector<float> mengen) {
 
 	std::cout << "Produktion Erfolgreich. Protokoll: \n \n";
-	std::cout << std::setprecision(0) << std::fixed;
+	//std::cout << std::setprecision(0) << std::fixed;
 	std::string pr = "%";
 
 //--------------------------Name-----------------------------------------------------------------------
@@ -718,7 +718,7 @@ void ProdProtokoll(std::vector<Alloy> vek, Firm a, Alloy wanted, std::vector<flo
 
 //--------------------------Ziellegierung----------------------------------------------------------------------
 
-	std::cout << " Liellegierung: " << wanted.getName() << "\t Kupfer: " << wanted.getCopper() << "\t Zink: " << wanted.getZinc() << "\t Zinn:\t" << wanted.getTin() <<
+	std::cout << " Ziellegierung: " << wanted.getName() << "\t Kupfer: " << wanted.getCopper() *100 << "\t Zink: " << wanted.getZinc() *100<< "\t Zinn:\t" << wanted.getTin() *100<<
 							"\t Menge: " << wanted.getAmount() <<std::endl;
 
 
@@ -755,7 +755,7 @@ void ProdProtokoll(std::vector<Alloy> vek, Firm a, Alloy wanted, std::vector<flo
 
 		file.open(name, std::ios::out);
 		file << "Produktion Erfolgreich. Protokoll: \n \n";
-		file << std::setprecision(0) << std::fixed;
+		//file << std::setprecision(0) << std::fixed;
 
 		//Textausgabe
 
@@ -812,7 +812,7 @@ void ProdProtokoll(std::vector<Alloy> vek, Firm a, Alloy wanted, std::vector<flo
 		mengenIt = 0;
 		for (auto i : vek) {
 
-			float a = (i.getAmount() * mengen.at(mengenIt));
+			float a = (wanted.getAmount() * mengen.at(mengenIt));
 			mengenIt++;
 			std::stringstream ss;
 			ss << a;
@@ -828,7 +828,9 @@ void ProdProtokoll(std::vector<Alloy> vek, Firm a, Alloy wanted, std::vector<flo
 		file << std::setw(10) << "Name: " << std::setw(10) << a.getName() << std::endl;
 		file << std::setw(10) << "Adresse: " << std::setw(10) << a.getStreet() << " " << a.getZip() << " " << a.getCity() << std::endl;
 
+		//file << std::setprecision(3) << std::fixed;
 		file.close();
+		//std::cout << std::setprecision(3) << std::fixed;
 
 	}
 }
@@ -840,13 +842,12 @@ void produktion(Storage &lager, std::vector<Supplier> &supplierVec, Firm firm) {
 	Alloy alloyWanted;
 	std::vector<Alloy> Auswahl;
 	if (lager.getAlloys().size() == 0) {
-		std::cout << " Keine Legierungen im Lager bitte Bestellen Sie welche" << std::endl;
+		std::cout << " Keine Legierungen im Lager. Bitte bestellen Sie welche." << std::endl;
 		return;
 	}
 
 	do {
-		std::cout << " Bitte waehlen sie die gewuenschten Legierungen aus, indem sie die Nummern eingeben. \n Sind Sie fertig, geben sie eine 0 ein. \n";
-		//todo abrechen Produktion;
+		std::cout << " Bitte waehlen sie die gewuenschten Legierungen aus, indem sie die Nummern eingeben. \n Wenn Sie mit der Produktion fortfahren moechten, geben sie eine 0 ein. \n";
 
 		//Deklarationen
 		std::string alloyChoice = "";
@@ -864,8 +865,8 @@ void produktion(Storage &lager, std::vector<Supplier> &supplierVec, Firm firm) {
 
 			}
 
-			std::cout << "0. Fertig" << std::endl;
-			std::cout << alloyVec.size() + 1 << ". Produktion Abbrechen" << std::endl;
+			std::cout << "0. Produktion fortfahren." << std::endl;
+			std::cout << alloyVec.size() + 1 << ". Produktion abbrechen." << std::endl;
 			//Auswahl der Legierungen(wieviele?)
 
 			do {
@@ -892,7 +893,7 @@ void produktion(Storage &lager, std::vector<Supplier> &supplierVec, Firm firm) {
 			std::cout << i.getName() << std::endl;
 		}
 
-		//Eingabeaufforderung Alloyy
+		//Eingabeaufforderung Alloy
 
 		std::cout << " Bitte geben sie die gewuenschte Ziellegierung ein: " << std::endl;
 		alloyWanted = alloyNewLager(lager);
@@ -902,12 +903,14 @@ void produktion(Storage &lager, std::vector<Supplier> &supplierVec, Firm firm) {
 	} while (mengen.size() == 0);
 
 	//Abzug Material Lager
-	std::vector<Alloy> lagerAlloysCopy = lager.getAlloys();
+	//std::vector<Alloy> lagerAlloysCopy = lager.getAlloys();
 	int bestellungSucces = 0;
 	unsigned int counterMengen = 0;
 	for (auto alloyIterator : Auswahl) {
 		float amount = lager.getAlloys().at(lager.getAlloyPosByType(alloyIterator)).getAmount();
+
 		bool orderAmount = (amount - mengen.at(counterMengen) * (alloyWanted.getAmount())) < 0;
+
 		if (!orderAmount)
 			bestellungSucces = -1;
 		if (!orderAmount) {
@@ -918,9 +921,9 @@ void produktion(Storage &lager, std::vector<Supplier> &supplierVec, Firm firm) {
 		do {
 			std::cout << lager.getAlloys().at(lager.getAlloyPosByType(alloyIterator)).getName() << " " << "Hat nicht genug im Lager, benoetigt " << mengen.at(counterMengen) * alloyWanted.getAmount() << " hat aber nur "
 					<< lager.getAlloys().at(lager.getAlloyPosByType(alloyIterator)).getAmount() << std::endl;
-			Storage newLager = lager;
-			bestellungSucces = bestellung(newLager, supplierVec, firm);
-			lager = newLager;
+			//Storage newLager = lager;
+			bestellungSucces = bestellung(lager, supplierVec, firm);
+			//lager = newLager;
 			orderAmount = (lager.getAlloys().at(lager.getAlloyPosByType(alloyIterator)).getAmount() - mengen.at(counterMengen) * alloyWanted.getAmount()) < 0;
 			if (bestellungSucces == -1)
 				break;
