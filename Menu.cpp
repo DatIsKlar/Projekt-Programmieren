@@ -652,7 +652,7 @@ int bestellung(Storage &lager, std::vector<Supplier> &supplierVec, Firm firm) {
 void ProdProtokoll(std::vector<Alloy> vek, Firm a, Alloy wanted, std::vector<float> mengen) {
 
 	std::cout << "Produktion Erfolgreich. Protokoll: \n \n";
-	std::cout << std::setprecision(0) << std::fixed;
+	//std::cout << std::setprecision(0) << std::fixed;
 	std::string pr = "%";
 
 //--------------------------Name-----------------------------------------------------------------------
@@ -755,7 +755,7 @@ void ProdProtokoll(std::vector<Alloy> vek, Firm a, Alloy wanted, std::vector<flo
 
 		file.open(name, std::ios::out);
 		file << "Produktion Erfolgreich. Protokoll: \n \n";
-		file << std::setprecision(0) << std::fixed;
+		//file << std::setprecision(0) << std::fixed;
 
 		//Textausgabe
 
