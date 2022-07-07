@@ -63,7 +63,7 @@ int readSupplier(std::string filename, std::string spacer, std::vector<Supplier>
 	for(unsigned int x = 0; x<data_.size(); x+= search.size()){
 		if(x%search.size() == 0){
 			bool wasError = false;
-			for (unsigned int supIt_ = x; supIt_ < search.size()+x; supIt_++) {
+			for (unsigned int supIt_ = x; supIt_ < search.size()+x-1; supIt_++) {
 				std::string s = data_.at(supIt_);
 //				std::cout << search.at(supIt_) << ": " << s << std::endl;
 				if (s.size() == 0){
@@ -72,7 +72,7 @@ int readSupplier(std::string filename, std::string spacer, std::vector<Supplier>
 			}
 			if(wasError){
 				std::cout << "Error with Supplier at Line " << y << std::endl;
-				for (unsigned int supIt_ = x; supIt_ < search.size()+x; supIt_++) {
+				for (unsigned int supIt_ = x; supIt_ < search.size()+x-1; supIt_++) {
 					std::string s = data_.at(supIt_);
 					if (s.size() == 0){
 						s = search.at(supIt_-x) + " fehlt";

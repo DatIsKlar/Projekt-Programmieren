@@ -10,13 +10,10 @@ Alloy::Alloy() {
 
 Alloy::Alloy(float copperIn, float zincIn, float tinIn, std::string nameIn, float amountIn) {
 	float complet_value = copperIn + zincIn + tinIn;
-	if ((complet_value > 1 || complet_value < 1)) {
-		if (complet_value > 1 && (complet_value < 100 || complet_value > 100)) {
-		} else {
+	if ((complet_value > 1 && complet_value == 100)) {
 			copperIn /= 100;
 			zincIn /= 100;
 			tinIn /= 100;
-		}
 	}
 	copper = copperIn;
 	zinc = zincIn;
@@ -27,14 +24,14 @@ Alloy::Alloy(float copperIn, float zincIn, float tinIn, std::string nameIn, floa
 
 bool Alloy::isValidAlloy(){
 	float complet_value = this->copper + this->zinc + this->tin;
-	if ((complet_value > 1 || complet_value < 1)) {
-		if (complet_value > 1 && (complet_value < 100 || complet_value > 100)) {
-			std::cout<<"Legierung : "<<this->name <<" nicht konform, Legierungsanteile insgesamt >100%"<<std::endl;
-			return false;
-		}else if(complet_value > 1 && (complet_value ==100))
-			return true;
-
-		std::cout<<"Legierung : "<<this->name <<" nicht konform, Legierungsanteile insgesamt <100%"<<std::endl;
+	if(complet_value == 1 || complet_value ==100 ){
+		return true;
+	}
+	else if(complet_value <0.999999){
+		std::cout<<"Legierung : "<<this->name <<" nicht konform, Legierungsanteile insgesamt "<<complet_value<<" <100%"<<std::endl;
+		return false;
+	}else if(complet_value > 1 && complet_value != 100 ){
+		std::cout<<"Legierung : "<<this->name <<" nicht konform, Legierungsanteile insgesamt "<<complet_value<<" >100%"<<std::endl;
 		return false;
 	}
 	return true;
