@@ -5,7 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-
+#include <math.h>
 namespace data {
 
 /**
@@ -15,6 +15,7 @@ namespace data {
  * @param std::string filename
  * Dateiname welcher ueberprueft werden soll.
  */
+bool clampFloat(float a, float b, float e);
 bool fileExists(std::string filename);
 std::vector<std::string> getHeaderText(char spacer, std::string filename);
 std::vector<std::string> getBodyText(char spacer, std::string filename);

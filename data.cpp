@@ -2,6 +2,11 @@
 
 namespace data {
 
+bool clampFloat(float a, float b, float e)
+{
+	return (fabs(a-b)<e);
+}
+
 bool fileExists(std::string filename) {
 	std::ifstream myfile;
 	myfile.open(filename);

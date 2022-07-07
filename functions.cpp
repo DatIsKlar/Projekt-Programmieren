@@ -1,8 +1,6 @@
 #include "Functions.h"
 
 namespace functions {
-
-
 bool isNumber(std::string number) {
 	try {
 		std::string::size_type size;

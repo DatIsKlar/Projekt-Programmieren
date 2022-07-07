@@ -9,6 +9,7 @@
 #define FUNCTIONS_H_
 #include "Data.h"
 #include "Classes.h"
+
 //namespace fuer unsere Funktionen damit wir die nicht in der Main datei haben muessen. bsp im code functions::Funktionsname
 //Funktionen werden hier einmal eingetragen wie man an readSupplierFile sehen kann und die Richtige funktion wird dann wie readSupplierFile auch in functions.cpp
 //im namespace noch mal definiert aber diesmal mit dem code

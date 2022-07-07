@@ -134,7 +134,7 @@ int readSupplier(std::string filename, std::string spacer, std::vector<Supplier>
 				}
 
 			} catch (const std::invalid_argument &ia) {
-				std::cout << "Unexpected data type at Line with Suppliers Alloy " << data_.at(x + 3) << std::endl;
+				std::cout << "Unexpected data type with Suppliers Alloy " << data_.at(x + 3) << std::endl;
 				suppliers.push_back(Supplier(menu::alloyNewSupplier(), data_.at(x + 5), data_.at(x + 6), data_.at(x + 7), data_.at(x + 8), data_.at(x + 9)));
 			} catch (const std::out_of_range &ia) {
 				return 4;
@@ -156,21 +156,21 @@ int readStorage(std::string filename, std::string spacer, Storage &lager) {
 		if (data_.at(0) == "false")
 			return 3;
 
-	unsigned int y = 1;
+	unsigned int y = 2;
 	std::vector<unsigned int> posError;
 	std::vector<Alloy> alloyError;
 	for(unsigned int x = 0; x<data_.size(); x+= search.size()){
 		if(x%search.size() == 0){
 			bool wasError = false;
-			for (unsigned int supIt_ = 0; supIt_ < search.size(); supIt_++) {
+			for (unsigned int supIt_ = x; supIt_ < search.size()+x; supIt_++) {
 				std::string s = data_.at(supIt_);
 				if (s.size() == 0){
 					wasError = true;
 				}
 			}
 			if(wasError){
-				std::cout << "Error with Supplier at Line " << y << std::endl;
-				for (unsigned int supIt_ = 0; supIt_ < search.size(); supIt_++) {
+				std::cout << "Error with Lager at Line " << y << std::endl;
+				for (unsigned int supIt_ = x; supIt_ < search.size()+x; supIt_++) {
 					std::string s = data_.at(supIt_);
 					if (s.size() == 0){
 						s = search.at(supIt_-x) + " fehlt";
@@ -235,7 +235,7 @@ int readStorage(std::string filename, std::string spacer, Storage &lager) {
 				}
 
 			} catch (const std::invalid_argument &ia) {
-
+				std::cout << "Unexpected data type at with Alloy " << data_.at(x + 3) << std::endl;
 				lager.addAlloy(menu::alloyNewSupplier());
 			} catch (const std::out_of_range &ia) {
 				return 4;

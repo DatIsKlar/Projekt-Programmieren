@@ -458,9 +458,9 @@ Alloy alloyNewLager(Storage &stor) {
 		} while (!functions::isPositive(tinString));
 		tin = stof(tinString);
 
-		metals = (copper + zinc + tin == 1) or (copper + zinc + tin == 100);
+		metals = data::clampFloat(copper + zinc + tin, 1, 0.0001) or data::clampFloat(copper + zinc + tin, 100, 0.0001);
 		if (!metals)
-			std::cout << "Legierung hat mehr als 100% Bestandteile" << std::endl;
+			std::cout << "Legierung hat nicht 100% Bestandteile" << std::endl;
 
 	} while (!metals);
 
@@ -524,7 +524,7 @@ Alloy alloyNewSupplier() {
 		} while (!functions::isPositive(tinString));
 		tin = stof(tinString);
 
-		metals = (copper + zinc + tin == 1) or (copper + zinc + tin == 100);
+		metals = data::clampFloat(copper + zinc + tin, 1, 0.0001) or data::clampFloat(copper + zinc + tin, 100, 0.0001);
 		if (!metals)
 			std::cout << "Legierung hat mehr als 100% Bestandteile" << std::endl;
 
