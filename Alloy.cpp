@@ -29,11 +29,13 @@ bool Alloy::isValidAlloy(){
 	float complet_value = this->copper + this->zinc + this->tin;
 	if ((complet_value > 1 || complet_value < 1)) {
 		if (complet_value > 1 && (complet_value < 100 || complet_value > 100)) {
-			std::cout<<"Legierung : "<<this->name <<" nicht konform, Legierungsanteile insgesamt >100"<<std::endl;
+			std::cout<<"Legierung : "<<this->name <<" nicht konform, Legierungsanteile insgesamt >100%"<<std::endl;
 			return false;
-		} else {
+		}else if(complet_value > 1 && (complet_value ==100))
 			return true;
-		}
+
+		std::cout<<"Legierung : "<<this->name <<" nicht konform, Legierungsanteile insgesamt <100%"<<std::endl;
+		return false;
 	}
 	return true;
 }

@@ -72,8 +72,6 @@ int readSupplier(std::string filename, std::string spacer, std::vector<Supplier>
 			}
 			if(wasError){
 				std::cout << "Error with Supplier at Line " << y << std::endl;
-				std::cout << "Error with Supplier at Line " << search.size()+x << std::endl;
-				std::cout << "Error with Supplier at Line " << data_.size() << std::endl;
 				for (unsigned int supIt_ = x; supIt_ < search.size()+x; supIt_++) {
 					std::string s = data_.at(supIt_);
 					if (s.size() == 0){
@@ -136,8 +134,8 @@ int readSupplier(std::string filename, std::string spacer, std::vector<Supplier>
 				}
 
 			} catch (const std::invalid_argument &ia) {
-				std::cout << "Unexpected data type at Line with Suppliers Alloy" << line << std::endl;
-				suppliers.push_back(menu::supplierNew(menu::alloyNewSupplier()));
+				std::cout << "Unexpected data type at Line with Suppliers Alloy " << data_.at(x + 3) << std::endl;
+				suppliers.push_back(Supplier(menu::alloyNewSupplier(), data_.at(x + 5), data_.at(x + 6), data_.at(x + 7), data_.at(x + 8), data_.at(x + 9)));
 			} catch (const std::out_of_range &ia) {
 				return 4;
 			}
