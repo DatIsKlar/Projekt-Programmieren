@@ -96,9 +96,6 @@ std::vector<float> makeAlloyMix(std::vector<Alloy> alloyIn, Alloy &wantedIn) {
 //	}
 	bool status = solve(solution, Gauss, wanted);
 	int f = solution.size()-1;
-	std::cout<<Gauss<<std::endl;
-	std::cout<<wanted<<std::endl;
-	std::cout<<solution<<std::endl;
 	if(!status){
 		returnAmount.clear();
 		return returnAmount;

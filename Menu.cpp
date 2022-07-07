@@ -887,7 +887,9 @@ void produktion(Storage &lager, std::vector<Supplier> &supplierVec, Firm firm) {
 		if (mengen.size() == 0)
 			std::cout << "Produktion so nicht moeglich" << std::endl;
 	} while (mengen.size() == 0);
-
+	for(auto i: mengen){
+		std::cout<<"mengen "<<i<<std::endl;
+	}
 	//Abzug Material Lager
 	std::vector<Alloy> lagerAlloysCopy = lager.getAlloys();
 	int bestellungSucces = 0;
