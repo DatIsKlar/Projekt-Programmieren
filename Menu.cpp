@@ -730,14 +730,33 @@ void ProdProtokoll(std::vector<Alloy> vek, Firm a, Alloy wanted, std::vector<flo
 		//Vorbereitungen
 		std::fstream file;
 
-		std::string name = "Produktionsprotkoll_" + wanted.getName() + ".txt";
-		unsigned int number = 1;
+		std::string name = "Produktionsprotkoll_" + wanted.getName();
 
-		while (data::fileExists(name)) {
+		unsigned int number = 1;
+		std::string in;
+
+		std:: cout << "Moechten sie einen eigenen oder automatischen Dateinamen für das Produktionsprotkoll? \n"
+				<< "\n 1. Eigenen | 2. Automatisch \n ";
+			do {
+				std::cin >> in;
+				if (functions::eingabe(3, in) == -1) {
+					std::cout << "ungueltige Eingabe, bitte neu eingeben: " << std::endl;
+				}
+			} while (functions::eingabe(3, in) == -1);
+			int ig = stoi(in);
+
+		if(ig==1){
+			std:: cout << "Bitte gebeen sie den Dateinamen ein: \n";
+			std::string g; std:: cin >> g;
+			name = g;
+		}
+
+		while(data::fileExists(name+".txt")){
 			std::string s = std::to_string(number);
-			name = "Produktionsprotkoll_" + wanted.getName() + "_" + s + ".txt";
+			name = name+"_"+s;
 			number++;
 		}
+		name = name+".txt";
 
 		file.open(name, std::ios::out);
 		file << "Produktion Erfolgreich. Protokoll: \n \n";
@@ -925,7 +944,7 @@ void produktion(Storage &lager, std::vector<Supplier> &supplierVec, Firm firm) {
 		//std::cout<<(b2.at(Lager.getAlloyPosByType(i)).getAmount() - mengen.at(x2))<<" "<<(b2.at(Lager.getAlloyPosByType(i)).getName())<<std::endl;
 		//BESTELLUNGSFUNKTION!!!		// bzw ABBRUCH
 	}
-	//ProdProtokoll(Auswahl, firm, alloyWanted, mengen);
+	ProdProtokoll(Auswahl, firm, alloyWanted, mengen);
 //Protokollierungswunsch------------------------------
 
 	//menu::ProdProtokoll(alloyVec[], amount, firm)

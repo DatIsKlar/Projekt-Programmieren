@@ -172,7 +172,7 @@ void html(Supplier Zulieferer,Alloy meineLeg,Order meineBestellung){
 	std::string name = "Bestellformular_" + Zulieferer.getName();
 
 	std::string in;
-	std:: cout << "Moechten sie einen eigenen oder automatischen Dateinamen? \n"
+	std:: cout << "Moechten sie einen eigenen oder automatischen Dateinamen für das Bestellformular? \n"
 			<< "\n 1. Eigenen | 2. Automatisch \n ";
 		do {
 			std::cin >> in;
