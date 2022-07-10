@@ -170,7 +170,7 @@ void html(Supplier Zulieferer,Alloy meineLeg,Order meineBestellung){
 	std::string name = "Bestellformular_" + Zulieferer.getName();
 
 	std::string in;
-	std:: cout << "Moechten sie einen eigenen oder automatischen Dateinamen für das Bestellformular? \n"
+	std:: cout << "Moechten sie einen eigenen oder automatischen Dateinamen fuer das Bestellformular? \n"
 			<< "\n 1. Eigenen | 2. Automatisch \n ";
 		do {
 			std::cin >> in;
@@ -178,19 +178,40 @@ void html(Supplier Zulieferer,Alloy meineLeg,Order meineBestellung){
 				std::cout << "ungueltige Eingabe, bitte neu eingeben: " << std::endl;
 			}
 		} while (functions::eingabe(3, in) == -1);
+
 		int ig = stoi(in);
+		if(ig==1){
+			std:: cout << "Bitte geben sie den Dateinamen ein: \n";
+			std::string g;
+			std:: cin >> g;
+			name = g;
+			while(data::fileExists(name+".html")){
+				std:: cout << "Dateiname existiert bereits. Moechten Sie ihn ueberschreiben? \n 1. Ja \n 2. Nein\n";
+				std::string overwrite;
+				do {
+					std::cin >> overwrite;
+					if (functions::eingabe(3, overwrite) == -1) {
+						std::cout << "ungueltige Eingabe, bitte neu eingeben: " << std::endl;
+					}
+				} while (functions::eingabe(3, overwrite) == -1);
+				int overwriteInt = stoi(overwrite);
+				if (overwriteInt == 1){
+					break;
+				}
+				if(overwriteInt == 2){
+					std:: cout << "Bitte geben sie den Dateinamen ein: \n";
+					std:: cin >> g;
+					name = g;
+				}
 
-	if(ig==1){
-		std:: cout << "Bitte gebeen sie den Dateinamen ein: \n";
-		std::string g; std:: cin >> g;
-		name = g;
-	}
-
-	while(data::fileExists(name+".html")){
-		std::string s = std::to_string(number);
-		name = name+"_"+s;
-		number++;
-	}
+				}
+		}else if(ig == 2){
+			while(data::fileExists(name+".html")){
+				std::string s = std::to_string(number);
+				name = name+"_"+s;
+				number++;
+			}
+				}
 	name = name+".html";
 	html_file.open(name);
 	if (html_file.is_open())

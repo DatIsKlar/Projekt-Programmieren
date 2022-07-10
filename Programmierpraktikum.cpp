@@ -103,7 +103,7 @@ int main() {
 		do {
 			std::cin >> choiceA;
 			if (functions::eingabe(5, choiceA) == -1) {
-				std::cout << "ungueltige Eingabe, bitte neu eingeben: \n" << std::endl;
+				std::cout << "Ungueltige Eingabe, bitte neu eingeben: \n" << std::endl;
 			}
 		} while (functions::eingabe(5, choiceA) == -1);
 		//Ende Eingabe A-Menue
@@ -128,7 +128,7 @@ int main() {
 				do {
 					std::cin >> choiceB;
 					if (functions::eingabe(3, choiceB) == -1) {
-						std::cout << "ungueltige Eingabe, bitte neu eingeben: \n" << std::endl;
+						std::cout << "Ungueltige Eingabe, bitte neu eingeben: \n" << std::endl;
 					}
 				} while (functions::eingabe(3, choiceB) == -1);
 				//Ende Eingabe B-Menue
@@ -153,7 +153,7 @@ int main() {
 					do {
 						std::cin >> choiceC;
 						if (functions::eingabe(3, choiceC) == -1) {
-							std::cout << "ungueltige Eingabe, bitte neu eingeben: \n" << std::endl;
+							std::cout << "Ungueltige Eingabe, bitte neu eingeben: \n" << std::endl;
 						}
 					} while (functions::eingabe(3, choiceC) == -1);
 					//Ende Eingabe C-MenUe

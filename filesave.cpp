@@ -60,17 +60,20 @@ int readSupplier(std::string filename, std::string spacer, std::vector<Supplier>
 	unsigned int y = 2;
 	std::vector<unsigned int> posError;
 	std::vector<Supplier> supError;
+	std::vector<bool> lineError;
 	for(unsigned int x = 0; x<data_.size(); x+= search.size()){
 		if(x%search.size() == 0){
 			bool wasError = false;
+			unsigned int errorSize = 0;
 			for (unsigned int supIt_ = x; supIt_ < search.size()+x-1; supIt_++) {
 				std::string s = data_.at(supIt_);
 //				std::cout << search.at(supIt_) << ": " << s << std::endl;
 				if (s.size() == 0){
+					errorSize++;
 					wasError = true;
 				}
 			}
-			if(wasError){
+			if(wasError && (errorSize != search.size() -1) ){
 				std::cout << "Error with Supplier at Line " << y << std::endl;
 				for (unsigned int supIt_ = x; supIt_ < search.size()+x-1; supIt_++) {
 					std::string s = data_.at(supIt_);
@@ -82,7 +85,13 @@ int readSupplier(std::string filename, std::string spacer, std::vector<Supplier>
 				Supplier supNew = menu::supplierNew(menu::alloyNewSupplier());
 				supError.push_back(supNew);
 				posError.push_back(x);
+				lineError.push_back(false);
 			}
+			else if(wasError && (errorSize == search.size() -1) ){
+				posError.push_back(x);
+				lineError.push_back(true);
+			}
+
 			y++;
 		}
 	}
@@ -115,7 +124,9 @@ int readSupplier(std::string filename, std::string spacer, std::vector<Supplier>
 	for (auto i : posError) {
 		int delta1 = static_cast<int>(i + data_.size()) - dataSizeOld;
 		int delta2 = static_cast<int>(i + search.size() + data_.size()) - dataSizeOld;
-		suppliers.push_back(supError.at(supErrorIt));
+		if (!lineError.at(supErrorIt))
+			suppliers.push_back(supError.at(supErrorIt));
+
 		data_.erase(data_.begin() + delta1, data_.begin() + delta2); // @suppress("Invalid arguments")
 		supErrorIt++;
 	}
@@ -159,16 +170,20 @@ int readStorage(std::string filename, std::string spacer, Storage &lager) {
 	unsigned int y = 2;
 	std::vector<unsigned int> posError;
 	std::vector<Alloy> alloyError;
+	std::vector<bool> lineError;
+
 	for(unsigned int x = 0; x<data_.size(); x+= search.size()){
 		if(x%search.size() == 0){
 			bool wasError = false;
+			unsigned int errorSize = 0;
 			for (unsigned int supIt_ = x; supIt_ < search.size()+x; supIt_++) {
 				std::string s = data_.at(supIt_);
 				if (s.size() == 0){
 					wasError = true;
+					errorSize++;
 				}
 			}
-			if(wasError){
+			if(wasError && (errorSize != search.size())){
 				std::cout << "Error with Lager at Line " << y << std::endl;
 				for (unsigned int supIt_ = x; supIt_ < search.size()+x; supIt_++) {
 					std::string s = data_.at(supIt_);
@@ -180,6 +195,10 @@ int readStorage(std::string filename, std::string spacer, Storage &lager) {
 				Alloy alloyNew = menu::alloyNewLager(lager);
 				alloyError.push_back(alloyNew);
 				posError.push_back(x);
+			}
+			else if(wasError && (errorSize == search.size()) ){
+				posError.push_back(x);
+				lineError.push_back(true);
 			}
 			y++;
 		}
@@ -211,13 +230,15 @@ int readStorage(std::string filename, std::string spacer, Storage &lager) {
 //	}
 
 	int dataSizeOld = data_.size();
-	unsigned int supErrorIt = 0;
+	unsigned int alloyErrorIt = 0;
 	for (auto i : posError) {
 		int delta1 = static_cast<int>(i + data_.size()) - dataSizeOld;
 		int delta2 = static_cast<int>(i + search.size() + data_.size()) - dataSizeOld;
-		lager.addAlloy(alloyError.at(supErrorIt));
+		if (!lineError.at(alloyErrorIt))
+			lager.addAlloy(alloyError.at(alloyErrorIt));
+
 		data_.erase(data_.begin() + delta1, data_.begin() + delta2); // @suppress("Invalid arguments")
-		supErrorIt++;
+		alloyErrorIt++;
 	}
 	unsigned int line = posError.size()-1;
 	for (unsigned int x = 0; x < data_.size(); x += search.size()) {

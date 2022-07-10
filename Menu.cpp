@@ -469,7 +469,7 @@ Alloy alloyNewLager(Storage &stor) {
 		std::cout << "Name: " << std::endl;
 		std::cin >> name;
 		if (stor.getAlloyPosByName(name) != -1)
-			std::cout << "Legierung mit diesem Namen existier bereits" << std::endl;
+			std::cout << "Legierung mit diesem Namen existiert bereits" << std::endl;
 	} while (stor.getAlloyPosByName(name) != -1);
 
 	do {
@@ -607,7 +607,7 @@ int bestellung(Storage &lager, std::vector<Supplier> &supplierVec, Firm firm) {
 		menge = lager.getAlloys().at(alloyPosLager).getAmount();
 	// Eingabe Wunschmenge
 	std::string amountIn = "";
-	std::cout << "Menge die Sie bestellen wollen: " << std::endl;
+	std::cout << "Menge, die Sie bestellen wollen: " << std::endl;
 	do {
 		std::cin >> amountIn;
 		if (functions::isPositive(amountIn)) {
@@ -746,16 +746,39 @@ void ProdProtokoll(std::vector<Alloy> vek, Firm a, Alloy wanted, std::vector<flo
 			int ig = stoi(in);
 
 		if(ig==1){
-			std:: cout << "Bitte gebeen sie den Dateinamen ein: \n";
-			std::string g; std:: cin >> g;
+			std:: cout << "Bitte geben sie den Dateinamen ein: \n";
+			std::string g;
+			std:: cin >> g;
 			name = g;
+			while(data::fileExists(name+".txt")){
+				std:: cout << "Dateiname existiert bereits. Moechten Sie ihn ueberschreiben? \n 1. Ja \n 2. Nein\n";
+				std::string overwrite;
+				do {
+					std::cin >> overwrite;
+					if (functions::eingabe(3, overwrite) == -1) {
+						std::cout << "ungueltige Eingabe, bitte neu eingeben: " << std::endl;
+					}
+				} while (functions::eingabe(3, overwrite) == -1);
+				int overwriteInt = stoi(overwrite);
+				if (overwriteInt == 1){
+					break;
+				}
+				if(overwriteInt == 2){
+					std:: cout << "Bitte geben sie den Dateinamen ein: \n";
+					std:: cin >> g;
+					name = g;
+				}
+
+				}
+		}else if(ig == 2){
+			while(data::fileExists(name+".txt")){
+				std::string s = std::to_string(number);
+				name = name+"_"+s;
+				number++;
+			}
 		}
 
-		while(data::fileExists(name+".txt")){
-			std::string s = std::to_string(number);
-			name = name+"_"+s;
-			number++;
-		}
+
 		name = name+".txt";
 
 		file.open(name, std::ios::out);
