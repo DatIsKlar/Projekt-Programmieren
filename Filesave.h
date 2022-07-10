@@ -72,6 +72,10 @@ bool saveStorage(std::string nameIn, std::string spacerIn, Storage lager);
  * 4 = unbekannter fehler eventuell falsche datei
  */
 int readStorage(std::string filename, std::string spacerIn, Storage &lager);
+
+bool saveFirma(std::string filename, std::string spacer, Firm eigenFirma);
+
+void readFirma(std::string filename, std::string spacer, Firm &eigenFirma);
 }
 
 

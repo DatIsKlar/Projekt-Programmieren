@@ -65,7 +65,7 @@ int main() {
 	 *
 	 */
 
-//todo ProdProduktion in produktion aufrufen, Dateinamen ver√§ndern
+//todo ProdProduktion in produktion aufrufen, Dateinamen ver‰ndern
 //--------------------TobiTest Protokoll
 //		Alloy AEins(10,20,70,"asdf",15);
 //		Alloy AZwei(20,20,60,"Dos",15);
@@ -85,7 +85,9 @@ int main() {
 	std::string suppliersName = "suppliers";
 	int couldReadStorage = filesave::readStorage("storage", ";", lager);
 	int couldReadSuppliers = filesave::readSupplier("suppliers", ";", suppliers);
+
 	Firm eigeneFirma("meineFirma", "meineStr", "01234", "meineStadt", "meinKomment");
+	filesave::readFirma("firma",";",eigeneFirma);
 
 	std::string choiceA;
 	std::string choiceB;
@@ -213,6 +215,7 @@ int main() {
 		}
 		filesave::saveStorage("storage", ";", lager);
 		filesave::saveSupplier("suppliers", ";", suppliers);
+		filesave::saveFirma("firma",";",eigeneFirma);
 	} while (stoi(choiceA) != 0);
 	//----------------------------------------------------------------------Ende A MenUe
 	std::cout << "\n Programm beendet, bis zum naechsten mal!";

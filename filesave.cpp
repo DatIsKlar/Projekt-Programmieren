@@ -48,6 +48,21 @@ bool saveStorage(std::string filename, std::string spacer, Storage lager) {
 	return true;
 }
 
+bool saveFirma(std::string filename, std::string spacer, Firm eigenFirma) {
+
+	std::ofstream myfile;
+
+	myfile.open(filename + ".csv");
+	myfile << "Firmname" + spacer + "Strasse" + spacer + "Plz" + spacer + "Stadt" + spacer + "Kommentar" + "\n";
+
+		myfile
+				<< eigenFirma.getName() + spacer+ eigenFirma.getStreet() + spacer + eigenFirma.getZip() + spacer +
+				eigenFirma.getCity() + spacer + eigenFirma.getComment();
+		myfile << "\n";
+	myfile.close();
+	return true;
+}
+
 int readSupplier(std::string filename, std::string spacer, std::vector<Supplier> &suppliers) {
 	std::vector<std::string> search = { "Kupfer", "Zink", "Zinn", "Name", "Menge", "Firmname", "Strasse", "Plz", "Stadt", "Kommentar" };
 	std::vector<std::string> data_ = data::getTextData(filename, spacer, search);
@@ -265,4 +280,24 @@ int readStorage(std::string filename, std::string spacer, Storage &lager) {
 	}
 	return 1;
 }
+void readFirma(std::string filename, std::string spacer, Firm &eigenFirma) {
+
+	std::vector<std::string> search = { "Firmname", "Strasse", "Plz", "Stadt", "Kommentar"};
+	std::vector<std::string> data_ = data::getTextData(filename, spacer, search);
+
+	if (!data::fileExists(filename + ".csv"))
+		return;
+
+	if (data_.size() == 1)
+		if (data_.at(0) == "false")
+			return;
+	try{
+		eigenFirma = {data_.at(0),data_.at(1),data_.at(2),data_.at(3),data_.at(4)};
+	} catch (const std::invalid_argument &ia) {
+		std::cout << "Unerwarteter Fehler mit Eigener Firma " <<std::endl;
+	} catch (const std::out_of_range &ia) {
+		std::cout << "Unerwarteter Fehler mit Eigener Firma " <<std::endl;
+	}
+}
+
 }
