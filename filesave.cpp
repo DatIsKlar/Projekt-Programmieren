@@ -66,12 +66,13 @@ bool saveFirma(std::string filename, std::string spacer, Firm eigenFirma) {
 int readSupplier(std::string filename, std::string spacer, std::vector<Supplier> &suppliers) {
 	std::vector<std::string> search = { "Kupfer", "Zink", "Zinn", "Name", "Menge", "Firmname", "Strasse", "Plz", "Stadt", "Kommentar" };
 	std::vector<std::string> data_ = data::getTextData(filename, spacer, search);
-	if (!data::fileExists(filename + ".csv"))
+	if (!data::fileExists(filename ))
 		return 2;
 
 	if (data_.size() == 1)
 		if (data_.at(0) == "false")
 			return 3;
+
 	unsigned int y = 2;
 	std::vector<unsigned int> posError;
 	std::vector<Supplier> supError;
@@ -110,41 +111,20 @@ int readSupplier(std::string filename, std::string spacer, std::vector<Supplier>
 			y++;
 		}
 	}
-
-//	for (unsigned int x = 1; x < data_.size(); x++) {
-//		if (data_.at(x - 1).size() == 0) {
-//			posError.push_back(supIt);
-//
-//			std::cout << "Error with Supplier at Line " << y << std::endl;
-//			for (unsigned int supIt_ = 0; supIt_ < search.size(); supIt_++) {
-//				std::string s = data_.at(supIt_ + supIt);
-//				if (s.size() == 0)
-//					s = search.at(supIt_) + " fehlt";
-//				std::cout << search.at(supIt_) << ": " << s << std::endl;
-//			}
-//			Supplier supNew = menu::supplierNew(menu::alloyNewSupplier());
-//			supError.push_back(supNew);
-//			x += search.size() * y - x - 1;
-//		}
-//		posSearch++;
-//		if ((x + 1) % search.size() == 0 and x != 0) {
-//			posSearch = 0;
-//			y++;
-//			supIt += search.size();
-//		}
-//	}
-//
 	int dataSizeOld = data_.size();
 	unsigned int supErrorIt = 0;
+	unsigned int lineErrorIt = 0;
 	for (auto i : posError) {
 		int delta1 = static_cast<int>(i + data_.size()) - dataSizeOld;
 		int delta2 = static_cast<int>(i + search.size() + data_.size()) - dataSizeOld;
-		if (!lineError.at(supErrorIt))
+		if (!lineError.at(lineErrorIt)){
 			suppliers.push_back(supError.at(supErrorIt));
-
+			supErrorIt++;
+		}
 		data_.erase(data_.begin() + delta1, data_.begin() + delta2); // @suppress("Invalid arguments")
-		supErrorIt++;
+		lineErrorIt++;
 	}
+
 	unsigned int line = posError.size()-1;
 	for (unsigned int x = 0; x < data_.size(); x += search.size()) {
 		if (x % search.size() == 0) {
@@ -172,12 +152,11 @@ int readSupplier(std::string filename, std::string spacer, std::vector<Supplier>
 
 int readStorage(std::string filename, std::string spacer, Storage &lager) {
 
+
 	std::vector<std::string> search = { "Kupfer", "Zink", "Zinn", "Name", "Menge" };
-	std::vector<std::string> data_ = data::getTextData(filename, spacer, search);
-
-	if (!data::fileExists(filename + ".csv"))
+	if (!data::fileExists(filename))
 		return 2;
-
+	std::vector<std::string> data_ = data::getTextData(filename, spacer, search);
 	if (data_.size() == 1)
 		if (data_.at(0) == "false")
 			return 3;
@@ -210,6 +189,7 @@ int readStorage(std::string filename, std::string spacer, Storage &lager) {
 				Alloy alloyNew = menu::alloyNewLager(lager);
 				alloyError.push_back(alloyNew);
 				posError.push_back(x);
+				lineError.push_back(false);
 			}
 			else if(wasError && (errorSize == search.size()) ){
 				posError.push_back(x);
@@ -218,42 +198,18 @@ int readStorage(std::string filename, std::string spacer, Storage &lager) {
 			y++;
 		}
 	}
-
-//	for (unsigned int x = 1; x < data_.size(); x++) {
-//
-//		if (data_.at(x - 1).size() == 0) {
-//			posError.push_back(supIt);
-//			std::cout << "Error with Alloy at Line " << y << std::endl;
-//			for (unsigned int supIt_ = 0; supIt_ < search.size(); supIt_++) {
-//				std::string s = data_.at(supIt_ + supIt);
-//				if (s.size() == 0)
-//					s = search.at(supIt_) + " fehlt";
-//
-//				std::cout << search.at(supIt_) << ": " << s << std::endl;
-//			}
-//			Alloy alloyNew = menu::alloyNewLager(lager);
-//			alloyError.push_back(alloyNew);
-//			x += search.size() * y - x - 1;
-//
-//		}
-//		posSearch++;
-//		if ((x + 1) % search.size() == 0 and x != 0) {
-//			posSearch = 0;
-//			y++;
-//			supIt += search.size();
-//		}
-//	}
-
 	int dataSizeOld = data_.size();
 	unsigned int alloyErrorIt = 0;
+	unsigned int lineErrorIt = 0;
 	for (auto i : posError) {
 		int delta1 = static_cast<int>(i + data_.size()) - dataSizeOld;
 		int delta2 = static_cast<int>(i + search.size() + data_.size()) - dataSizeOld;
-		if (!lineError.at(alloyErrorIt))
+		if (!lineError.at(lineErrorIt)){
 			lager.addAlloy(alloyError.at(alloyErrorIt));
-
+			alloyErrorIt++;
+		}
 		data_.erase(data_.begin() + delta1, data_.begin() + delta2); // @suppress("Invalid arguments")
-		alloyErrorIt++;
+		lineErrorIt++;
 	}
 	unsigned int line = posError.size()-1;
 	for (unsigned int x = 0; x < data_.size(); x += search.size()) {
@@ -280,24 +236,27 @@ int readStorage(std::string filename, std::string spacer, Storage &lager) {
 	}
 	return 1;
 }
-void readFirma(std::string filename, std::string spacer, Firm &eigenFirma) {
+int readFirma(std::string filename, std::string spacer, Firm &eigenFirma) {
 
 	std::vector<std::string> search = { "Firmname", "Strasse", "Plz", "Stadt", "Kommentar"};
 	std::vector<std::string> data_ = data::getTextData(filename, spacer, search);
 
 	if (!data::fileExists(filename + ".csv"))
-		return;
+		return 2;
 
 	if (data_.size() == 1)
 		if (data_.at(0) == "false")
-			return;
+			return 3;
 	try{
 		eigenFirma = {data_.at(0),data_.at(1),data_.at(2),data_.at(3),data_.at(4)};
 	} catch (const std::invalid_argument &ia) {
 		std::cout << "Unerwarteter Fehler mit Eigener Firma " <<std::endl;
+		return 4;
 	} catch (const std::out_of_range &ia) {
 		std::cout << "Unerwarteter Fehler mit Eigener Firma " <<std::endl;
+		return 4;
 	}
+	return 1;
 }
 
 }

@@ -8,6 +8,7 @@
 #include <sstream>
 #include "Data.h"
 #include <iostream>
+#include "Functions.h"
 
 class Alloy {
 private:
@@ -26,15 +27,15 @@ public:
 	/**
 	 * @fn Alloy(float copperIn, float zincIn, float tinIn, std::string nameIn,float amountIn)
 	 * Konstruktor mit Anfangswerten des typen Alloy
-	 * @param float copperIn
+	 * @param copperIn
 	 * Anfangswert von Kuppfer/Copper
-	 * @param float zincIn
+	 * @param zincIn
 	 * Anfangswert von Zink/Zinc
-	 * @param float tinIn
+	 * @param tinIn
 	 * Anfangswert von Zinn/Tin
-	 * @param float nameIn
+	 * @param nameIn
 	 * Setzen vom Namen
-	 * @param float amountIn
+	 * @param amountIn
 	 * Anfangswert von der Menge/amount
 	 */
 	Alloy(float copperIn, float zincIn, float tinIn, std::string nameIn, float amountIn);
@@ -97,6 +98,16 @@ public:
 
 	bool operator%(const Alloy &b);
 
+
+	/**
+	 * @fn std::vector<float> makeAlloyMix(std::vector<std::string> namesIn)
+	 * gibt die Verhaeltnisse der gegebenen Legierung als Vector mit der Postions im Verglich zu der Pos. der gebenen Namen
+	 * der gesuchten Legierung wieder und entfernt die benoetigte Menge aus dem Lager
+	 * @param namesIn
+	 * ein Vector mit den Namen der gegebenen Legierungen
+	 */
+	std::vector<float> makeAlloyMix(std::vector<Alloy> alloyIn);
+
 	void print();
 };
 
@@ -117,15 +128,15 @@ public:
 	/**
 	 * @fn Firm(std::string nameIn, std::string streetIn, std::string zipIn, std::string cityIn, std::string commentIn)
 	 * Konstruktor mit Anfangswerten des typen Firm
-	 * @param std::string nameIn
+	 * @param ameIn
 	 * Setzen vom Namen
-	 * @param std::string streetIn
+	 * @param streetIn
 	 * Setzten der Strasse
-	 * @param std::sring zipIn
+	 * @param ipIn
 	 * Setzten der Postleitzahl
-	 * @param std:.string cityIn
+	 * @param ityIn
 	 * Setzten der Stadt
-	 * @param std:.string commandIn
+	 * @param commandIn
 	 * Kommentar ueber die Firma
 	 */
 	Firm(std::string nameIn, std::string streetIn, std::string zipIn, std::string cityIn, std::string commentIn);
@@ -372,19 +383,18 @@ public:
 
 	/**
 	 * @fn setOrder(Order orderIn)
-	 * fuegt eine neue Legierung hinzu
+	 * fuegt eine neue Bestellung dem vector Order hinzu
 	 * @param
-	 * alloyIn
-	 * neue Legierung
+	 * orderIn
+	 * neue Bestellung
 	 */
 	void setOrder(Order orderIn);
 
 	/**
 	 * @fn setAlloy(Alloy alloyIn)
-	 * fuegt eine neue Bestellung dem vector Order hinzu
-	 * @param
-	 * orderIn
-	 * neue Bestellung
+	 * fuegt eine neue Legierung hinzu
+	 * @param alloyIn
+	 * neue Legierung
 	 */
 	void setAlloy(Alloy alloyIn);
 
@@ -400,8 +410,12 @@ public:
 	 */
 	Alloy getAlloy();
 
-	//bool saveSupplier(std::string nameIn, std::string spacerIn); muss noch neu ueberdacht werden speichern und lesen der Zulieferer noch nicht ganz geloest
-	//bool readSupplier(std::string filename, std::string spacerIn);
+	/**
+	 * @fn void html()
+	 * gibt eine Bestellübersicht als html Datei aus
+	 * der gesuchten Legierung wieder und entfernt die benoetigte Menge aus dem Lager
+	 */
+	void html();
 
 };
 
