@@ -20,6 +20,7 @@ namespace filesave{
  * spacer ( in csv am besten ";" )
  * @param &sup
  * Referenz des vector mit in welchem die Supplier gespeichert werden sollen
+ * @return
  * 1 = Erfolg
  * 2 = Datei konnte nicht gefunden werden
  * 3 = Datei inhalt stimmt nicht ueberein
@@ -30,13 +31,14 @@ int readSupplier(std::string filename, std::string spacer, std::vector<Supplier>
 /**
  * @fn bool saveSupplier(std::string filename, std::string spacer, std::vector<Supplier> sup)
  * Speichert ein vector vom typ Supplier in einer csv datei.
- * Gibt true wieder wenn wahr and false wenn falsch.
  * @param filename
  * dateiname
  * @param pacer
  * spacer ( in csv am besten ";" )
  * @param sup
  * Kopie des vector mit den Supplier
+ * @return
+ * Gibt True wider wenn beendet wurde
  */
 bool saveSupplier(std::string filename, std::string spacer, std::vector<Supplier> sup);
 
@@ -44,13 +46,14 @@ bool saveSupplier(std::string filename, std::string spacer, std::vector<Supplier
 /**
  * @fn bool saveStorage(std::string nameIn, std::string spacerIn, Storage lager)
  * Speichert das Lager in einer csv Datei;
- * Gibt wahr wider wenn beendet wurde
  * @param nameIn
  * gewuenschter Dateiname
  * @param spacerIn
  * gewuenschter spacer in der Datei
  * @param lager
  * lager welches gespeichert werden soll
+ * @return
+ * Gibt True wider wenn beendet wurde
  */
 bool saveStorage(std::string nameIn, std::string spacerIn, Storage lager);
 
@@ -63,7 +66,7 @@ bool saveStorage(std::string nameIn, std::string spacerIn, Storage lager);
  * spacer in der Datei
  * @param &lager
  * Referenz des Lagers zu welchem gelesen werden soll.
- * return values:
+ * @return
  * 1 = Erfolg
  * 2 = Datei konnte nicht gefunden werden
  * 3 = Datei inhalt stimmt nicht ueberein
@@ -74,13 +77,14 @@ int readStorage(std::string filename, std::string spacerIn, Storage &lager);
 /**
  * @fn bool saveFirma(std::string filename, std::string spacer, Firm eigenFirma)
  * Speichert die Firmer in einer csv Datei;
- * Gibt wahr wider wenn beendet wurde
  * @param filename
  * gewuenschter Dateiname
  * @param spacer
  * gewuenschter spacer in der Datei
  * @param eigenFirma
  * die eigene Firma
+ * @return
+ * Gibt True wider wenn beendet wurde
  */
 bool saveFirma(std::string filename, std::string spacer, Firm eigenFirma);
 
@@ -93,13 +97,13 @@ bool saveFirma(std::string filename, std::string spacer, Firm eigenFirma);
  * spacer in der Datei
  * @param eigenFirma
  * Referenz zur eigenen Firma
- * return values:
+ * @return
  * 1 = Erfolg
  * 2 = Datei konnte nicht gefunden werden
  * 3 = Datei inhalt stimmt nicht ueberein
  * 4 = unbekannter fehler eventuell falsche datei
  */
-void readFirma(std::string filename, std::string spacer, Firm &eigenFirma);
+int readFirma(std::string filename, std::string spacer, Firm &eigenFirma);
 }
 
 

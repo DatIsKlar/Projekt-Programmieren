@@ -236,6 +236,7 @@ int readStorage(std::string filename, std::string spacer, Storage &lager) {
 	}
 	return 1;
 }
+
 int readFirma(std::string filename, std::string spacer, Firm &eigenFirma) {
 
 	std::vector<std::string> search = { "Firmname", "Strasse", "Plz", "Stadt", "Kommentar"};

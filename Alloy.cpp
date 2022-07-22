@@ -169,8 +169,3 @@ std::vector<float> Alloy::makeAlloyMix(std::vector<Alloy> alloyIn){
 		return returnAmount;
 }
 
-void Alloy::print() {
-
-	std::cout << this->copper << " " << this->zinc << " " << this->tin << " ";
-
-}

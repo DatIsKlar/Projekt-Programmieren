@@ -8,6 +8,7 @@
 #include "Functions.h"
 
 namespace menu {
+
 void anschriftPflegen(Firm &eigeneFirma) {
 	/**
 	 * Dieses 'Menue' geht nur eine Ebene tief, d.h. man waehlt eine Option aus und wird dann
@@ -607,8 +608,6 @@ Supplier supplierNew(Alloy alloyIn) {
 
 	return s;
 }
-
-
 
 int bestellung(Storage &lager, std::vector<Supplier> &supplierVec, Firm firm) {
 	std::vector<Alloy> lagerKopie = lager.getAlloys();

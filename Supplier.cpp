@@ -189,23 +189,9 @@ void Supplier::html(){
 					<<"</tr>"
 				<<"</tbody>"
 				<<"</table>";
-
-
-
-
 		html_file.close();
 	} else {
 		std::cout << "File konnte nicht geoeffnet werden." << std::endl;
 	}
 }
-
-//void Supplier::printOrder(){
-//	std::cout<<"Legierung	"<<"Namen	"<<"Menge	"<<"Id"<<std::endl;
-//
-//	for(auto i: this->order){
-//		std::cout<<this->alloy.getCopper()<<"	"<<i.getFirmName()<<"	"<<i.getAmount()<<"	"<<i.getId()<<std::endl;
-//		std::cout<<this->alloy.getZinc()<<std::endl;
-//		std::cout<<this->alloy.getTin()<<std::endl;
-//	}
-//}
 

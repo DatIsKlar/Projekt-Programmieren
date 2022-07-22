@@ -40,6 +40,10 @@ public:
 	 */
 	Alloy(float copperIn, float zincIn, float tinIn, std::string nameIn, float amountIn);
 
+	/**
+	 *	@fn	bool isValidAlloy()
+	 *	überprüft ein Alloy auf seine zulässigkeit
+	 */
 	bool isValidAlloy();
 
 	/**
@@ -82,20 +86,30 @@ public:
 
 	/**
 	 *	@fn	operator==(const Alloy &b)
-	 *	Vergleicht zwei Legierungen auf gleichheit a == b und gibt wahr oder falsch wieder
+	 *	Vergleicht zwei Legierungen auf gleichheit a == b
 	 *	@param b
 	 *	Ist der zu vergleichende Alloy
+	 *	@return
+	 *	true or false
 	 */
 	bool operator==(const Alloy &b);
 
 	/**
 	 *	@fn	operator!=(const Alloy &b)
-	 *	Vergleicht zwei Legierungen auf ungleichheit a !=b und gibt wahr oder falsch wieder
+	 *	Vergleicht zwei Legierungen auf ungleichheit a !=b
 	 *	@param b
 	 *	Ist der zu vergleichende Alloy
+	 *	@return true or false
 	 */
 	bool operator!=(const Alloy &b);
 
+	/**
+	 *	@fn	bool operator%(const Alloy &b)
+	 *	Vergleicht zwei Legierungen auf gleichheit a ==b ohne betrachtung der menge
+	 *	@param b
+	 *	Ist der zu vergleichende Alloy
+	 *	@return true or false
+	 */
 	bool operator%(const Alloy &b);
 
 
@@ -105,10 +119,10 @@ public:
 	 * der gesuchten Legierung wieder und entfernt die benoetigte Menge aus dem Lager
 	 * @param namesIn
 	 * ein Vector mit den Namen der gegebenen Legierungen
+	 * @return
+	 * ein vector des Typen float
 	 */
 	std::vector<float> makeAlloyMix(std::vector<Alloy> alloyIn);
-
-	void print();
 };
 
 class Firm {
@@ -412,8 +426,7 @@ public:
 
 	/**
 	 * @fn void html()
-	 * gibt eine Bestellübersicht als html Datei aus
-	 * der gesuchten Legierung wieder und entfernt die benoetigte Menge aus dem Lager
+	 * gibt eine Bestellübersicht der letzten Bestellung als html Datei aus
 	 */
 	void html();
 
