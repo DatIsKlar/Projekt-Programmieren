@@ -15,7 +15,7 @@ namespace filesave{
  * @fn bool readSupplier(std::string filename, std::string spacer, std::vector<Supplier> &suppliers)
  * Liest den Supplier aus einer Datei aus.
  * @param filename
- * dateiname
+ * Dateiname
  * @param spacer
  * spacer ( in csv am besten ";" )
  * @param &sup
@@ -24,7 +24,7 @@ namespace filesave{
  * 1 = Erfolg
  * 2 = Datei konnte nicht gefunden werden
  * 3 = Datei inhalt stimmt nicht ueberein
- * 4 = unbekannter fehler eventuell falsche datei
+ * 4 = unbekannter fehler eventuell falsche Datei
  */
 int readSupplier(std::string filename, std::string spacer, std::vector<Supplier> &suppliers);
 
@@ -32,7 +32,7 @@ int readSupplier(std::string filename, std::string spacer, std::vector<Supplier>
  * @fn bool saveSupplier(std::string filename, std::string spacer, std::vector<Supplier> sup)
  * Speichert ein vector vom typ Supplier in einer csv datei.
  * @param filename
- * dateiname
+ * Dateiname
  * @param pacer
  * spacer ( in csv am besten ";" )
  * @param sup
@@ -51,7 +51,7 @@ bool saveSupplier(std::string filename, std::string spacer, std::vector<Supplier
  * @param spacerIn
  * gewuenschter spacer in der Datei
  * @param lager
- * lager welches gespeichert werden soll
+ * Lager welches gespeichert werden soll
  * @return
  * Gibt True wider wenn beendet wurde
  */

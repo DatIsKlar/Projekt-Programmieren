@@ -99,7 +99,8 @@ public:
 	 *	Vergleicht zwei Legierungen auf ungleichheit a !=b
 	 *	@param b
 	 *	Ist der zu vergleichende Alloy
-	 *	@return true or false
+	 *	@return
+	 *	true or false
 	 */
 	bool operator!=(const Alloy &b);
 
@@ -108,7 +109,8 @@ public:
 	 *	Vergleicht zwei Legierungen auf gleichheit a ==b ohne betrachtung der menge
 	 *	@param b
 	 *	Ist der zu vergleichende Alloy
-	 *	@return true or false
+	 *	@return
+	 *	true or false
 	 */
 	bool operator%(const Alloy &b);
 
@@ -254,18 +256,20 @@ public:
 	/**
 	 * @fn int getAlloyPosByName(std::string alloyNameIn)
 	 * gibt einen integer mit der Position der gesuchten Legierung im Vector wieder.
-	 * wenn die Legierung nicht gefunden wurde wird eine -1 zurueckgeben
 	 * @param alloyNameIn
 	 * Name der gesuchten Legierung
+	 * @return
+	 * -1 = Legierung nicht gefunden
 	 */
 	int getAlloyPosByName(std::string alloyNameIn);
 
 	/**
 	 * @fn int getAlloyPosByType(Alloy& alloyIn)
 	 * gibt einen integer mit der Position der gesuchten Legierung im Vector wieder.
-	 * wenn die Legierung nicht gefunden wurde wird eine -1 zurueckgeben
 	 * @param alloyIn
 	 * Referenz der gesuchten Legierung
+	 * @return
+	 * -1 = Legierung nicht gefunden
 	 */
 	int getAlloyPosByType(const Alloy alloyIn);
 
@@ -273,25 +277,29 @@ public:
 	 * @fn void addAlloy(Alloy alloyIn)
 	 * packt ein Legierung dem Lager hinzu/Vector
 	 * @param alloyIn
-	 * Legierung welche dem lager hinzugefuegt werden soll
+	 * Legierung welche dem Lager hinzugefuegt werden soll
 	 */
 	void addAlloy(const Alloy alloyIn);
 
 	/**
 	 * @fn bool removeAlloyByName(std::string alloyNameIn)
 	 * entfernt eine Legierung mit dem gesuchten Namen aus dem Lager
-	 * Gibt wahr wider wenn gesuchte Legierung gefunden wurde, falsch wenn nicht
 	 * @param alloyNameIn
 	 * Name der gesuchten Legierung
+	 * @return
+	 * true = Legierung gefunden
+	 * false = Legierung nicht gefunden
 	 */
 	bool removeAlloyByName(std::string alloyNameIn);
 
 	/**
 	 * @fn bool removeAlloyByName(std::string alloyNameIn)
 	 * entfernt eine Legierung mit der gesuchten Legierung aus dem Lager.
-	 * Gibt wahr wider wenn gesuchte Legierung gefunden wurde, falsch wenn nicht
 	 * @param alloyIn
 	 * Referenz der gesuchten Legierung
+	 * @return
+	 * true = Legierung gefunden
+	 * false = Legierung nicht gefunden
 	 */
 	bool removeAlloyByType(const Alloy alloyIn);
 
@@ -299,22 +307,26 @@ public:
 	/**
 	 * @fn bool editAlloyByName(std::string namesIn ,Alloy edit)
 	 * bearbeitet die gesuchte Legierung mit den neuen Werten, sucht mit Namen.
-	 * Gibt wahr wider wenn gesuchte Legierung gefunden wurde, falsch wenn nicht
 	 * @param namesIn
 	 * Name der gesuchten Legierung
 	 * @param edit
 	 * Kopie der neuen Legierung
+	 * @return
+	 * true = Legierung gefunden
+	 * false = Legierung nicht gefunden
 	 */
 	bool editAlloyByName(std::string namesIn, Alloy edit);
 
 	/**
 	 * @fn bool editAlloyByType(Alloy in ,Alloy edit)
 	 * bearbeitet die gesuchte Legierung mit den neuen Werten, sucht mit einer Kopie des gesuchten Alloys.
-	 * Gibt wahr wider wenn gesuchte Legierung gefunden wurde, falsch wenn nicht
 	 * @param in
 	 * kopie der gesuchten Legierung
 	 * @param edit
 	 * Kopie der neuen Legierung
+	 * @return
+	 * true = Legierung gefunden
+	 * false = Legierung nicht gefunden
 	 */
 	bool editAlloyByType(Alloy in, Alloy edit);
 };

@@ -18,7 +18,7 @@ namespace menu {
 
 /**
  * @fn void anschriftPflegen(Firm &eigeneFirma)
- * Behandelt die komplette funtkion des anschrift Pflegens.
+ * Behandelt die komplette Funtkion des anschrift Pflegens.
  * Ausgabe der Anfrage sowie eingabe des Benutzters
  * @param &eigeneFirma
  * eine Refernz unsere Firma in welche die Werte übernommen werden.
@@ -27,7 +27,7 @@ void anschriftPflegen(Firm &eigeneFirma);
 
 /**
  * @fn void supplierPlfegen(std::vector<Supplier> &suppliers)
- * Behandelt die komplette funtkion des bearbeiten von den Supplier.
+ * Behandelt die komplette Funtkion des Bearbeiten von den Supplier.
  * Ausgabe der Anfrage sowie eingabe des Benutzters und überprüfung der Werte.
  * @param &suppliers
  * eine Refernz zu unsere Liste von in welche die Werte übernommen werden.
@@ -36,7 +36,7 @@ void supplierPlfegen(std::vector<Supplier> &suppliers);
 
 /**
  * @fn void lagerPflegen(Storage &Lager)
- * Behandelt die ausgabe sowie das Löschen aus dem Lager.
+ * Behandelt die Ausgabe sowie das Löschen aus dem Lager.
  * Ausgabe der Anfrage sowie eingabe des Benutzters und überprüfung der Werte.
  * @param &suppliers
  * eine Referenz zu unserem Lager in welches die Werte übernommen werden.
@@ -92,7 +92,7 @@ int bestellung(Storage &Lager, std::vector<Supplier> &sup, Firm firm);
 
 /**
  * @fn void ProdProtokoll(std::vector<Alloy> vek, Firm a, Alloy wanted, std::vector<float> mengen)
- * Behandelt den Kompletten bestellablauf sowie das inzufügen im Lager.
+ * Behandelt den Kompletten bestellablauf sowie das hinzufügen im Lager.
  * Ausgabe der Anfrage sowie eingabe des Benutzters und überprüfung der Werte.
  * @param vek
  * Liste der Legierungen welche zur Produktion benutzt wurden
@@ -101,7 +101,7 @@ int bestellung(Storage &Lager, std::vector<Supplier> &sup, Firm firm);
  * @param wanted
  * Die Ziellegierung der Produktion
  * @param mengen
- * Liste der Mengen
+ * Liste der Mengenanteile
  */
 void ProdProtokoll(std::vector<Alloy> vek, Firm a, Alloy wanted, std::vector<float> mengen);
 

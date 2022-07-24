@@ -11,10 +11,10 @@ namespace data {
 /**
  * @fn bool fileExists(std::string filename)
  * ueberprueft ob eine Datei existiert
- * @param std::string filename
- * Dateiname welcher ueberprueft werden soll
+ * @param filename
+ * Dateiname
  * @return
- * gibt True wider wenn Datei gefunden wurde false fals nicht
+ * gibt True wider wenn Datei gefunden wurde false falls nicht
  *  */
 bool fileExists(std::string filename);
 
@@ -42,7 +42,7 @@ std::vector<std::string> getText(char spacer, std::string filename, unsigned int
  *	@param spacer
  *	spacer
  *	@param search
- *	vector mit den Header welcher werte gesucht werden soll, gibt diese in der Reihenfolge wieder wie eingeben z.b a,b,c wird als a,b,c wiedergegeben wenn es mehere
+ *	vector mit den Header welcher Werte die gesucht werden soll, gibt diese in der Reihenfolge wieder wie eingeben z.b a,b,c wird als a,b,c wiedergegeben wenn es mehere
  *	Werte unter Header a,b,c gibt werden diese wie folgt wieder gegeben header a,b,c als a1,b1,c1,a2,b2,c2 ...
  * 	@return
  * 	gibt einen vector des Typen string zurück
